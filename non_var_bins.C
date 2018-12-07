@@ -108,17 +108,7 @@ void deltarr()
        RooPlot * plot = x.frame(Title("x=min_Delta_R in 3ll"));
        datac->plotOn(plot,Binning(b)) ;
        //   pdf->plotOn(plot);
-       cout << ">> number of bins: " << datac->numEntries() << endl ;
-       for(Int_t i=0 ;i< datac->numEntries();i++)
-	 {	
-	   datac->get(i);
-	   Double_t c = datac->weight(); 
-	   Double_t d = sqrt(c); 
-	   Double_t e = d/c; 
-	   cout << "n("<<i<<"):"  << c << "-->"<< d << "-->" << e*100 <<"%"<< endl;
-	 }
-       plot->Draw();
-
+        plot->Draw();
 
      }
 }
