@@ -27,7 +27,7 @@ void deltarr()
 
    RooRandom::randomGenerator()->SetSeed(0);
 
-   bool aprioriBinning(true);
+   bool aprioriBinning(false);
    if(aprioriBinning)
      {
        RooBinning b(0,4);
@@ -54,6 +54,23 @@ void deltarr()
 	   cout << "n("<<i<<"):"  << c << "-->"<< d << "-->" << e*100 <<"%"<< endl;
 	 }
        plot->Draw();
+     }
+   else
+     {
+       // Let's first generate events according to the desired PDF, without forcing any binning
+       RooDataSet* data  = pdf->generate(RooArgSet(x));
+       RooDataSet* datac = (RooDataSet*) data->reduce(Cut("x > 0.4"));
+       // Now let's build the binning from scratch, looping from the left on the dataset  // b.addBoundary(binboundary)
+       // We could as well loop from the right, it should not really matter at this point
+       // It's only a matter of which side will have the last bin as over-populated. We prefer to have it in the right tail.
+       cout << "Dataset entries: " << datac->numEntries() << endl;
+       for(int i=0; i<datac->numEntries(); ++i)
+	 {
+	   const RooArgSet* set = datac->get(i);
+	   RooRealVar* var = (RooRealVar*)set->find(x.GetName());
+	   double deltar = var->getVal();
+	   cout << "Entry " << i << ": " << deltar << endl;
+	 }
      }
 }
 
