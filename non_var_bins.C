@@ -6,7 +6,17 @@
 #include "RooRealVar.h"
 #include "RooRandom.h"
 #include "RooStats/ModelConfig.h"
+
+#include<cmath>
+
 using namespace RooFit; 
+
+double getStatUnc(std::vector<double>& vec)
+{
+  // Unweighted events
+  return(1./sqrt(vec.size()));
+}
+
 void deltarr()
 {
    RooWorkspace w("w"); 
@@ -60,7 +70,7 @@ void deltarr()
        // Let's first generate events according to the desired PDF, without forcing any binning
        RooDataSet* data  = pdf->generate(RooArgSet(x));
        RooDataSet* datac = (RooDataSet*) data->reduce(Cut("x > 0.4"));
-       // Now let's build the binning from scratch, looping from the left on the dataset  // b.addBoundary(binboundary)
+       // Now let's build the binning from scratch, looping from the left on the dataset
        // We could as well loop from the right, it should not really matter at this point
        // It's only a matter of which side will have the last bin as over-populated. We prefer to have it in the right tail.
        cout << "Dataset entries: " << datac->numEntries() << endl;
@@ -77,13 +87,39 @@ void deltarr()
        std::sort(allthedata.begin(), allthedata.end(), [](const double a, const double b) {return a > b; });
        
        // OK now start with the binning
+       RooBinning b(0,4);
        double binBoundary(x.getBinning().highBound()); // This works even in the unbinned case, it kind of assumes the only bis the full range of the variable
        vector<double> binContent; // Store the current bin content
        for(auto& datum : allthedata)
          {
-           cout << datum << endl;
            binContent.push_back(datum); // Add current event to the current bin
+           bool statuncOK(getStatUnc(binContent)<0.13);
+           if(statuncOK) // If the current bin stat uncertainty is OK,
+             {
+               b.addBoundary(datum); // Store bin boundary
+               cout << "FOUND BIN BOUNDARY AT " << datum << " for statunc of " << getStatUnc(binContent) << endl;
+               binContent.clear(); // Start another bin
+             }
          }
+       b.Print();
+       x.setBinning(b);
+       w.import(*datac);
+       datac->Print();
+       RooPlot * plot = x.frame(Title("x=min_Delta_R in 3ll"));
+       datac->plotOn(plot,Binning(b)) ;
+       //   pdf->plotOn(plot);
+       cout << ">> number of bins: " << datac->numEntries() << endl ;
+       for(Int_t i=0 ;i< datac->numEntries();i++)
+	 {	
+	   datac->get(i);
+	   Double_t c = datac->weight(); 
+	   Double_t d = sqrt(c); 
+	   Double_t e = d/c; 
+	   cout << "n("<<i<<"):"  << c << "-->"<< d << "-->" << e*100 <<"%"<< endl;
+	 }
+       plot->Draw();
+
+
      }
 }
 
@@ -94,5 +130,4 @@ void non_var_bins(TString var="deltar"){
   else
     cout << "This variable is not implemented yet. Have a nice day" << endl;
 
-  gApplication->Terminate();
 }
