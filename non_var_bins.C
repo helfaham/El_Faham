@@ -64,7 +64,6 @@ void deltarr()
        // We could as well loop from the right, it should not really matter at this point
        // It's only a matter of which side will have the last bin as over-populated. We prefer to have it in the right tail.
        cout << "Dataset entries: " << datac->numEntries() << endl;
-       double binBoundary(x.getBinning().highBound()); // This works even in the unbinned case, it kind of assumes the only bis the full range of the variable
        vector<double> allthedata; // Store all the data for sorting
        for(int i=0; i<datac->numEntries(); ++i)
 	 {
@@ -75,10 +74,15 @@ void deltarr()
 	 }
        if(allthedata.size() != datac->numEntries())
          cout << "There is a huge issue: we imported " << allthedata.size() << " events out of " << datac->numEntries() << " importable events! Please check." << endl;
-       std::sort(allthedata.begin(), allthedata.end());
+       std::sort(allthedata.begin(), allthedata.end(), [](const double a, const double b) {return a > b; });
+       
+       // OK now start with the binning
+       double binBoundary(x.getBinning().highBound()); // This works even in the unbinned case, it kind of assumes the only bis the full range of the variable
+       vector<double> binContent; // Store the current bin content
        for(auto& datum : allthedata)
          {
            cout << datum << endl;
+           binContent.push_back(datum); // Add current event to the current bin
          }
      }
 }
