@@ -105,7 +105,7 @@ if options.sync == 0 :
     if theSample == None:
         raise NameError("Sample with name %s wasn't found" % (options.sample))
 else:
-    from HF.El_Faham.Sample import *
+    from Haamm.HaNaMiniAnalyzer.Sample import *
     theSample = Sample( "Sync" , 1 , False , "" )
     theSample.Files = ['/store/mc/RunIISummer16MiniAODv2/ZToMuMu_NNPDF30_13TeV-powheg_M_50_120/MINIAODSIM/PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/60000/243D09B4-90D1-E611-B0FA-001E674DA347.root']
     options.nFilesPerJob = 1
