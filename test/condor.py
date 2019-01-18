@@ -9,7 +9,8 @@ if not len(sys.argv) == 3 :
     exit()
 
 prefix = "out"
-OutPath = "eos/cms/store/user/%s/%s/" % (user, sys.argv[2] )
+OutPath = "/%s/%s/" % (sys.argv[2], user )
+#OutPath = "eos/cms/store/user/%s/%s/" % (user, sys.argv[2] )
 
 from SamplesPU.Samples import MINIAOD as samples
 for sample in samples:
@@ -50,7 +51,7 @@ for sample in samples:
         "vomsaddress":"%s/%s/.x509up_u%d" % (os.getcwd() , workingdir , os.getuid()) ,
         "scram":os.getenv("SCRAM_ARCH") ,
         "cmsver":os.getenv("CMSSW_VERSION"),
-        "gitco":"HamedPU" ,
+        "gitco":"PileUP" ,
         "sample":sample.Name ,
         "out":prefix,
         "outdir":OutPath,
