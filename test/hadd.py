@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from ROOT import gROOT
 gROOT.SetBatch(True)
-hesham
+
 from SamplesPU.Samples import *
 samples = None
 runOnOutsOfAnotherJob = False
