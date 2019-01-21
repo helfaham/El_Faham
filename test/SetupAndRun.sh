@@ -30,10 +30,8 @@ else
     fi
 fi
 
-echo cmsRun PUAnalyzer_cfg.py sample=$5 output=$6 maxEvents=-1 nFilesPerJob=$8
-cmsRun PUAnalyzer_cfg.py sample=$5 output=$6 maxEvents=-1 nFilesPerJob=$8
-#echo cmsRun PUAnalyzer_cfg.py sample=$5 job=$FILEID output=$6 maxEvents=-1 nFilesPerJob=$8
-#cmsRun PUAnalyzer_cfg.py sample=$5 job=$FILEID output=$6 maxEvents=-1 nFilesPerJob=$8
+echo cmsRun PUAnalyzer_cfg.py sample=$5 job=$FILEID output=$6 maxEvents=-1 nFilesPerJob=$8
+cmsRun PUAnalyzer_cfg.py sample=$5 job=$FILEID output=$6 maxEvents=-1 nFilesPerJob=$8
 
 outfilename=`ls $6*$5*.root`
 outfilenames=`ls *$6*$5*.root`
