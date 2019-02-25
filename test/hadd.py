@@ -1,19 +1,7 @@
 #!/usr/bin/env python
 from ROOT import gROOT
 gROOT.SetBatch(True)
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
-hesham
->>>>>>> b08a837cd3d1a3b74bbea48f4520f3662310eb5a
-=======
-
->>>>>>> 50d7fc78efbcd2b5d9e95467fd21ac57d8628815
-=======
-
->>>>>>> Stashed changes
 from SamplesPU.Samples import *
 samples = None
 runOnOutsOfAnotherJob = False

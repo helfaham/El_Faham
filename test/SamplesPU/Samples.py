@@ -28,7 +28,7 @@ ZMuMuM2 = Sample( "ZmuMuM2" , 1 , False , "/DYJetsToLL_M-50_TuneCUETP8M1_13TeV-m
 ZMuMuM3 = Sample( "ZmuMuM3" , 1 , False , "/DYJetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv2-FlatPU0to75TuneCUETP8M3_80X_mcRun2_asymptotic_2016_TrancheIV_v6_ext1-v1/MINIAODSIM")
 ZMuMuM4 = Sample( "ZmuMuM4" , 1 , False , "/DYJetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv2-FlatPU0to75TuneCUETP8M4_80X_mcRun2_asymptotic_2016_TrancheIV_v6_ext1-v1/MINIAODSIM")
 
-MINIAOD.extend( [ ZMuMuM1 , ZMuMuM2 , ZMuMuM3 , ZMuMuM4  ] ) #, DYMuMu0J , DYMuMu1J , DYMuMu2J ] )
+MINIAOD.extend( [ ZMuMu, ZMuMuM1 , ZMuMuM2 , ZMuMuM3 , ZMuMuM4  ] ) #, DYMuMu0J , DYMuMu1J , DYMuMu2J ] )
 
 NuGunM1 = Sample("NuGunM1" , 1 , False , "/NeutrinoGun_E_10GeV/RunIISummer16MiniAODv2-FlatPU0to75TuneCUETP8M1_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v2/MINIAODSIM")
 NuGunM2 = Sample("NuGunM2" , 1 , False , "/NeutrinoGun_E_10GeV/RunIISummer16MiniAODv2-FlatPU0to75TuneCUETP8M2_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM")

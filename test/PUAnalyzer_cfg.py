@@ -53,7 +53,7 @@ process.PUAnalyzer = cms.EDAnalyzer('PUAnalyzer',
                                                         "fixedGridRhoFastjetCentralNeutral"),
                                     
                                     sample = cms.string("WJetsMG"),
-                                    isData = cms.bool( False ),
+                                    isData = cms.bool( False ),  
                                     SetupDir = cms.string("PUStudies")
                                     )
 
