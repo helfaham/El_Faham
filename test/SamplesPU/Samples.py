@@ -23,12 +23,13 @@ DYMuMu0J = Sample( "DYMuMu0J" , 1 , False ,  "/DYToLL_0J_13TeV-amcatnloFXFX-pyth
 DYMuMu1J = Sample( "DYMuMu1J" , 1 , False ,  "/DYToLL_1J_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6_ext1-v1/MINIAODSIM" )
 DYMuMu2J = Sample( "DYMuMu2J" , 1 , False ,  "/DYToLL_2J_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6_ext1-v1/MINIAODSIM" )
 
-ZMuMuM1 = Sample( "ZmuMuM1" , 1 , False , "/DYJetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv2-FlatPU0to75TuneCUETP8M1_80X_mcRun2_asymptotic_2016_TrancheIV_v6_ext1-v2/MINIAODSIM")
+ZMuMuM1 = Sample( "ZmuMuM1" , 1 , False , "/DYJetsToLL_M-50_TuneCP1_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-FlatPU0to75TuneCP1_12Apr2018_94X_mc2017_realistic_v14-v2/MINIAODSIM")
 ZMuMuM2 = Sample( "ZmuMuM2" , 1 , False , "/DYJetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv2-FlatPU0to75TuneCUETP8M2_80X_mcRun2_asymptotic_2016_TrancheIV_v6_ext1-v1/MINIAODSIM")
 ZMuMuM3 = Sample( "ZmuMuM3" , 1 , False , "/DYJetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv2-FlatPU0to75TuneCUETP8M3_80X_mcRun2_asymptotic_2016_TrancheIV_v6_ext1-v1/MINIAODSIM")
 ZMuMuM4 = Sample( "ZmuMuM4" , 1 , False , "/DYJetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv2-FlatPU0to75TuneCUETP8M4_80X_mcRun2_asymptotic_2016_TrancheIV_v6_ext1-v1/MINIAODSIM")
+ZMuMuM5 = Sample( "ZmuMuM5" , 1 , False , "/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8_Fall17/RunIIFall17MiniAODv2-FlatPU0to75TuneCP5_12Apr2018_94X_mc2017_realistic_v14-v2/MINIAODSIM")
 
-MINIAOD.extend( [ ZMuMuM1 , ZMuMuM2 , ZMuMuM3 , ZMuMuM4  ] ) #, ZMuMu, DYMuMu0J , DYMuMu1J , DYMuMu2J ] )
+MINIAOD.extend( [ ZMuMuM1 , ZMuMuM2 , ZMuMuM3 , ZMuMuM4 , ZMuMuM5  ] ) #, ZMuMu, DYMuMu0J , DYMuMu1J , DYMuMu2J ] )
 
 NuGunM1 = Sample("NuGunM1" , 1 , False , "/NeutrinoGun_E_10GeV/RunIISummer16MiniAODv2-FlatPU0to75TuneCUETP8M1_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v2/MINIAODSIM")
 NuGunM2 = Sample("NuGunM2" , 1 , False , "/NeutrinoGun_E_10GeV/RunIISummer16MiniAODv2-FlatPU0to75TuneCUETP8M2_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM")
@@ -58,10 +59,10 @@ MINIAOD.extend( [ ZeroBiasC , ZeroBiasD , ZeroBiasE , ZeroBiasF , ZeroBiasG , Ze
 
 
 SingleNeutrinoTuneCP0 = Sample("SingleNeutrinoTuneCP0" , 1 , False , "/SingleNeutrino/RunIISummer16MiniAODv2-FlatPU0to75TuneCP0_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v3/MINIAODSIM" )
+SingleNeutrinoTuneCP1 = Sample("SingleNeutrinoTuneCP1" , 1 , False , "/SingleNeutrino/RunIIFall17MiniAODv2-FlatPU0to75TuneCP1_12Apr2018_94X_mc2017_realistic_v14_ext3-v1/MINIAODSIM" )
 SingleNeutrinoTuneCP2 = Sample("SingleNeutrinoTuneCP2" , 1 , False , "/SingleNeutrino/RunIISummer16MiniAODv2-FlatPU0to75TuneCP2_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v2/MINIAODSIM" )
-SingleNeutrinoTuneCP5 = Sample("SingleNeutrinoTuneCP5" , 1 , False , "/SingleNeutrino/RunIISummer16MiniAODv2-FlatPU0to75TuneCP5_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v2/MINIAODSIM" )
-
+SingleNeutrinoTuneCP5 = Sample("SingleNeutrinoTuneCP5" , 1 , False , "/SingleNeutrino/RunIIFall17MiniAODv2-FlatPU0to75TuneCP5_12Apr2018_94X_mc2017_realistic_v14_ext2-v1/MINIAODSIM" )
 SingleNeutrinos = []
-SingleNeutrinos.extend( [ SingleNeutrinoTuneCP0 , SingleNeutrinoTuneCP2 , SingleNeutrinoTuneCP5 ] )
-MINIAOD.extend( [ SingleNeutrinoTuneCP0 , SingleNeutrinoTuneCP2 , SingleNeutrinoTuneCP5 ] )
+SingleNeutrinos.extend( [ SingleNeutrinoTuneCP0 , SingleNeutrinoTuneCP1 , SingleNeutrinoTuneCP2 , SingleNeutrinoTuneCP5 ] )
+MINIAOD.extend( [ SingleNeutrinoTuneCP0 , SingleNeutrinoTuneCP1 , SingleNeutrinoTuneCP2 , SingleNeutrinoTuneCP5 ] )
 
