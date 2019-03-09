@@ -63,8 +63,9 @@ MINIAOD.extend( [ ZeroBiasC , ZeroBiasD , ZeroBiasE , ZeroBiasF , ZeroBiasG , Ze
 
 #2017
 SingleNeutrinoTuneCP1 = Sample("SingleNeutrinoTuneCP1" , 1 , False , "/SingleNeutrino/RunIIFall17MiniAODv2-FlatPU0to75TuneCP1_12Apr2018_94X_mc2017_realistic_v14_ext3-v1/MINIAODSIM" )
-SingleNeutrinoTuneCP5 = Sample("SingleNeutrinoTuneCP5" , 1 , False , "/SingleNeutrino/RunIIFall17MiniAODv2-FlatPU0to75TuneCP5_12Apr2018_94X_mc2017_realistic_v14_ext2-v1/MINIAODSIM" )
+SingleNeutrinoTuneCP5_2 = Sample("SingleNeutrinoTuneCP5_2" , 1 , False , "/SingleNeutrino/RunIIFall17MiniAODv2-FlatPU0to75TuneCP5_12Apr2018_94X_mc2017_realistic_v14_ext2-v1/MINIAODSIM" )
+SingleNeutrinoTuneCP5_1 = Sample("SingleNeutrinoTuneCP5_1" , 1 , False , "/SingleNeutrino/RunIIFall17MiniAODv2-FlatPU0to75TuneCP5_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM" )
 
 SingleNeutrinos = []
-MINIAOD.extend( [ SingleNeutrinoTuneCP1 , SingleNeutrinoTuneCP5 ] )
-SingleNeutrinos.extend( [ SingleNeutrinoTuneCP1 , SingleNeutrinoTuneCP5 ] )
+MINIAOD.extend( [ SingleNeutrinoTuneCP1 , SingleNeutrinoTuneCP5_1, SingleNeutrinoTuneCP5_2 ] )
+SingleNeutrinos.extend( [ SingleNeutrinoTuneCP1 , SingleNeutrinoTuneCP5_1, SingleNeutrinoTuneCP5_2 ] )
