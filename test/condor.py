@@ -33,7 +33,7 @@ file_sh = open("%s/Submit.sh" % (workingdir) , "w" )
 
 
 for sample in samples:
-    if not sample.Name.count("SingleNeutrino"):
+    if not sample.Name.count("SingleNeutrinoTuneCP5"):
         continue
 
     os.mkdir( "%s/%s" % (workingdir , sample.Name) )
