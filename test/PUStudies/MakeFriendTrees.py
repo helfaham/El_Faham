@@ -89,7 +89,7 @@ class Variable:
         fout.cd()
 
 class DatasetController :
-    def __init__(self , path = "/eos/home-h/helfaham/" , fileName = "SingleMu%s.root"):
+    def __init__(self , path = "/eos/home-h/helfaham/PU_work/2016/samples_hadd/" , fileName = "SingleMu%s.root"):
         self.runEras = {} #"B":{},"C":{},"D":{},"E":{},"F":{},"G":{},"H":{}}
         self.nTuples = path
         self.All = TChain("PUAnalyzer/Trees/Events")
@@ -129,7 +129,7 @@ class DatasetController :
         return getattr( self , attrname )
         
 class MCSampleContainer :
-    def __init__(self, name , nTuples = "/eos/home-h/helfaham/" , runEras = []):
+    def __init__(self, name , nTuples = "/eos/home-h/helfaham/PU_work/2016/samples_hadd/" , runEras = []):
         self.nTuples=nTuples
 
         self.SampleName = name
@@ -154,7 +154,7 @@ class MCSampleContainer :
         for runEra in self.runEras:
             for method in datapumethods:
                 fdata = None
-                datafilename = nTuples + "datapu_H/data_%s_H_%s.root" % (method, runEra)
+                datafilename = nTuples + "../datapu_hadd/data_%s_H_%s.root" % (method, runEra)
                 print datafilename
                 if os.path.isfile( datafilename ):
                     fdata = TFile.Open( datafilename )
