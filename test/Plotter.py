@@ -3,7 +3,7 @@
 #/usr/bin/env python
 ############MAKE SAMPLE LIST : ###################
 
-LUMI = 35.5
+LUMI = 35.9
 
 import os
 import os.path
@@ -19,32 +19,31 @@ from ROOT import kGray, kGreen, kYellow, kOrange, kRed, kBlack, kCyan, kBlue, gR
 puScenario=sys.argv[1]
 era=sys.argv[2]
 for env in os.environ:
-    if "LSB" in env:
+    if "CONDOR" in env:
         print "%s = %s" %( env , os.environ[env] )
-xsecvar=os.environ[  "LSB_JOBINDEX" ]
+xsecvar=os.environ[ "CONDORJOBID"  ]
 print xsecvar
-outdir=os.environ[ "LSB_OUTDIR" ]
+outdir =os.environ[ "CONDOR_OUTDIR"]
 
 TreeTemN = "PUAnalyzer/Trees/Events"
-DIR = "/eos/cms/store/user/hbakhshi/02MarchPPD2/"
-#DIR = "/eos/user/h/hbakhshi/Personal/Projects/PU/02MarchPPD/" #"/home/hbakhshi/Downloads/CERNBox/Personal/Projects/PU/02MarchPPD/"
+DIR = "/eos/home-h/helfaham/PU_work/2016/samples_hadd/"
 data_files = [ "%s%s" % (DIR,s) for s in [ #"SingleMuB1.root",
-                                           "outSingleMuB2.root",
-                                           "outSingleMuC.root",
-                                           "outSingleMuD.root",
-                                           "outSingleMuE.root",
-                                           "outSingleMuF.root",
-                                           "outSingleMuG.root",
-                                           "outSingleMuH2.root",
-                                           "outSingleMuH3.root"]]
+                                           "SingleMuB2.root",
+                                           "SingleMuC.root",
+                                           "SingleMuD.root",
+                                           "SingleMuE.root",
+                                           "SingleMuF.root",
+                                           "SingleMuG.root",
+                                           "SingleMuH2.root",
+                                           "SingleMuH3.root"]]
 
 dataSamples = SampleType("Data" , kBlack , [ Sample( os.path.basename(s).split('.')[0] , 0 , False , "" , treeName = TreeTemN  ) for s in data_files ] , DIR )
 
-
+#should specifiy where are my ZmuMu samples??
 zmumu = SampleType("ZMuMu" , kCyan , [ Sample( "ZmuMu" , -1 , True , "" , treeName = TreeTemN  ) ]  )
 for s in zmumu.Samples:
-    s.LoadJobs( "/tmp/hbakhshi/" , "out%s.root" )
-    s.SetFriendTreeInfo( "/tmp/hbakhshi/" , "friend" )
+    s.LoadJobs( "/afs/cern.ch/user/h/helfaham/CMSSW_8_4_0/src/Haamm/HaNaMiniAnalyzer/test/PUStudies/" , "out%s.root" ) #not sure if that line is correct and the one below
+    s.SetFriendTreeInfo( "/afs/cern.ch/user/h/helfaham/CMSSW_8_4_0/src/Haamm/HaNaMiniAnalyzer/test/PUStudies/" , "friend" )
 
 
 allSTs = [ dataSamples , zmumu ]
