@@ -9,7 +9,7 @@ from os import listdir
 
 eras=["All"]
 eras.extend(["era"+ c for c in ["B","C","D","E","F","G","H"]])
-
+OutPath = "/eos/home-h/helfaham/"
 #puScenarios = {"pcc" :[95,105,5], "bestfit":[95,105,5], "latest":[84,117,1]}
 puScenarios = {"latest" :[84,117,1]}
 
@@ -32,24 +32,28 @@ for puScenario in puScenarios:
         if not era.count("B"):
            continue 
         os.mkdir( "%s/%s" % (workingdir , era) )
-        shutil.copy( "Plotter.py" , "./%s/%s" % (workingdir,era))
+        shutil.copy( "Plotter1.sh" , "./%s/%s" % (workingdir,era))
 
         file = open ("%s/%s/Submit.cmd" % (workingdir, era), "w")
-        print >> file, "universe                = vanilla"
-        print >> file, "executable              = %s/%s/%s/Plotter.py" % (os.getcwd() , workingdir , era)
+#        print >> file, "universe                = vanilla"
+        print >> file, "executable              = %s/%s/%s/Plotter1.sh" % (os.getcwd() , workingdir , era)
         print >> file, "output                  = $(ClusterId)_$(ProcId).out"
         print >> file, "error                   = $(ClusterId)_$(ProcId).err"
         print >> file, "log                     = $(ClusterId)_$(ProcId).log"
         print >> file, '+JobFlavour             = "tomorrow"'
         print >> file, "environment             = CONDORJOBID=$(ProcId)"
         print >> file, "notification            = Error"
-        print >> file, "should_transfer_files   = YES"
-        print >> file, "when_to_transfer_output = ON_EXIT"
-        print >> file, "transfer_input_files    = /afs/cern.ch/user/h/helfaham/CMSSW_8_4_0/src/Haamm/HaNaMiniAnalyzer/test/SamplesPU/Samples.py, /afs/cern.ch/user/h/helfaham/CMSSW_8_4_0/src/Haamm/HaNaMiniAnalyzer/test/SamplesPU/__init__.py"
+#        print >> file, "should_transfer_files   = YES"
+#        print >> file, "when_to_transfer_output = ON_EXIT"
+#        print >> file, "transfer_input_files    = /afs/cern.ch/user/h/helfaham/CMSSW_8_4_0/src/Haamm/HaNaMiniAnalyzer/test/SamplesPU/Samples.py, /afs/cern.ch/user/h/helfaham/CMSSW_8_4_0/src/Haamm/HaNaMiniAnalyzer/test/SamplesPU/__init__.py"
         print >> file, ""
-        print >> file, "arguments               = %(puScenario)s %(Appendix)s " % {
+        print >> file, "arguments               = %(vomsaddress)s %(scram)s %(cmsver)s %(puScenario)s %(Appendix)s %(outdir)s" % {
+                "vomsaddress":"%s/%s/.x509up_u%d" % (os.getcwd() , workingdir , os.getuid()) ,
+                "scram":os.getenv("SCRAM_ARCH") ,
+                "cmsver":os.getenv("CMSSW_VERSION") ,
 		"puScenario":puScenario ,
-                "Appendix"  :era
+                "Appendix"  :era ,
+                "outdir"    :OutPath
 		}
         print >> file, "queue 1"
         print >> file, ""
