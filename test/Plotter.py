@@ -21,15 +21,7 @@ for env in os.environ:
         print "%s = %s" %( env , os.environ[env] )
 xsecvar=os.environ[ "CONDORJOBID"  ]
 print xsecvar
-outdir =os.environ[ "CONDOR_OUTDIR"]
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> ca00dc19be28471ef69695d82df49488e1cf2710
-=======
-
->>>>>>> ca00dc19be28471ef69695d82df49488e1cf2710
+#outdir =os.environ[ "CONDOR_OUTDIR"]
 TreeTemN = "PUAnalyzer/Trees/Events"
 DIR = "/eos/home-h/helfaham/PU_work/2016/samples_hadd/"
 data_files = [ "%s%s" % (DIR,s) for s in [ #"SingleMuB1.root",
@@ -44,26 +36,10 @@ data_files = [ "%s%s" % (DIR,s) for s in [ #"SingleMuB1.root",
 
 dataSamples = SampleType("Data" , kBlack , [ Sample( os.path.basename(s).split('.')[0] , 0 , False , "" , treeName = TreeTemN  ) for s in data_files ] , DIR )
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 zmumu = SampleType("ZMuMu" , kCyan , [ Sample( "ZmuMu" , -1 , True , "" , treeName = TreeTemN  ) ]  )
 for s in zmumu.Samples:
     s.LoadJobs( "/eos/home-h/helfaham" , "out%s.root" ) 
     s.SetFriendTreeInfo( "/eos/home-h/helfaham" , "friend" )
-=======
-=======
->>>>>>> ca00dc19be28471ef69695d82df49488e1cf2710
-#should specifiy where are my ZmuMu samples??
-zmumu = SampleType("ZMuMu" , kCyan , [ Sample( "ZmuMu" , -1 , True , "" , treeName = TreeTemN  ) ]  )
-for s in zmumu.Samples:
-    s.LoadJobs( "/afs/cern.ch/user/h/helfaham/CMSSW_8_4_0/src/Haamm/HaNaMiniAnalyzer/test/PUStudies/" , "out%s.root" ) #not sure if that line is correct and the one below
-    s.SetFriendTreeInfo( "/afs/cern.ch/user/h/helfaham/CMSSW_8_4_0/src/Haamm/HaNaMiniAnalyzer/test/PUStudies/" , "friend" )
-<<<<<<< HEAD
->>>>>>> ca00dc19be28471ef69695d82df49488e1cf2710
-=======
->>>>>>> ca00dc19be28471ef69695d82df49488e1cf2710
-
-
 allSTs = [ dataSamples , zmumu ]
 
 
