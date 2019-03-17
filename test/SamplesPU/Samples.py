@@ -17,20 +17,13 @@ SingleMuonH2 = Sample( "SingleMuH2" ,  0 , False ,  "/SingleMuon/Run2017H-17Nov2
 
 MINIAOD.extend( [ SingleMuonB , SingleMuonC , SingleMuonD , SingleMuonE , SingleMuonF , SingleMuonG , SingleMuonH1 , SingleMuonH2 ] )
 
-#DYMuMu0J = Sample( "DYMuMu0J" , 1 , False ,  "/DYToLL_0J_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6_ext1-v1/MINIAODSIM" )
-#DYMuMu1J = Sample( "DYMuMu1J" , 1 , False ,  "/DYToLL_1J_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6_ext1-v1/MINIAODSIM" )
-#DYMuMu2J = Sample( "DYMuMu2J" , 1 , False ,  "/DYToLL_2J_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6_ext1-v1/MINIAODSIM" )
-
 #2017
 ZMuMuM1 = Sample( "ZmuMuM1" , 1 , False , "/DYJetsToLL_M-50_TuneCP1_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-FlatPU0to75TuneCP1_12Apr2018_94X_mc2017_realistic_v14-v2/MINIAODSIM")
 ZMuMuM5 = Sample( "ZmuMuM5" , 1 , False , "/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8_Fall17/RunIIFall17MiniAODv2-FlatPU0to75TuneCP5_12Apr2018_94X_mc2017_realistic_v14-v2/MINIAODSIM")
 
-MINIAOD.extend( [ ZMuMuM1 , ZMuMuM5  ] ) #, ZMuMu, DYMuMu0J , DYMuMu1J , DYMuMu2J ] )
+MINIAOD.extend( [ ZMuMuM1 , ZMuMuM5  ] ) 
 
 #NuGunM1 = Sample("NuGunM1" , 1 , False , "/NeutrinoGun_E_10GeV/RunIISummer16MiniAODv2-FlatPU0to75TuneCUETP8M1_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v2/MINIAODSIM")
-#NuGunM2 = Sample("NuGunM2" , 1 , False , "/NeutrinoGun_E_10GeV/RunIISummer16MiniAODv2-FlatPU0to75TuneCUETP8M2_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM")
-#NuGunM3 = Sample("NuGunM3" , 1 , False , "/NeutrinoGun_E_10GeV/RunIISummer16MiniAODv2-FlatPU0to75TuneCUETP8M3_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM")
-#NuGunM4 = Sample("NuGunM4" , 1 , False , "/NeutrinoGun_E_10GeV/RunIISummer16MiniAODv2-FlatPU0to75TuneCUETP8M4_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM")
 
 #MINIAOD.extend( [ NuGunM1 , NuGunM2 , NuGunM3 , NuGunM4 ] )
 
@@ -62,7 +55,7 @@ ZeroBiasC = Sample("ZeroBiasC" , 0 , False , "/ZeroBias/Run2017C-31Mar2018-v1/MI
 MINIAOD.extend( [ ZeroBiasC , ZeroBiasD , ZeroBiasE , ZeroBiasF , ZeroBiasG , ZeroBiasH ] )
 
 #2017
-SingleNeutrinoTuneCP1 = Sample("SingleNeutrinoTuneCP1" , 1 , False , "/SingleNeutrino/RunIIFall17MiniAODv2-FlatPU0to75TuneCP1_12Apr2018_94X_mc2017_realistic_v14_ext3-v1/MINIAODSIM" )
+SingleNeutrinoTuneCP1   = Sample("SingleNeutrinoTuneCP1"   , 1 , False , "/SingleNeutrino/RunIIFall17MiniAODv2-FlatPU0to75TuneCP1_12Apr2018_94X_mc2017_realistic_v14_ext3-v1/MINIAODSIM" )
 SingleNeutrinoTuneCP5_2 = Sample("SingleNeutrinoTuneCP5_2" , 1 , False , "/SingleNeutrino/RunIIFall17MiniAODv2-FlatPU0to75TuneCP5_12Apr2018_94X_mc2017_realistic_v14_ext2-v1/MINIAODSIM" )
 SingleNeutrinoTuneCP5_1 = Sample("SingleNeutrinoTuneCP5_1" , 1 , False , "/SingleNeutrino/RunIIFall17MiniAODv2-FlatPU0to75TuneCP5_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM" )
 
