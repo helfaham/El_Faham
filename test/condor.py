@@ -13,7 +13,6 @@ OutPath = "/%s/%s/" % (sys.argv[2], user )
 #OutPath = "eos/cms/store/user/%s/%s/" % (user, sys.argv[2] )
 
 from SamplesPU.Samples import MINIAOD as samples
-#from SamplesPU.Samples import SingleNeutrinos as samples
 for sample in samples:
     sample.MakeJobs( nFilesPerJob , "%s/%s" % (OutPath , prefix) )
 
@@ -33,7 +32,7 @@ file_sh = open("%s/Submit.sh" % (workingdir) , "w" )
 
 
 for sample in samples:
-    if not sample.Name.count("SingleNeutrinoTuneCP5"):
+    if not sample.Name.count("SingleMuC"):
         continue
 
     os.mkdir( "%s/%s" % (workingdir , sample.Name) )
