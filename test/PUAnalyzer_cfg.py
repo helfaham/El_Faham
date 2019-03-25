@@ -137,20 +137,11 @@ if theSample.IsData :
     # for v in range(0 , 10 ):
 
 else :
-    #process.GlobalTag.globaltag = '76X_dataRun2_16Dec2015_v0'
+    process.GlobalTag.globaltag = '94X_mc2017_realistic_v14'
     from PhysicsTools.PatAlgos.producersLayer1.jetUpdater_cff import *
     process.PUAnalyzer.ZSelection = ("ZmuMu" in theSample.Name)
     process.p = cms.Path(process.PUAnalyzer)
     # if options.sync == 0 :
     #     for v in range(0 , 10 ):
     #         process.PUAnalyzer.HLT.HLT_To_Or.append( 'HLT_Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL_DZ_v%d' % (v) )
-#process.MessageLogger = cms.Service("MessageLogger",
-#    destinations = cms.untracked.vstring(
-#        "detailedInfo",
-#        "critical"
-#        ),
-#    detailedInfo = cms.untracked.PSet(
-#        threshold = cms.untracked.string("DEBUG")
-#        ),
-#    )
 
