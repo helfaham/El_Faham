@@ -4,12 +4,12 @@ process = cms.Process("HaNa")
 
 process.load("FWCore.MessageService.MessageLogger_cfi")
 process.MessageLogger.cerr.FwkReport.reportEvery = 10000
-
+#process.MessageLogger.cerr.FwkReport.reportEvery = 1
+#process.options   = cms.untracked.PSet( wantSummary = cms.untracked.bool(True) )
 process.load('Configuration.StandardSequences.Services_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
 process.TFileService = cms.Service("TFileService", fileName = cms.string("histo.root") )
-
 process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
 process.source = cms.Source("PoolSource",
     # replace 'myfile.root' with the source file you want to use
@@ -127,15 +127,15 @@ process.maxEvents.input = options.maxEvents
 
 if theSample.IsData :
     import FWCore.PythonUtilities.LumiList as LumiList
-    process.source.lumisToProcess = LumiList.LumiList(filename = (process.PUAnalyzer.SetupDir.value() + '/JSON.txt')).getVLuminosityBlockRange()
-    #process.GlobalTag.globaltag = '76X_dataRun2_v15'
+    process.source.lumisToProcess = LumiList.LumiList(filename = (process.PUAnalyzer.SetupDir.value() + '/Cert_294927-306462_13TeV_PromptReco_Collisions17_JSON.txt')).getVLuminosityBlockRange()
     
-    process.PUAnalyzer.ZSelection = ("SingleMu" in theSample.Name)
+    from Configuration.AlCa.GlobalTag import GlobalTag
+    process.GlobalTag.globaltag = '94X_dataRun2_v6' 
 
+    process.PUAnalyzer.ZSelection = ("SingleMu" in theSample.Name)
     process.p = cms.Path( process.PUAnalyzer )
     # for v in range(0 , 10 ):
-    #     process.PUAnalyzer.HLT.HLT_To_Or.append( 'HLT_Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL_DZ_v%d' % (v) )
-    
+
 else :
     #process.GlobalTag.globaltag = '76X_dataRun2_16Dec2015_v0'
     from PhysicsTools.PatAlgos.producersLayer1.jetUpdater_cff import *
@@ -144,3 +144,13 @@ else :
     # if options.sync == 0 :
     #     for v in range(0 , 10 ):
     #         process.PUAnalyzer.HLT.HLT_To_Or.append( 'HLT_Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL_DZ_v%d' % (v) )
+#process.MessageLogger = cms.Service("MessageLogger",
+#    destinations = cms.untracked.vstring(
+#        "detailedInfo",
+#        "critical"
+#        ),
+#    detailedInfo = cms.untracked.PSet(
+#        threshold = cms.untracked.string("DEBUG")
+#        ),
+#    )
+
