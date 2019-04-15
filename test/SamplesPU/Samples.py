@@ -12,20 +12,16 @@ SingleMuonD  = Sample( "SingleMuD"  ,  0 , False ,  "/SingleMuon/Run2017D-31Mar2
 SingleMuonE  = Sample( "SingleMuE"  ,  0 , False ,  "/SingleMuon/Run2017E-31Mar2018-v1/MINIAOD" )
 SingleMuonF  = Sample( "SingleMuF"  ,  0 , False ,  "/SingleMuon/Run2017F-31Mar2018-v1/MINIAOD" )
 SingleMuonG  = Sample( "SingleMuG"  ,  0 , False ,  "/SingleMuon/Run2017G-17Nov2017-v1/MINIAOD" )
-SingleMuonH1 = Sample( "SingleMuH1" ,  0 , False ,  "/SingleMuon/Run2017H-17Nov2017-v1/MINIAOD" )
+#SingleMuonH1 = Sample( "SingleMuH1" ,  0 , False ,  "/SingleMuon/Run2017H-17Nov2017-v1/MINIAOD" ) #empty list
 SingleMuonH2 = Sample( "SingleMuH2" ,  0 , False ,  "/SingleMuon/Run2017H-17Nov2017-v2/MINIAOD" )
 
-MINIAOD.extend( [ SingleMuonB , SingleMuonC , SingleMuonD , SingleMuonE , SingleMuonF , SingleMuonG , SingleMuonH1 , SingleMuonH2 ] )
+MINIAOD.extend( [ SingleMuonB , SingleMuonC , SingleMuonD , SingleMuonE , SingleMuonF , SingleMuonG ,SingleMuonH2 ] )
 
 #2017
 ZMuMuM1 = Sample( "ZmuMuM1" , 1 , False , "/DYJetsToLL_M-50_TuneCP1_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-FlatPU0to75TuneCP1_12Apr2018_94X_mc2017_realistic_v14-v2/MINIAODSIM")
 ZMuMuM5 = Sample( "ZmuMuM5" , 1 , False , "/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8_Fall17/RunIIFall17MiniAODv2-FlatPU0to75TuneCP5_12Apr2018_94X_mc2017_realistic_v14-v2/MINIAODSIM")
 
 MINIAOD.extend( [ ZMuMuM1 , ZMuMuM5  ] ) 
-
-#NuGunM1 = Sample("NuGunM1" , 1 , False , "/NeutrinoGun_E_10GeV/RunIISummer16MiniAODv2-FlatPU0to75TuneCUETP8M1_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v2/MINIAODSIM")
-
-#MINIAOD.extend( [ NuGunM1 , NuGunM2 , NuGunM3 , NuGunM4 ] )
 
 #2017
 MinBiasA3 = Sample("MinBiasA3"  , 0 , False , "/MinimumBias/Run2017A-PromptReco-v3/MINIAOD")
