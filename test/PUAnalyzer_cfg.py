@@ -129,15 +129,15 @@ if theSample.IsData :
     import FWCore.PythonUtilities.LumiList as LumiList
     process.source.lumisToProcess = LumiList.LumiList(filename = (process.PUAnalyzer.SetupDir.value() + '/Cert_294927-306462_13TeV_PromptReco_Collisions17_JSON.txt')).getVLuminosityBlockRange()
     
-    from Configuration.AlCa.GlobalTag import GlobalTag
-    process.GlobalTag.globaltag = '94X_dataRun2_v6' 
+#    from Configuration.AlCa.GlobalTag import GlobalTag
+#    process.GlobalTag.globaltag = '94X_dataRun2_v6' 
 
     process.PUAnalyzer.ZSelection = ("SingleMu" in theSample.Name)
     process.p = cms.Path( process.PUAnalyzer )
     # for v in range(0 , 10 ):
 
 else :
-    process.GlobalTag.globaltag = '94X_mc2017_realistic_v14'
+#    process.GlobalTag.globaltag = '94X_mc2017_realistic_v14'
     from PhysicsTools.PatAlgos.producersLayer1.jetUpdater_cff import *
     process.PUAnalyzer.ZSelection = ("ZmuMu" in theSample.Name)
     process.p = cms.Path(process.PUAnalyzer)
