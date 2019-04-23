@@ -55,8 +55,8 @@ for era in jsons:
         "Appendix":era
         }
     #print >> file, "queue %d" % (len(era))
-    print >> file, "queue 160" #[from 840-999, you need 160 jobs that ranges from 0 to 159 which plus 840 in produceDataPU gives from h_840-h_999]
-    #print >> file, "queue 171" #[from 1000-1170, you need 171 jobs that ranges from 0 to 170 which plus 1000 in produceDataPU gives from h_1000-h_1170]
+    #print >> file, "queue 160" #[from 840-999, you need 160 jobs that ranges from 0 to 159 which plus 840 in produceDataPU gives from h_840-h_999]
+    print >> file, "queue 171" #[from 1000-1170, you need 171 jobs that ranges from 0 to 170 which plus 1000 in produceDataPU gives from h_1000-h_1170]
     print >> file, ""
 
     file.close()
