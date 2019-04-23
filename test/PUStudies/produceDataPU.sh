@@ -7,7 +7,7 @@ if [ ! -z "$CONDORJOBID" ];
 then
     #export FILEID=$CONDORJOBID #you might want to add this.
     echo $CONDORJOBID
-    export xsecvariation=`expr $CONDORJOBID + 1000` #you might want to subtract zero.
+    export xsecvariation=`expr $CONDORJOBID + 840` #you might want to subtract zero.
     echo $xsecvariation
 fi
 #variations[1000-1170][840-1000]
