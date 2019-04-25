@@ -94,7 +94,7 @@ class DatasetController :
         self.nTuples = path
         self.All = TChain("PUAnalyzer/Trees/Events")
         #for runEra in ['B','C','D','E','F','G','H']: #self.runEras :
-        for runEra in ['B','C','D','E','F']: #self.runEras :
+        for runEra in ['B','C','D','E']: #self.runEras :
             fname = path + fileName%(runEra)
             if os.path.isfile( fname ):
                 self.runEras[ runEra ] = {}
@@ -201,7 +201,8 @@ class EraTuneHandler :
             index += 1
         return h
     
-    def __init__(self, name , datafiles , mcfiles , fout , tunes = [1,2,3,4] ):
+    #def __init__(self, name , datafiles , mcfiles , fout , tunes = [1,2,3,4] ):
+    def __init__(self, name , datafiles , mcfiles , fout , tunes = [1,5] ):
         self.Tunes = tunes 
         self.data = DatasetController(fileName = datafiles)
         self.Dir = fout.mkdir( name )
