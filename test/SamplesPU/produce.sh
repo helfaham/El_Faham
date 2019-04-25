@@ -1,22 +1,17 @@
-#/afs/cern.ch/work/h/hbakhshi/PU/CMSSW_8_0_26_patch2/src/Haamm/HaNaMiniAnalyzer/test/SamplesPU
-#das_client --limit=0 --query="file dataset=/NeutrinoGun_E_10GeV/RunIISummer16MiniAODv2-FlatPU0to75TuneCUETP8M1_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v2/MINIAODSIM" > NuGunM1.list
-#das_client --limit=0 --query="file dataset=/NeutrinoGun_E_10GeV/RunIISummer16MiniAODv2-FlatPU0to75TuneCUETP8M2_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM" > NuGunM2.list
-#das_client --limit=0 --query="file dataset=/NeutrinoGun_E_10GeV/RunIISummer16MiniAODv2-FlatPU0to75TuneCUETP8M3_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM" > NuGunM3.list
-#das_client --limit=0 --query="file dataset=/NeutrinoGun_E_10GeV/RunIISummer16MiniAODv2-FlatPU0to75TuneCUETP8M4_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM" > NuGunM4.list
-#das_client --limit=0 --query="file dataset=/MinimumBias/Run2016B-03Feb2017_ver1-v1/MINIAOD" > MinBiasB.list
-#das_client --limit=0 --query="file dataset=/MinimumBias/Run2016F-03Feb2017-v1/MINIAOD" > MinBiasF.list
-#das_client --limit=0 --query="file dataset=/MinimumBias/Run2016G-PromptReco-v1/MINIAOD" > MinBiasG.list
-#das_client --limit=0 --query="file dataset=/MinimumBias/Run2016H-PromptReco-v1/MINIAOD" > MinBiasH1.list
-#das_client --limit=0 --query="file dataset=/MinimumBias/Run2016H-PromptReco-v2/MINIAOD" > MinBiasH2.list
-#das_client --limit=0 --query="file dataset=/MinimumBias/Run2016H-PromptReco-v3/MINIAOD" > MinBiasH3.list
-#das_client --limit=0 --query="file dataset=/ZeroBias/Run2016C-03Feb2017-v1/MINIAOD" > ZeroBiasC.list
-#das_client --limit=0 --query="file dataset=/ZeroBias/Run2016D-03Feb2017-v1/MINIAOD" > ZeroBiasD.list
-#das_client --limit=0 --query="file dataset=/ZeroBias/Run2016E-03Feb2017-v1/MINIAOD" > ZeroBiasE.list
-#das_client --limit=0 --query="file dataset=/ZeroBias/Run2016F-03Feb2017-v1/MINIAOD" > ZeroBiasF.list
-#das_client --limit=0 --query="file dataset=/ZeroBias/Run2016G-03Feb2017-v1/MINIAOD" > ZeroBiasG.list
-#das_client --limit=0 --query="file dataset=/ZeroBias/Run2016H-03Feb2017_ver2-v1/MINIAOD" > ZeroBiasH2.list
-#das_client --limit=0 --query="file dataset=/ZeroBias/Run2016H-03Feb2017_ver3-v1/MINIAOD" > ZeroBiasH3.list
-
-
+#/afs/cern.ch/user/h/helfaham/CMSSW_10_2_5/src/Haamm/HaNaMiniAnalyzer/test/SamplesPU
+das_client --limit=0 --query="file dataset=/SingleNeutrino/RunIIAutumn18MiniAOD-FlatPU0to75TuneCP1_102X_upgrade2018_realistic_v15_ext4-v1/MINIAODSIM" > SingleNeutrinoTuneCP1_1.list
+das_client --limit=0 --query="file dataset=/SingleNeutrino/RunIIAutumn18MiniAOD-FlatPU0to75TuneCP1_102X_upgrade2018_realistic_v15_ext2-v1/MINIAODSIM" > SingleNeutrinoTuneCP1_2.list
+das_client --limit=0 --query="file dataset=/SingleNeutrino/RunIIAutumn18MiniAOD-FlatPU0to75TuneCP5_102X_upgrade2018_realistic_v15_ext5-v1/MINIAODSIM" > SingleNeutrinoTuneCP5.list
+das_client --limit=0 --query="file dataset=/DYJetsToLL_M-50_TuneCP1_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-FlatPU0to75TuneCP1_102X_upgrade2018_realistic_v15-v1/MINIAODSIM" > ZmuMuM1.list
+das_client --limit=0 --query="file dataset=/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-FlatPU0to75TuneCP5_102X_upgrade2018_realistic_v15-v1/MINIAODSIM" > ZmuMuM5.list
+das_client --limit=0 --query="file dataset=/SingleMuon/Run2018A-17Sep2018-v2/MINIAOD" > SingleMuA.list
+das_client --limit=0 --query="file dataset=/SingleMuon/Run2018B-17Sep2018-v1/MINIAOD" > SingleMuB.list
+das_client --limit=0 --query="file dataset=/SingleMuon/Run2018C-17Sep2018-v1/MINIAOD" > SingleMuC.list
+das_client --limit=0 --query="file dataset=/SingleMuon/Run2018D-22Jan2019-v2/MINIAOD" > SingleMuD.list
+das_client --limit=0 --query="file dataset=/ZeroBias/Run2018A-17Sep2018-v1/MINIAOD  " > ZeroBiasA.list
+das_client --limit=0 --query="file dataset=/ZeroBias/Run2018B-17Sep2018-v1/MINIAOD  " > ZeroBiasB.list
+das_client --limit=0 --query="file dataset=/ZeroBias/Run2018C-17Sep2018-v1/MINIAOD  " > ZeroBiasC.list
+das_client --limit=0 --query="file dataset=/ZeroBias/Run2018D-PromptReco-v2/MINIAOD " > ZeroBiasD.list
+das_client --limit=0 --query="file dataset=/ZeroBias/Run2018E-PromptReco-v1/MINIAOD " > ZeroBiasE.list
 
 
