@@ -107,10 +107,10 @@ class LumiCorrelationStudiesPerRun :
             self.RunMin = 276831
             self.RunMax = 277420
             self.Color = 7
-        elif run == "F":
-            self.RunMin = 277772
-            self.RunMax = 278808
-            self.Color = 8
+        #elif run == "F":
+            #self.RunMin = 277772
+            #self.RunMax = 278808
+            #self.Color = 8
         #elif run == "G":
             #self.RunMin = 278820
             #self.RunMax = 280385
@@ -228,7 +228,7 @@ class LumiCorrelationStudies :
         self.AllRuns = {}
         self.AllRunNames = []
         #for runEra in ['B','C','D','E','F','G','H']:
-        for runEra in ['B','C','D','E','F']:
+        for runEra in ['B','C','D','E']:
             fname = path + self.FileName%(runEra)
             if not os.path.isfile( fname ):
                 print "data file" , fname , "doesn't exist"
@@ -337,7 +337,7 @@ class LumiCorrelationStudies :
                 
         self.fout.Close()
             
-path = "/afs/cern.ch/work/h/helfaham/helfaham/"
+path = "/eos/home-h/helfaham/"
 lcs = LumiCorrelationStudies( path , argv[1] , argv[2])
 if argv[2] == "p1":
     lcs.Loop( 1 )
