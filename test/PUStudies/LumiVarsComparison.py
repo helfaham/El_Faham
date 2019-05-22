@@ -90,35 +90,39 @@ class LumiCorrelationStudiesPerRun :
         self.File = TFile.Open( file_in )
         self.Tree = self.File.Get("PUAnalyzer/Trees/Lumis")
         self.Tree.BuildIndex( "run" , "lumi" )
-
+        
+        #if run == "A": TODO 
+            #self.RunMin = 294645 
+            #self.RunMax = 299329
+            #self.Color = 2
         if run == "B":
-            self.RunMin =  272007
-            self.RunMax =  275376
+            self.RunMin = 297020 
+            self.RunMax = 299329
             self.Color = 2
         elif run == "C":
-            self.RunMin = 275657
-            self.RunMax = 276283
+            self.RunMin = 299337
+            self.RunMax = 302044
             self.Color = 4
         elif run == "D":
-            self.RunMin = 276315
-            self.RunMax = 276811
+            self.RunMin = 302046
+            self.RunMax = 303434
             self.Color = 5
         elif run == "E":
-            self.RunMin = 276831
-            self.RunMax = 277420
+            self.RunMin = 303435
+            self.RunMax = 304826
             self.Color = 7
-        #elif run == "F":
-            #self.RunMin = 277772
-            #self.RunMax = 278808
-            #self.Color = 8
-        #elif run == "G":
-            #self.RunMin = 278820
-            #self.RunMax = 280385
-            #self.Color = 9
-        #elif run == "H":
-            #self.RunMin = 280919
-            #self.RunMax = 284044
-            #self.Color = 49
+        elif run == "F":
+            self.RunMin = 304914
+            self.RunMax = 306462
+            self.Color = 8
+        elif run == "G":
+            self.RunMin = 306464
+            self.RunMax = 306826
+            self.Color = 9
+        elif run == "H":
+            self.RunMin = 306828
+            self.RunMax = 307554
+            self.Color = 49
         else:
             self.RunMin = self.Tree.GetMinimum("run")
             self.RunMax = self.Tree.GetMaximum("run")
@@ -227,8 +231,7 @@ class LumiCorrelationStudies :
 
         self.AllRuns = {}
         self.AllRunNames = []
-        #for runEra in ['B','C','D','E','F','G','H']:
-        for runEra in ['B','C','D','E']:
+        for runEra in ['B','C','D','E', 'F', 'G', 'H']:
             fname = path + self.FileName%(runEra)
             if not os.path.isfile( fname ):
                 print "data file" , fname , "doesn't exist"
@@ -337,7 +340,8 @@ class LumiCorrelationStudies :
                 
         self.fout.Close()
             
-path = "/eos/home-h/helfaham/"
+#path = "/eos/home-h/helfaham/"
+path = "/afs/cern.ch/work/h/helfaham/helfaham/2017_PU/samples_hadd/"
 lcs = LumiCorrelationStudies( path , argv[1] , argv[2])
 if argv[2] == "p1":
     lcs.Loop( 1 )
