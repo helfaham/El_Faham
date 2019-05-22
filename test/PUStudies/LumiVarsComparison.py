@@ -91,7 +91,7 @@ class LumiCorrelationStudiesPerRun :
         self.Tree = self.File.Get("PUAnalyzer/Trees/Lumis")
         self.Tree.BuildIndex( "run" , "lumi" )
         
-        #if run == "A": TODO 
+        #if run == "A": 
             #self.RunMin = 294645 
             #self.RunMax = 299329
             #self.Color = 2
@@ -111,18 +111,18 @@ class LumiCorrelationStudiesPerRun :
             self.RunMin = 303435
             self.RunMax = 304826
             self.Color = 7
-        elif run == "F":
-            self.RunMin = 304914
-            self.RunMax = 306462
-            self.Color = 8
-        elif run == "G":
-            self.RunMin = 306464
-            self.RunMax = 306826
-            self.Color = 9
-        elif run == "H":
-            self.RunMin = 306828
-            self.RunMax = 307554
-            self.Color = 49
+        #elif run == "F":
+            #self.RunMin = 304914
+            #self.RunMax = 306462
+            #self.Color = 8
+        #elif run == "G":
+            #self.RunMin = 306464
+            #self.RunMax = 306826
+            #self.Color = 9
+        #elif run == "H":
+            #self.RunMin = 306828
+            #self.RunMax = 307554
+            #self.Color = 49
         else:
             self.RunMin = self.Tree.GetMinimum("run")
             self.RunMax = self.Tree.GetMaximum("run")
@@ -231,7 +231,7 @@ class LumiCorrelationStudies :
 
         self.AllRuns = {}
         self.AllRunNames = []
-        for runEra in ['B','C','D','E', 'F', 'G', 'H']:
+        for runEra in ['B','C','D','E']:
             fname = path + self.FileName%(runEra)
             if not os.path.isfile( fname ):
                 print "data file" , fname , "doesn't exist"
