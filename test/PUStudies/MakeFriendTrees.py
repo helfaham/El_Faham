@@ -89,7 +89,7 @@ class Variable:
         fout.cd()
 
 class DatasetController :
-    def __init__(self , path = "/eos/home-h/helfaham/PU_work/2016/samples_hadd/" , fileName = "SingleMu%s.root"):
+    def __init__(self , path = "/eos/home-h/helfaham/PU_work/2016/samples_hadd/" , fileName = "ZeroBias%s.root"):
         self.runEras = {} #"B":{},"C":{},"D":{},"E":{},"F":{},"G":{},"H":{}}
         self.nTuples = path
         self.All = TChain("PUAnalyzer/Trees/Events")
@@ -149,6 +149,7 @@ class MCSampleContainer :
         self.runEras = ["era%s"%era for era in runEras] #{"All","eraB","eraC","eraD","eraE","eraF","eraG","eraH"}
         self.runEras.append("All")
         datapumethods={"latest"} # "bestFit" , , "pcc"}
+       #datapumethods={"bestFit"} # "bestFit" , , "pcc"}
 
         self.DataFiles = {}
         for runEra in self.runEras:
@@ -245,13 +246,13 @@ class EraTuneHandler :
             chi2bestxsec.Write()
             ktestbestxsec.Write()
         
-fout = TFile.Open("out_2018.root" , "recreate")
-
-EraTuneHandler( "DY" , "SingleMu%s.root",  "ZmuMuM%d" , fout )
+#fout = TFile.Open("out_2016.root" , "recreate")
+fout = TFile.Open("out_2016_SingleNeutrinovsZeroBias.root" , "recreate")
+#EraTuneHandler( "DY" , "SingleMu%s.root",  "ZmuMuM%d" , fout )
 #EraTuneHandler( "NuGunZeroBias" , "ZeroBias%s.root",  "NuGunM%d" , fout )
 #EraTuneHandler( "NuGunMinBias" , "MinBias%s.root",  "NuGunM%d" , fout )
 #EraTuneHandler( "SingleNuMinBias" , "MinBias%s.root",  "SingleNeutrinoTuneCP%d" , fout , [0,2,5] )
-#EraTuneHandler( "SingleNuZeroBias" , "ZeroBias%s.root",  "SingleNeutrinoTuneCP%d" , fout , [0,2,5] )
+EraTuneHandler( "SingleNuZeroBias" , "ZeroBias%s.root",  "SingleNeutrinoTuneCP%d" , fout , [0,2,5] )
 
 fout.Close()
 

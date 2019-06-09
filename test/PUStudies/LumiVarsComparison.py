@@ -336,8 +336,9 @@ class LumiCorrelationStudies :
                 
         self.fout.Close()
             
-path = "/eos/home-h/helfaham/PU_work/2016"
-lcs = LumiCorrelationStudies( path , argv[1] , argv[2])
+path = "/eos/home-h/helfaham/PU_work/2016/samples_hadd/"
+lcs = LumiCorrelationStudies( path , argv[1] , argv[2]) 
+#arg1 is the sample, arg2 is the plot type(see above)
 if argv[2] == "p1":
     lcs.Loop( 1 )
 elif argv[2] == "p3" :
