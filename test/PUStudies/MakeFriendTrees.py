@@ -89,12 +89,12 @@ class Variable:
         fout.cd()
 
 class DatasetController :
-    def __init__(self , path = "/afs/cern.ch/work/h/helfaham/helfaham/" , fileName = "SingleMu%s.root"):
+    def __init__(self , path = "/afs/cern.ch/work/h/helfaham/helfaham/2017_PU/samples_hadd/" , fileName = "ZeroBias%s.root"):
         self.runEras = {} #"B":{},"C":{},"D":{},"E":{},"F":{},"G":{},"H":{}}
         self.nTuples = path
         self.All = TChain("PUAnalyzer/Trees/Events")
-        #for runEra in ['B','C','D','E','F','G','H']: #self.runEras :
-        for runEra in ['B','C','D','E']: #self.runEras :
+        #for runEra in ['B','C','D','E','F']: #self.runEras :
+        for runEra in ['C','D','E','F']: #self.runEras :
             fname = path + fileName%(runEra)
             if os.path.isfile( fname ):
                 self.runEras[ runEra ] = {}
@@ -130,7 +130,7 @@ class DatasetController :
         return getattr( self , attrname )
         
 class MCSampleContainer :
-    def __init__(self, name , nTuples = "/afs/cern.ch/work/h/helfaham/helfaham/" , runEras = []):
+    def __init__(self, name , nTuples = "/afs/cern.ch/work/h/helfaham/helfaham/2017_PU/samples_hadd/" , runEras = []):
         self.nTuples=nTuples
 
         self.SampleName = name
@@ -155,7 +155,7 @@ class MCSampleContainer :
         for runEra in self.runEras:
             for method in datapumethods:
                 fdata = None
-                datafilename = nTuples + "datapu_hadd/data_%s_H_%s.root" % (method, runEra)
+                datafilename = nTuples + "../datapu_hadd/data_%s_H_%s.root" % (method, runEra)
                 print datafilename
                 if os.path.isfile( datafilename ):
                     fdata = TFile.Open( datafilename )
@@ -202,7 +202,7 @@ class EraTuneHandler :
         return h
     
     #def __init__(self, name , datafiles , mcfiles , fout , tunes = [1,2,3,4] ):
-    def __init__(self, name , datafiles , mcfiles , fout , tunes = [1,5] ):
+    def __init__(self, name , datafiles , mcfiles , fout , tunes = [1] ):
         self.Tunes = tunes 
         self.data = DatasetController(fileName = datafiles)
         self.Dir = fout.mkdir( name )
@@ -247,13 +247,13 @@ class EraTuneHandler :
             chi2bestxsec.Write()
             ktestbestxsec.Write()
         
-fout = TFile.Open("out_2017.root" , "recreate")
+fout = TFile.Open("out_2017_SingleNeutrinovsZeroBias.root" , "recreate")
 
-EraTuneHandler( "DY" , "SingleMu%s.root",  "ZmuMuM%d" , fout )
+#EraTuneHandler( "DY" , "SingleMu%s.root",  "ZmuMuM%d" , fout )
 #EraTuneHandler( "NuGunZeroBias" , "ZeroBias%s.root",  "NuGunM%d" , fout )
 #EraTuneHandler( "NuGunMinBias" , "MinBias%s.root",  "NuGunM%d" , fout )
 #EraTuneHandler( "SingleNuMinBias" , "MinBias%s.root",  "SingleNeutrinoTuneCP%d" , fout , [0,2,5] )
-#EraTuneHandler( "SingleNuZeroBias" , "ZeroBias%s.root",  "SingleNeutrinoTuneCP%d" , fout , [0,2,5] )
+EraTuneHandler( "SingleNuZeroBias" , "ZeroBias%s.root",  "SingleNeutrinoTuneCP%d" , fout , [1] )
 
 fout.Close()
 

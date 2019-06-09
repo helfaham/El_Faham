@@ -44,23 +44,23 @@ class VarsMaker :
 
         elif dataset == "ZeroBias" :
             self.vars = {"AVGnGoodVertices":[100,5,25],
-                         "AVGnVertices":[100,6,26],
+                         "AVGnVertices":[100,6,30],
                          #"AVGnInt",            
                          #"AVGnInt50ns",        
                          "AVGnEles":[10,0,1],
                          "AVGnMus":[60,0,3],
-                         "AVGnChargedHadrons":[600,100,700], 
+                         "AVGnChargedHadrons":[600,100,800], 
                          "AVGnLostTracks":[60,0,3],     
                          "AVGnPhotons":[500 , 50 , 300 ],        
-                         "AVGnNeutralHadrons":[80,30,70], 
+                         "AVGnNeutralHadrons":[80,30,90], 
                          "nEventsInLumi":[1000, 0 , 1000],
                          "AVGfixedGridRhoFastjetCentralNeutral":[50 , 0 , 6],
-                         "AVGfixedGridRhoFastjetAllCalo":[70, 0 , 14],
+                         "AVGfixedGridRhoFastjetAllCalo":[70, 0 , 20],
                          "AVGfixedGridRhoFastjetCentralCalo":[50 , 0 , 10 ],
-                         "AVGfixedGridRhoAll":[80 , 4, 20],
-                         "AVGfixedGridRhoFastjetAll":[80 , 4, 20],
-                         "AVGfixedGridRhoFastjetCentral":[80 , 4 , 22],
-                         "AVGfixedGridRhoFastjetCentralChargedPileUp":[100, 0 , 20]}
+                         "AVGfixedGridRhoAll":[80 , 4, 25],
+                         "AVGfixedGridRhoFastjetAll":[80 , 4, 25],
+                         "AVGfixedGridRhoFastjetCentral":[80 , 4 , 25],
+                         "AVGfixedGridRhoFastjetCentralChargedPileUp":[100, 0 , 25]}
         elif dataset == "MinBias" :
             self.vars = {"AVGnGoodVertices":[100,0,0.4],
                          "AVGnVertices":[100,0,0.4],
@@ -111,10 +111,10 @@ class LumiCorrelationStudiesPerRun :
             self.RunMin = 303435
             self.RunMax = 304826
             self.Color = 7
-        #elif run == "F":
-            #self.RunMin = 304914
-            #self.RunMax = 306462
-            #self.Color = 8
+        elif run == "F":
+            self.RunMin = 304914
+            self.RunMax = 306462
+            self.Color = 8
         #elif run == "G":
             #self.RunMin = 306464
             #self.RunMax = 306826
@@ -137,7 +137,7 @@ class LumiCorrelationStudiesPerRun :
             elif argv[2] == "p3" :
                 self.AllHistos[var] = TH2D( "h" + run +var , run+";Average bunch instantaneous luminosity (/ub/Xing);" + bins[3] , 300, 0.00001 , 0.001 , bins[0] , bins[1] , bins[2] ) # for avg lumi from pu_latest.txt
             elif argv[2] == "b" :
-                self.AllHistos[var] = TH2D( "h" + run +var , run+";Normalized Integrated luminosity (/ub);" + bins[3] , 350, 0.0 , 7 , bins[0] , bins[1] , bins[2] ) # for avg recorded lumi from brilcalc
+                self.AllHistos[var] = TH2D( "h" + run +var , run+";Normalized Integrated luminosity (/ub);" + bins[3] , 350, 0.0 , 10 , bins[0] , bins[1] , bins[2] ) # for avg recorded lumi from brilcalc
 
             self.AllHistos[var].SetMarkerColorAlpha(self.Color , 0.5)
             self.AllHistos[var].SetFillColor(self.Color)
@@ -231,7 +231,7 @@ class LumiCorrelationStudies :
 
         self.AllRuns = {}
         self.AllRunNames = []
-        for runEra in ['B','C','D','E']:
+        for runEra in ['B','C','D','E','F']:
             fname = path + self.FileName%(runEra)
             if not os.path.isfile( fname ):
                 print "data file" , fname , "doesn't exist"
