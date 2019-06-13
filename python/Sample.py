@@ -2,7 +2,7 @@ import sys
 from os import listdir
 from os.path import isfile, join
 import Utilities.General.cmssw_das_client as das_client
-from das_client import *
+#from das_client import *
 from subprocess import call
 import os, ntpath
 import os.path
