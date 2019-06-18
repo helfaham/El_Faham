@@ -196,13 +196,13 @@ class EraTuneHandler :
             h.GetXaxis().SetBinLabel( index , "era%s" % (runera) )
             index += 1
         index = 1
-        for tune in self.Tunes : #[1,2,3,4]:
+        for tune in self.Tunes:
             h.GetYaxis().SetBinLabel( index , "tuneM%d"%(tune) )
             index += 1
         return h
     
     #def __init__(self, name , datafiles , mcfiles , fout , tunes = [1,2,3,4] ):
-    def __init__(self, name , datafiles , mcfiles , fout , tunes = [1] ):
+    def __init__(self, name , datafiles , mcfiles , fout , tunes = [1,5] ):
         self.Tunes = tunes 
         self.data = DatasetController(fileName = datafiles)
         self.Dir = fout.mkdir( name )
@@ -229,7 +229,7 @@ class EraTuneHandler :
             varDir = self.Dir.mkdir( var )
             chi2bestxsec = self.Make2DSummaryPlot( var , "Chi2" )
             ktestbestxsec = self.Make2DSummaryPlot( var , "KTest")
-            for tune in tunes : #[1,2,3,4]:
+            for tune in tunes: 
                 tuneName = "tuneM%d" % (tune)
                 setattr( self, "MC_" + tuneName , MCSampleContainer( name=mcfiles % (tune) , runEras=self.data.runEras.keys() ) )
                 mc = getattr( self, "MC_" + tuneName )

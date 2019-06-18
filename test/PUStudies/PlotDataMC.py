@@ -10,7 +10,7 @@ t.SetTextFont(72)
 
 
 AllBestXSections = {}
-fin = TFile.Open("/afs/cern.ch/work/h/helfaham/helfaham/2017_PU/out_2017_SingleNeutrinovsZeroBias.root")
+fin = TFile.Open("/afs/cern.ch/user/h/helfaham/CMSSW_9_4_7/src/Haamm/HaNaMiniAnalyzer/test/PUStudies/out_2017_SingleNeutrinovsZeroBias.root")
 
 
 objs = []
@@ -147,9 +147,8 @@ allGraphs = {}
 allMultiGraphs = {}
 canvases = {}
 
-#tunes = [  "tuneM1" , "tuneM2" , "tuneM3" , "tuneM4" ]
 tunes = [  "tuneM1" ]  
-
+#tunes = [  "tuneM1","tuneM5" ]  
 for runEra in ["All" , 'eraC','eraD','eraE','eraF','eraG','eraH']:
     mg = TMultiGraph()
     mg.SetName( runEra )
