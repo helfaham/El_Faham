@@ -12,6 +12,7 @@ t.SetTextFont(72)
 AllBestXSections = {}
 #fin = TFile.Open("out.root")
 fin = TFile.Open("/eos/home-h/helfaham/PU_work/2016/out_2016_SingleNeutrinovsZeroBias.root")
+#fin = TFile.Open("/afs/cern.ch/work/h/helfaham/helfaham/2017_PU/out_2017_SingleNeutrinovsZeroBias.root")
 
 objs = []
 def PlotVariable( DirName , varName , MCName, runEra ):
@@ -139,6 +140,7 @@ varNames = [#"nGoodVertices",
 
 for var in varNames :
     for tune in [ "tuneM2" , "tuneM5" ] :
+    #for tune in [ "tuneM1" ] :
         a = PlotVariable( "SingleNuZeroBias" , var , tune , "All" )                    
 #exit()
         
@@ -148,6 +150,7 @@ canvases = {}
 
 #tunes = [  "tuneM1" , "tuneM2" , "tuneM3" , "tuneM4" ]
 tunes = [  "tuneM2" , "tuneM5" ]
+#tunes = [  "tuneM1" ]
 
 for runEra in ["All" , 'eraC','eraD','eraE','eraF','eraG','eraH']:
     mg = TMultiGraph()
