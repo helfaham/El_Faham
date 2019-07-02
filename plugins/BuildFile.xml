@@ -15,4 +15,6 @@
 <use name="CondFormats/BTauObjects"/>
 <use name="DataFormats/MuonReco"/>
 <use name="Haamm/HaNaMiniAnalyzer"/>
+<use   name="DataFormats/TrackReco"/>
+<use   name="DataFormats/VertexReco"/>
 <flags EDM_PLUGIN="1"/>
