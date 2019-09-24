@@ -1,0 +1,31 @@
+000 (3232580.015.000) 09/24 11:24:32 Job submitted from host: <137.138.120.116:9618?addrs=137.138.120.116-9618+[2001-1458-d00-16--17b]-9618&alias=bigbird12.cern.ch&noUDP&sock=schedd_3291_ee45_3>
+...
+040 (3232580.015.000) 09/24 11:37:31 Started transferring input files
+	Transferring to host: <188.185.142.80:9618?addrs=188.185.142.80-9618+[2001-1459-301-9--100-41]-9618&noUDP&sock=28020_5fed_23796>
+...
+040 (3232580.015.000) 09/24 11:37:31 Finished transferring input files
+...
+001 (3232580.015.000) 09/24 11:37:32 Job executing on host: <188.185.142.80:9618?addrs=188.185.142.80-9618+[2001-1459-301-9--100-41]-9618&noUDP&sock=8614_614c_136>
+...
+006 (3232580.015.000) 09/24 11:37:41 Image size of job updated: 7076
+	6  -  MemoryUsage of job (MB)
+	6028  -  ResidentSetSize of job (KB)
+...
+040 (3232580.015.000) 09/24 11:46:13 Started transferring output files
+...
+040 (3232580.015.000) 09/24 11:46:13 Finished transferring output files
+...
+004 (3232580.015.000) 09/24 11:46:14 Job was evicted.
+	(0) CPU times
+		Usr 0 00:02:41, Sys 0 00:00:31  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+	53328  -  Run Bytes Sent By Job
+	3580  -  Run Bytes Received By Job
+	Partitionable Resources :    Usage  Request Allocated 
+	   Cpus                 :                 1           
+	   Disk (KB)            :    79969        4   2104596 
+	   Memory (MB)          :        6     2000      2000 
+...
+009 (3232580.015.000) 09/24 11:46:15 Job was aborted by the user.
+	via condor_rm (by user helfaham)
+...

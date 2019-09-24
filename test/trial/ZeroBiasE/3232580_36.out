@@ -1,0 +1,89 @@
+subject   : /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=helfaham/CN=834699/CN=Hesham El Faham/CN=107901401
+issuer    : /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=helfaham/CN=834699/CN=Hesham El Faham
+identity  : /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=helfaham/CN=834699/CN=Hesham El Faham
+type      : RFC3820 compliant impersonation proxy
+strength  : 2048
+path      : /afs/cern.ch/user/h/helfaham/CMSSW_10_2_10/src/Haamm/HaNaMiniAnalyzer/test/./trial/.x509up_u119445
+timeleft  : 999:46:42
+key usage : Digital Signature, Key Encipherment
+Your branch is up to date with 'origin/PileUP18'.
+>> Local Products Rules ..... started
+>> Local Products Rules ..... done
+>> Entering Package Haamm/HaNaMiniAnalyzer
+>> Creating project symlinks
+Entering library rule at src/Haamm/HaNaMiniAnalyzer/plugins
+>> Compiling edm plugin /pool/condor/dir_26830/CMSSW_10_2_10/src/Haamm/HaNaMiniAnalyzer/plugins/PUStudies.cc 
+Entering library rule at Haamm/HaNaMiniAnalyzer
+>> Compiling  /pool/condor/dir_26830/CMSSW_10_2_10/src/Haamm/HaNaMiniAnalyzer/src/JetReader.cc 
+>> Compiling  /pool/condor/dir_26830/CMSSW_10_2_10/src/Haamm/HaNaMiniAnalyzer/src/PackedCandidateReader.cc 
+>> Compiling  /pool/condor/dir_26830/CMSSW_10_2_10/src/Haamm/HaNaMiniAnalyzer/src/DiMuonReader.cc 
+>> Compiling  /pool/condor/dir_26830/CMSSW_10_2_10/src/Haamm/HaNaMiniAnalyzer/src/VertexReader.cc 
+>> Compiling  /pool/condor/dir_26830/CMSSW_10_2_10/src/Haamm/HaNaMiniAnalyzer/src/LHEEventReader.cc 
+>> Compiling  /pool/condor/dir_26830/CMSSW_10_2_10/src/Haamm/HaNaMiniAnalyzer/src/GenEventInfoProductReader.cc 
+>> Compiling  /pool/condor/dir_26830/CMSSW_10_2_10/src/Haamm/HaNaMiniAnalyzer/src/METReader.cc 
+>> Compiling  /pool/condor/dir_26830/CMSSW_10_2_10/src/Haamm/HaNaMiniAnalyzer/src/Histograms.cc 
+>> Compiling  /pool/condor/dir_26830/CMSSW_10_2_10/src/Haamm/HaNaMiniAnalyzer/src/Category.cc 
+>> Compiling  /pool/condor/dir_26830/CMSSW_10_2_10/src/Haamm/HaNaMiniAnalyzer/src/TtGenEvent.cc 
+>> Compiling  /pool/condor/dir_26830/CMSSW_10_2_10/src/Haamm/HaNaMiniAnalyzer/src/HLTReader.cc 
+>> Compiling  /pool/condor/dir_26830/CMSSW_10_2_10/src/Haamm/HaNaMiniAnalyzer/src/BTagWeight.cc 
+>> Compiling  /pool/condor/dir_26830/CMSSW_10_2_10/src/Haamm/HaNaMiniAnalyzer/src/HaNaBaseMiniAnalyzer.cc 
+>> Building shared library tmp/slc6_amd64_gcc700/src/Haamm/HaNaMiniAnalyzer/src/HaammHaNaMiniAnalyzer/libHaammHaNaMiniAnalyzer.so
+Copying tmp/slc6_amd64_gcc700/src/Haamm/HaNaMiniAnalyzer/src/HaammHaNaMiniAnalyzer/libHaammHaNaMiniAnalyzer.so to productstore area:
+Leaving library rule at Haamm/HaNaMiniAnalyzer
+>> Building edm plugin tmp/slc6_amd64_gcc700/src/Haamm/HaNaMiniAnalyzer/plugins/HaammHaNaMiniAnalyzerAuto/libHaammHaNaMiniAnalyzerAuto.so
+Leaving library rule at src/Haamm/HaNaMiniAnalyzer/plugins
+@@@@ Running edmWriteConfigs for HaammHaNaMiniAnalyzerAuto
+--- Registered EDM Plugin: HaammHaNaMiniAnalyzerAuto
+>> Leaving Package Haamm/HaNaMiniAnalyzer
+>> Package Haamm/HaNaMiniAnalyzer built
+gmake[1]: Entering directory '/pool/condor/dir_26830/CMSSW_10_2_10'
+>> Local Products Rules ..... started
+>> Local Products Rules ..... done
+>> Creating project symlinks
+>> Done python_symlink
+>> Compiling python modules cfipython/slc6_amd64_gcc700/Haamm/HaNaMiniAnalyzer
+>> Compiling python modules python
+>> Compiling python modules src/Haamm/HaNaMiniAnalyzer/python
+>> All python modules compiled
+@@@@ Refreshing Plugins:edmPluginRefresh
+>> Plugins of all types refreshed.
+>> Done generating edm plugin poisoned information
+gmake[1]: Leaving directory '/pool/condor/dir_26830/CMSSW_10_2_10'
+36
+cmsRun PUAnalyzer_cfg.py sample=ZeroBiasE job=36 output=out maxEvents=-1 nFilesPerJob=2
+/pool/condor/dir_26830/CMSSW_10_2_10/src/Haamm/HaNaMiniAnalyzer/test/SamplesPU
+total 72
+-rw-r--r--. 1 helfaham zh 13937 Sep 24 11:38 Cert_314472-325175_13TeV_PromptReco_Collisions18_JSON.txt
+-rw-r--r--. 1 helfaham zh  2487 Sep 24 11:38 FinalDraw.py
+-rw-r--r--. 1 helfaham zh  7219 Sep 24 11:38 PUAnalyzer_cfg.py
+drwxr-xr-x. 2 helfaham zh  4096 Sep 24 11:38 PUStudies
+-rw-r--r--. 1 helfaham zh  6245 Sep 24 11:38 Plotter.py
+drwxr-xr-x. 2 helfaham zh  4096 Sep 24 11:42 SamplesPU
+-rwxr-xr-x. 1 helfaham zh  3580 Sep 24 11:38 SetupAndRun.sh
+-rw-r--r--. 1 helfaham zh   565 Sep 24 11:38 SubmitPlotter.py
+-rwxr-xr-x. 1 helfaham zh  2626 Sep 24 11:38 condor.py
+-rwxr-xr-x. 1 helfaham zh  1370 Sep 24 11:38 hadd.py
+-rw-r--r--. 1 helfaham zh  4574 Sep 24 11:38 lxbatch.py
+-rw-r--r--. 1 helfaham zh   220 Sep 24 11:38 runPlotter.sh
+1th Try
+2th Try
+3th Try
+4th Try
+5th Try
+6th Try
+7th Try
+8th Try
+9th Try
+10th Try
+11th Try
+12th Try
+13th Try
+14th Try
+15th Try
+16th Try
+17th Try
+18th Try
+19th Try
+20th Try
+21th Try
+The file was not copied to destination after 20 tries
