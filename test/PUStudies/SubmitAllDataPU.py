@@ -9,8 +9,8 @@ user = getpass.getuser()
 import os
 from os import listdir
 #variations = range( 84 , 117 )
-jsons = {"All":"/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions17/13TeV/Final/Cert_294927-306462_13TeV_PromptReco_Collisions17_JSON.txt"} 
-dir="/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions17/13TeV/Era/Prompt/"
+jsons = {"All":"/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions18/13TeV/PromptReco/Cert_314472-325175_13TeV_PromptReco_Collisions18_JSON.txt"} 
+dir="/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions18/13TeV/Era/Prompt"
 for f in listdir(dir):
     era = f.split("_")[-1].split(".")[0]
     jsons[era] = dir+f
@@ -55,8 +55,8 @@ for era in jsons:
         "Appendix":era
         }
     #print >> file, "queue %d" % (len(era))
-    #print >> file, "queue 160" #[from 840-999, you need 160 jobs that ranges from 0 to 159 which plus 840 in produceDataPU gives from h_840-h_999]
-    print >> file, "queue 171" #[from 1000-1170, you need 171 jobs that ranges from 0 to 170 which plus 1000 in produceDataPU gives from h_1000-h_1170]
+    print >> file, "queue 160" #[from 840-999, you need 160 jobs that ranges from 0 to 159 which plus 840 in produceDataPU gives from h_840-h_999]
+    #print >> file, "queue 171" #[from 1000-1170, you need 171 jobs that ranges from 0 to 170 which plus 1000 in produceDataPU gives from h_1000-h_1170]
     print >> file, ""
 
     file.close()
