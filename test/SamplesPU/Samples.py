@@ -29,10 +29,14 @@ ZeroBiasE = Sample("ZeroBiasE" , 0 , False , "/ZeroBias/Run2018E-PromptReco-v1/M
 MINIAOD.extend( [ ZeroBiasA , ZeroBiasB , ZeroBiasC , ZeroBiasD , ZeroBiasE ] )
 
 #2018
-SingleNeutrinoTuneCP1_1   = Sample("SingleNeutrinoTuneCP1_1" , 1 , False , "/SingleNeutrino/RunIIAutumn18MiniAOD-FlatPU0to75TuneCP1_102X_upgrade2018_realistic_v15_ext4-v1/MINIAODSIM" )
-SingleNeutrinoTuneCP1_2   = Sample("SingleNeutrinoTuneCP1_2" , 1 , False , "/SingleNeutrino/RunIIAutumn18MiniAOD-FlatPU0to75TuneCP1_102X_upgrade2018_realistic_v15_ext2-v1/MINIAODSIM" )
+#SingleNeutrinoTuneCP1_1   = Sample("SingleNeutrinoTuneCP1_1" , 1 , False , "/SingleNeutrino/RunIIAutumn18MiniAOD-FlatPU0to75TuneCP1_102X_upgrade2018_realistic_v15_ext4-v1/MINIAODSIM" )
+#SingleNeutrinoTuneCP1_2   = Sample("SingleNeutrinoTuneCP1_2" , 1 , False , "/SingleNeutrino/RunIIAutumn18MiniAOD-FlatPU0to75TuneCP1_102X_upgrade2018_realistic_v15_ext2-v1/MINIAODSIM" )
 SingleNeutrinoTuneCP5     = Sample("SingleNeutrinoTuneCP5"   , 1 , False , "/SingleNeutrino/RunIIAutumn18MiniAOD-FlatPU0to75TuneCP5_102X_upgrade2018_realistic_v15_ext5-v1/MINIAODSIM" )
+SingleNeutrinoTuneCP1_1   = Sample("SingleNeutrinoTuneCP1" , 1 , False , "/SingleNeutrino/RunIIAutumn18MiniAOD-FlatPU0to75TuneCP1_102X_upgrade2018_realistic_v15_ext4-v1/MINIAODSIM" )
+SingleNeutrinoTuneCP1_2   = Sample("SingleNeutrinoTuneCP1" , 1 , False , "/SingleNeutrino/RunIIAutumn18MiniAOD-FlatPU0to75TuneCP1_102X_upgrade2018_realistic_v15_ext2-v1/MINIAODSIM" )
 
 SingleNeutrinos = []
-MINIAOD.extend( [ SingleNeutrinoTuneCP1_1 , SingleNeutrinoTuneCP1_2, SingleNeutrinoTuneCP5 ] )
-SingleNeutrinos.extend( [ SingleNeutrinoTuneCP1_1 , SingleNeutrinoTuneCP1_2, SingleNeutrinoTuneCP5 ] )
+#MINIAOD.extend( [ SingleNeutrinoTuneCP1_1 , SingleNeutrinoTuneCP1_2, SingleNeutrinoTuneCP5 ] )
+MINIAOD.extend( [ SingleNeutrinoTuneCP1, SingleNeutrinoTuneCP5 ] )
+#SingleNeutrinos.extend( [ SingleNeutrinoTuneCP1_1 , SingleNeutrinoTuneCP1_2, SingleNeutrinoTuneCP5 ] )
+SingleNeutrinos.extend( [ SingleNeutrinoTuneCP1,  SingleNeutrinoTuneCP5 ] )
