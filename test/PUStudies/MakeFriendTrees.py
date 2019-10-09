@@ -138,7 +138,9 @@ class MCSampleContainer :
         self.File = TFile.Open( self.FileName )
 
         self.hnTrueIntMCName = "PUAnalyzer/nTruInteractions/nTruInteractions_" + self.SampleName
+        
         self.hnTrueInt = self.File.Get( self.hnTrueIntMCName )
+        print self.File, self.hnTrueInt
         self.nIntNBins = self.hnTrueInt.GetNbinsX()
         self.nIntMin = self.hnTrueInt.GetBinLowEdge(1)
         self.nIntMax = self.hnTrueInt.GetBinLowEdge( 1+self.nIntNBins )
@@ -155,7 +157,7 @@ class MCSampleContainer :
         for runEra in self.runEras:
             for method in datapumethods:
                 fdata = None
-                datafilename = nTuples + "../datapu_hadd/data_%s_H_%s.root" % (method, runEra)
+                datafilename = nTuples + "../datapu_hadd/data_%s_%s.root" % (method, runEra)
                 print datafilename
                 if os.path.isfile( datafilename ):
                     fdata = TFile.Open( datafilename )
@@ -252,7 +254,7 @@ fout = TFile.Open("out_2018.root" , "recreate")
 #EraTuneHandler( "NuGunZeroBias" , "ZeroBias%s.root",  "NuGunM%d" , fout )
 #EraTuneHandler( "NuGunMinBias" , "MinBias%s.root",  "NuGunM%d" , fout )
 #EraTuneHandler( "SingleNuMinBias" , "MinBias%s.root",  "SingleNeutrinoTuneCP%d" , fout , [0,2,5] )
-EraTuneHandler( "SingleNuZeroBias" , "ZeroBias%s.root",  "SingleNeutrinoTuneCP%d" , fout , [1,5] )
+EraTuneHandler( "SingleNuZeroBias" , "ZeroBias%s.root",  "SingleNeutrinoTuneCP%d" , fout , [5] )
 
 fout.Close()
 
