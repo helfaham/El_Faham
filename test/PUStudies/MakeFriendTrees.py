@@ -94,7 +94,7 @@ class DatasetController :
         self.nTuples = path
         self.All = TChain("PUAnalyzer/Trees/Events")
         #for runEra in ['B','C','D','E','F','G','H']: #self.runEras :
-        for runEra in ['A','B','C','E']: #self.runEras :
+        for runEra in ['A','B','C']: #self.runEras :
             fname = path + fileName%(runEra)
             if os.path.isfile( fname ):
                 self.runEras[ runEra ] = {}
@@ -254,7 +254,7 @@ fout = TFile.Open("out_2018.root" , "recreate")
 #EraTuneHandler( "NuGunZeroBias" , "ZeroBias%s.root",  "NuGunM%d" , fout )
 #EraTuneHandler( "NuGunMinBias" , "MinBias%s.root",  "NuGunM%d" , fout )
 #EraTuneHandler( "SingleNuMinBias" , "MinBias%s.root",  "SingleNeutrinoTuneCP%d" , fout , [0,2,5] )
-EraTuneHandler( "SingleNuZeroBias" , "ZeroBias%s.root",  "SingleNeutrinoTuneCP%d" , fout , [5] )
+EraTuneHandler( "SingleNuZeroBias" , "ZeroBias%s.root",  "SingleNeutrinoTuneCP%d" , fout , [1,5] )
 
 fout.Close()
 

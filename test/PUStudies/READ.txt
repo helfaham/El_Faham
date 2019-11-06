@@ -1,1 +1,0 @@
-#this folder needs to be modified for 2018 data, i.e. change the two scripts and add 2018 Final JSON
