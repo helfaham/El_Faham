@@ -33,8 +33,8 @@ for era in jsons:
 #    submit = ('bsub -q {que:s} -J "{era:s}[840-1170]" -o datapu/{era:s}_{var:s}.out ' + command).format( var="%I" , json=jsons[era] , era=era , que=queue )
 #    print submit
     
-    #if not era.count("eraB"):
-     #   continue
+    if not era.count("eraD"):
+        continue
 
     os.mkdir( "%s/%s" % (workingdir , era) )
     shutil.copy( "produceDataPU.sh" , "./%s/%s" % (workingdir,era))
@@ -55,7 +55,8 @@ for era in jsons:
         "Appendix":era
         }
     #print >> file, "queue %d" % (len(era))
-    print >> file, "queue 160" #[from 840-999, you need 160 jobs that ranges from 0 to 159 which plus 840 in produceDataPU gives from h_840-h_999]
+    print >> file, "queue 6" #[from 840-999, you need 160 jobs that ranges from 0 to 159 which plus 840 in produceDataPU gives from h_840-h_999]
+    #print >> file, "queue 160" #[from 840-999, you need 160 jobs that ranges from 0 to 159 which plus 840 in produceDataPU gives from h_840-h_999]
     #print >> file, "queue 171" #[from 1000-1170, you need 171 jobs that ranges from 0 to 170 which plus 1000 in produceDataPU gives from h_1000-h_1170]
     print >> file, ""
 

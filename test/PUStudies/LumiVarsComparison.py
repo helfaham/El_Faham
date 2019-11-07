@@ -322,7 +322,7 @@ class LumiCorrelationStudies :
             l.Write()
             self.Canvases[ var + "_l" ] = l
             c.Write()
-            c.SaveAs("%s.png" %(var))
+            c.SaveAs("./FitRes/%s.png" %(var))
             self.Canvases[ var ] = c
         #gROOT.SetBatch(False)
         #gStyle.SetOptStat(1)
