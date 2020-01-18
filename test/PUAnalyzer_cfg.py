@@ -127,8 +127,8 @@ process.maxEvents.input = options.maxEvents
 
 if theSample.IsData :
     import FWCore.PythonUtilities.LumiList as LumiList
-    process.source.lumisToProcess = LumiList.LumiList(filename = (process.PUAnalyzer.SetupDir.value() + '/Cert_314472-325175_13TeV_PromptReco_Collisions18_JSON.txt')).getVLuminosityBlockRange()
-    
+    #process.source.lumisToProcess = LumiList.LumiList(filename = (process.PUAnalyzer.SetupDir.value() + '/Cert_314472-325175_13TeV_PromptReco_Collisions18_JSON.txt')).getVLuminosityBlockRange()
+    process.source.lumisToProcess = LumiList.LumiList(filename = (process.PUAnalyzer.SetupDir.value() + '/Cert_320394-325273_13TeV_PromptReco_Collisions18_JSON_eraD.txt')).getVLuminosityBlockRange()
 #    from Configuration.AlCa.GlobalTag import GlobalTag
 #    process.GlobalTag.globaltag = '94X_dataRun2_v6' 
 

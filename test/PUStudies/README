@@ -1,0 +1,1 @@
+the JSON file for eraD was added thinking that ZeroBiasD won't work unless its specific JSON file is used. That was not true.
