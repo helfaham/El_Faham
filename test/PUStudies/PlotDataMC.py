@@ -150,7 +150,7 @@ canvases = {}
 #tunes = [  "tuneM1" , "tuneM2" , "tuneM3" , "tuneM4" ]
 tunes = [  "tuneM1" , "tuneM5" ]
 
-for runEra in ["All" , 'eraA','eraB','eraC']:
+for runEra in ["All" , 'eraA','eraB','eraC','eraD']:
     mg = TMultiGraph()
     mg.SetName( runEra )
     allMultiGraphs[ runEra ] = mg

@@ -24,7 +24,7 @@ from Haamm.HaNaMiniAnalyzer.ExtendedSample import *
 for sample in samples:
     ss = None
     skip = True
-    for sname in [ "SingleMuD"]: #"ZmuMuM" , "NuGunM" ]:,
+    for sname in [ "ZeroBiasD"]: #"ZmuMuM" , "NuGunM" ]:,
         if sname in sample.Name :
             print "skipping ", sample.Name
             skip = False

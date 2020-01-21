@@ -103,10 +103,10 @@ class LumiCorrelationStudiesPerRun :
             self.RunMin = 319313
             self.RunMax = 320393
             self.Color = 6
-        #elif run == "D":
-            #self.RunMin = 320413
-            #self.RunMax = 325273
-            #self.Color = 7
+        elif run == "D":
+            self.RunMin = 320413
+            self.RunMax = 325273
+            self.Color = 7
         #elif run == "E":
             #self.RunMin = 325283
             #self.RunMax = 325746
@@ -219,7 +219,7 @@ class LumiCorrelationStudies :
 
         self.AllRuns = {}
         self.AllRunNames = []
-        for runEra in ['A','B','C']:
+        for runEra in ['A','B','C','D']:
             fname = path + self.FileName%(runEra)
             if not os.path.isfile( fname ):
                 print "data file" , fname , "doesn't exist"
