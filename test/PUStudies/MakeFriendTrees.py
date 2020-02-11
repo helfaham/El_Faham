@@ -94,7 +94,7 @@ class DatasetController :
         self.nTuples = path
         self.All = TChain("PUAnalyzer/Trees/Events")
         #for runEra in ['B','C','D','E','F','G','H']: #self.runEras :
-        for runEra in ['A','B','C','D']: #self.runEras :
+        for runEra in ['A','B','C','D','E']: #self.runEras :
             fname = path + fileName%(runEra)
             if os.path.isfile( fname ):
                 self.runEras[ runEra ] = {}
