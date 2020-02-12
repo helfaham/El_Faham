@@ -9,7 +9,8 @@ user = getpass.getuser()
 import os
 from os import listdir
 #variations = range( 84 , 117 )
-jsons = {"All":"/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions18/13TeV/PromptReco/Cert_314472-325175_13TeV_PromptReco_Collisions18_JSON.txt"} 
+#jsons = {"All":"/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions18/13TeV/PromptReco/Cert_314472-325175_13TeV_PromptReco_Collisions18_JSON.txt"} 
+jsons = {"All":"./Cert_325274-325765_13TeV_PromptReco_Collisions18_JSON_eraE.txt"} 
 dir="/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions18/13TeV/Era/Prompt"
 for f in listdir(dir):
     era = f.split("_")[-1].split(".")[0]
@@ -33,7 +34,7 @@ for era in jsons:
 #    submit = ('bsub -q {que:s} -J "{era:s}[840-1170]" -o datapu/{era:s}_{var:s}.out ' + command).format( var="%I" , json=jsons[era] , era=era , que=queue )
 #    print submit
     
-    if not era.count("eraD"):
+    if not era.count("eraE"):
         continue
 
     os.mkdir( "%s/%s" % (workingdir , era) )
