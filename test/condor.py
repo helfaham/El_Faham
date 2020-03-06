@@ -10,6 +10,7 @@ if not len(sys.argv) == 3 :
 
 prefix = "out"
 OutPath = "/%s/%s/" % (sys.argv[2], user )
+#OutPath = "/%s" % (sys.argv[2])
 #OutPath = "eos/cms/store/user/%s/%s/" % (user, sys.argv[2] )
 
 from SamplesPU.Samples import MINIAOD as samples
@@ -32,7 +33,7 @@ file_sh = open("%s/Submit.sh" % (workingdir) , "w" )
 
 
 for sample in samples:
-    if not sample.Name.count("SingleMuC"):
+    if not sample.Name.count("SingleNeutrinoTuneCP5"):
         continue
 
     os.mkdir( "%s/%s" % (workingdir , sample.Name) )

@@ -93,7 +93,6 @@ class DatasetController :
         self.runEras = {} #"B":{},"C":{},"D":{},"E":{},"F":{},"G":{},"H":{}}
         self.nTuples = path
         self.All = TChain("PUAnalyzer/Trees/Events")
-        #for runEra in ['B','C','D','E','F']: #self.runEras :
         for runEra in ['C','D','E','F']: #self.runEras :
             fname = path + fileName%(runEra)
             if os.path.isfile( fname ):
@@ -201,8 +200,7 @@ class EraTuneHandler :
             index += 1
         return h
     
-    #def __init__(self, name , datafiles , mcfiles , fout , tunes = [1,2,3,4] ):
-    def __init__(self, name , datafiles , mcfiles , fout , tunes = [1,5] ):
+    def __init__(self, name , datafiles , mcfiles , fout , tunes = [5,1] ):
         self.Tunes = tunes 
         self.data = DatasetController(fileName = datafiles)
         self.Dir = fout.mkdir( name )
@@ -248,12 +246,13 @@ class EraTuneHandler :
             ktestbestxsec.Write()
         
 fout = TFile.Open("out_2017_SingleNeutrinovsZeroBias.root" , "recreate")
-
+#fout = TFile.Open("out_2018_SingleNeutrinovsZeroBias.root" , "recreate")
 #EraTuneHandler( "DY" , "SingleMu%s.root",  "ZmuMuM%d" , fout )
 #EraTuneHandler( "NuGunZeroBias" , "ZeroBias%s.root",  "NuGunM%d" , fout )
 #EraTuneHandler( "NuGunMinBias" , "MinBias%s.root",  "NuGunM%d" , fout )
 #EraTuneHandler( "SingleNuMinBias" , "MinBias%s.root",  "SingleNeutrinoTuneCP%d" , fout , [0,2,5] )
-EraTuneHandler( "SingleNuZeroBias" , "ZeroBias%s.root",  "SingleNeutrinoTuneCP%d" , fout , [1] )
+EraTuneHandler( "SingleNuZeroBias" , "ZeroBias%s.root",  "SingleNeutrinoTuneCP%d" , fout , [5,1] )
+
 
 fout.Close()
 

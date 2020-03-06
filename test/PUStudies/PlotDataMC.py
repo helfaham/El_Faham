@@ -59,10 +59,10 @@ def PlotVariable( DirName , varName , MCName, runEra ):
                 hMC.SetLineWidth( 3 )
             elif xsec > bestXSec :
                 hMC.SetTitle( "Cross Section : %.1f" % xsec )
-                hMC.SetLineColor( kBlue )
+                hMC.SetLineColor( kRed )
             elif xsec < bestXSec :
                 hMC.SetTitle( "Cross Section : %.1f" % xsec )
-                hMC.SetLineColor( kGreen )
+                hMC.SetLineColor( kRed )
 
             hMC.SetStats(False)
             hMC.DrawNormalized("SAME E PLC PMC")
