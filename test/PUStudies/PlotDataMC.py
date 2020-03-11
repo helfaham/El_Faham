@@ -138,8 +138,7 @@ varNames = [#"nGoodVertices",
 ]
 
 for var in varNames :
-    #for tune in [ "tuneM1" , "tuneM5" ] :
-    for tune in [ "tuneM1"] :
+    for tune in [ "tuneM1" , "tuneM5" ] :
         a = PlotVariable( "SingleNuZeroBias" , var , tune , "All" )                    
 #exit()
         
@@ -147,9 +146,8 @@ allGraphs = {}
 allMultiGraphs = {}
 canvases = {}
 
-tunes = [  "tuneM1" ]  
-#tunes = [  "tuneM1","tuneM5" ]  
-for runEra in ["All" , 'eraC','eraD','eraE','eraF','eraG','eraH']:
+tunes = [  "tuneM1","tuneM5" ]  
+for runEra in ["All" ,'eraB', 'eraC','eraD','eraE','eraF','eraG','eraH']:
     mg = TMultiGraph()
     mg.SetName( runEra )
     allMultiGraphs[ runEra ] = mg
@@ -285,6 +283,7 @@ for runEra in ["All" , 'eraC','eraD','eraE','eraF','eraG','eraH']:
         i+=1
 
     canvas.SaveAs( canvas.GetName() + ".png" )
+#TODO you exit here why?
 exit()                
 
 allGraphs_2 = {}
@@ -402,7 +401,7 @@ for MCName in tunes : # [ "tuneM1" , "tuneM2" , "tuneM3" , "tuneM4" ]:
                    "eraB":(22, 4 , 0.7)  }
 
     Legend = TLegend( 0.8 , 0.7 , 1 , 1 )
-    for runEra in ["All",'eraG','eraH','eraD','eraE','eraF' , 'eraC','eraB']:
+    for runEra in ["All",'eraB','eraC','eraD','eraE','eraF','eraG','eraH']:
         x = array.array( 'd' )
         y = array.array( 'd' )
         exl = array.array( 'd' )

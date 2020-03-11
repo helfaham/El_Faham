@@ -135,8 +135,10 @@ class MCSampleContainer :
         self.SampleName = name
         self.FileName = nTuples + self.SampleName + ".root"
         self.File = TFile.Open( self.FileName )
-
-        self.hnTrueIntMCName = "PUAnalyzer/nTruInteractions/nTruInteractions_" + self.SampleName
+        if name.count("CP5"):
+           self.hnTrueIntMCName = "PUAnalyzer/nTruInteractions/nTruInteractions_" + self.SampleName + "_1"
+        else:
+	     self.hnTrueIntMCName = "PUAnalyzer/nTruInteractions/nTruInteractions_" + self.SampleName
         self.hnTrueInt = self.File.Get( self.hnTrueIntMCName )
         self.nIntNBins = self.hnTrueInt.GetNbinsX()
         self.nIntMin = self.hnTrueInt.GetBinLowEdge(1)
@@ -251,7 +253,7 @@ fout = TFile.Open("out_2017_SingleNeutrinovsZeroBias.root" , "recreate")
 #EraTuneHandler( "NuGunZeroBias" , "ZeroBias%s.root",  "NuGunM%d" , fout )
 #EraTuneHandler( "NuGunMinBias" , "MinBias%s.root",  "NuGunM%d" , fout )
 #EraTuneHandler( "SingleNuMinBias" , "MinBias%s.root",  "SingleNeutrinoTuneCP%d" , fout , [0,2,5] )
-EraTuneHandler( "SingleNuZeroBias" , "ZeroBias%s.root",  "SingleNeutrinoTuneCP%d" , fout , [5,1] )
+EraTuneHandler( "SingleNuZeroBias" , "ZeroBias%s.root",  "SingleNeutrinoTuneCP%d" , fout , [1,5] )
 
 
 fout.Close()
