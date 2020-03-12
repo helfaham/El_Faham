@@ -47,8 +47,10 @@ ZeroBiasF = Sample("ZeroBiasF" , 0 , False , "/ZeroBias/Run2017F-31Mar2018-v1/MI
 ZeroBiasE = Sample("ZeroBiasE" , 0 , False , "/ZeroBias/Run2017E-31Mar2018-v1/MINIAOD")
 ZeroBiasD = Sample("ZeroBiasD" , 0 , False , "/ZeroBias/Run2017D-31Mar2018-v1/MINIAOD")
 ZeroBiasC = Sample("ZeroBiasC" , 0 , False , "/ZeroBias/Run2017C-31Mar2018-v1/MINIAOD")
+ZeroBiasB = Sample("ZeroBiasB" , 0 , False , "/ZeroBias/Run2017B-31Mar2018-v1/MINIAOD")
+ZeroBiasA = Sample("ZeroBiasA" , 0 , False , "/ZeroBias/Run2017A-09Oct2017-v1/MINIAOD")
 
-MINIAOD.extend( [ ZeroBiasC , ZeroBiasD , ZeroBiasE , ZeroBiasF , ZeroBiasG , ZeroBiasH ] )
+MINIAOD.extend( [ ZeroBiasA, ZeroBiasB, ZeroBiasC , ZeroBiasD , ZeroBiasE , ZeroBiasF , ZeroBiasG , ZeroBiasH ] )
 
 #2017
 SingleNeutrinoTuneCP1   = Sample("SingleNeutrinoTuneCP1"   , 1 , False , "/SingleNeutrino/RunIIFall17MiniAODv2-FlatPU0to75TuneCP1_12Apr2018_94X_mc2017_realistic_v14_ext3-v1/MINIAODSIM" )
