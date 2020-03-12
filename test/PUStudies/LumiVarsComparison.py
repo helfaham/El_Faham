@@ -91,14 +91,14 @@ class LumiCorrelationStudiesPerRun :
         self.Tree = self.File.Get("PUAnalyzer/Trees/Lumis")
         self.Tree.BuildIndex( "run" , "lumi" )
         
-        #if run == "A": 
-            #self.RunMin = 294645 
-            #self.RunMax = 299329
-            #self.Color = 2
-        #if run == "B":
-            #self.RunMin = 297020 
-            #self.RunMax = 299329
-            #self.Color = 2
+        if run == "A": 
+            self.RunMin = 294645 
+            self.RunMax = 299329
+            self.Color = 2
+        if run == "B":
+            self.RunMin = 297020 
+            self.RunMax = 299329
+            self.Color = 2
         if run == "C":
             self.RunMin = 299337
             self.RunMax = 302044
@@ -115,14 +115,14 @@ class LumiCorrelationStudiesPerRun :
             self.RunMin = 304914
             self.RunMax = 306462
             self.Color = 8
-        #elif run == "G":
-            #self.RunMin = 306464
-            #self.RunMax = 306826
-            #self.Color = 9
-        #elif run == "H":
-            #self.RunMin = 306828
-            #self.RunMax = 307554
-            #self.Color = 49
+        elif run == "G":
+            self.RunMin = 306464
+            self.RunMax = 306826
+            self.Color = 9
+        elif run == "H":
+            self.RunMin = 306828
+            self.RunMax = 307554
+            self.Color = 49
         else:
             self.RunMin = self.Tree.GetMinimum("run")
             self.RunMax = self.Tree.GetMaximum("run")
@@ -141,6 +141,7 @@ class LumiCorrelationStudiesPerRun :
 
             self.AllHistos[var].SetMarkerColorAlpha(self.Color , 0.5)
             self.AllHistos[var].SetFillColor(self.Color)
+            self.AllHistos[var].SetTitle("")
 
     def RunIsHere( self, run):
         
@@ -231,7 +232,7 @@ class LumiCorrelationStudies :
 
         self.AllRuns = {}
         self.AllRunNames = []
-        for runEra in ['C','D','E','F']:
+        for runEra in ['A','B','C','D','E','F','G','H']:
             fname = path + self.FileName%(runEra)
             if not os.path.isfile( fname ):
                 print "data file" , fname , "doesn't exist"
@@ -241,7 +242,6 @@ class LumiCorrelationStudies :
 
         self.PULumiData = None
         with open('pileup_latest.txt') as data_file:   
-        #with open('pileup_JSON.txt') as data_file:    
             self.PULumiData = json.load(data_file)
 
         self.ntot_runs = len(self.PULumiData)
@@ -335,6 +335,7 @@ class LumiCorrelationStudies :
             l.Write()
             self.Canvases[ var + "_l" ] = l
             c.Write()
+            c.SetTitle("")
             c.SaveAs("./corr/%s.png"%(var))
             self.Canvases[ var ] = c
         #gROOT.SetBatch(False)
@@ -342,8 +343,7 @@ class LumiCorrelationStudies :
                 
         self.fout.Close()
             
-#path = "/eos/home-h/helfaham/"
-path = "/afs/cern.ch/work/h/helfaham/helfaham/2017_PU/samples_hadd/"
+path = "/eos/home-h/helfaham/PU_work/2017/samples_hadd/"
 lcs = LumiCorrelationStudies( path , argv[1] , argv[2])
 if argv[2] == "p1":
     lcs.Loop( 1 )
