@@ -248,7 +248,6 @@ class EraTuneHandler :
             ktestbestxsec.Write()
         
 fout = TFile.Open("out_2017_SingleNeutrinovsZeroBias.root" , "recreate")
-#fout = TFile.Open("out_2018_SingleNeutrinovsZeroBias.root" , "recreate")
 #EraTuneHandler( "DY" , "SingleMu%s.root",  "ZmuMuM%d" , fout )
 #EraTuneHandler( "NuGunZeroBias" , "ZeroBias%s.root",  "NuGunM%d" , fout )
 #EraTuneHandler( "NuGunMinBias" , "MinBias%s.root",  "NuGunM%d" , fout )
