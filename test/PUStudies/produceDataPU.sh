@@ -18,7 +18,9 @@ echo $xsec
 nBins1=100
 nBins2=200 #that was a special configuration for ZeroBiasEraE normally both are 100
 
-ANJSON=$1
+#TODO always specify the JSON file you are using here, the script automatically takes it from certification directly and I don't know why
+
+ANJSON=/afs/cern.ch/user/h/helfaham/CMSSW_11_0_0/src/Haamm/HaNaMiniAnalyzer/test/PUStudies/Cert_325274-325765_13TeV_PromptReco_Collisions18_JSON_eraE.txt
 appendixName=$2
 #/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions18/13TeV/PromptReco/Cert_314472-325175_13TeV_PromptReco_Collisions18_JSON.txt
 

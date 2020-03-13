@@ -128,8 +128,8 @@ class LumiCorrelationStudiesPerRun :
             self.RunMax = 325273
             self.Color = 7
         elif run == "E":
-            self.RunMin = 325283
-            self.RunMax = 325746
+            self.RunMin = 325308
+            self.RunMax = 325310
             self.Color = 8
         else:
             self.RunMin = self.Tree.GetMinimum("run")
@@ -240,7 +240,8 @@ class LumiCorrelationStudies :
 
         self.AllRuns = {}
         self.AllRunNames = []
-        for runEra in ['A','B','C','D']:
+        for runEra in ['A','B','C','D','E']:
+        #for runEra in ['E']:
             fname = path + self.FileName%(runEra)
             if not os.path.isfile( fname ):
                 print "data file" , fname , "doesn't exist"
@@ -249,7 +250,7 @@ class LumiCorrelationStudies :
             self.AllRuns[ runEra ] = LumiCorrelationStudiesPerRun( runEra , fname , self.Vars.vars , title )
 
         self.PULumiData = None
-        with open('pileup_latest.txt') as data_file:    
+        with open('pileup_JSON.txt') as data_file:    
             self.PULumiData = json.load(data_file)
 
         self.ntot_runs = len(self.PULumiData)
