@@ -250,7 +250,7 @@ class LumiCorrelationStudies :
             self.AllRuns[ runEra ] = LumiCorrelationStudiesPerRun( runEra , fname , self.Vars.vars , title )
 
         self.PULumiData = None
-        with open('pileup_JSON.txt') as data_file:    
+        with open('pileup_JSON.txt') as data_file:   #this data file should latest for eras and JSON for eraE 
             self.PULumiData = json.load(data_file)
 
         self.ntot_runs = len(self.PULumiData)
