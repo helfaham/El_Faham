@@ -93,8 +93,8 @@ class DatasetController :
         self.runEras = {} #"B":{},"C":{},"D":{},"E":{},"F":{},"G":{},"H":{}}
         self.nTuples = path
         self.All = TChain("PUAnalyzer/Trees/Events")
-        #for runEra in ['B','C','D','E','F','G','H']: #self.runEras :
-        for runEra in ['A','B','C','D','E']: #self.runEras :
+        for runEra in ['A','B','C','D']: #self.runEras :
+        #for runEra in ['A','B','C','D','E']: #self.runEras :
             fname = path + fileName%(runEra)
             if os.path.isfile( fname ):
                 self.runEras[ runEra ] = {}
@@ -248,8 +248,7 @@ class EraTuneHandler :
             chi2bestxsec.Write()
             ktestbestxsec.Write()
         
-fout = TFile.Open("out_2018.root" , "recreate")
-
+fout = TFile.Open("out_2018_SingleNeutrinovsZeroBias.root" , "recreate")
 #EraTuneHandler( "DY" , "SingleMu%s.root",  "ZmuMuM%d" , fout )
 #EraTuneHandler( "NuGunZeroBias" , "ZeroBias%s.root",  "NuGunM%d" , fout )
 #EraTuneHandler( "NuGunMinBias" , "MinBias%s.root",  "NuGunM%d" , fout )

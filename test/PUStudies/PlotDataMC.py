@@ -10,7 +10,7 @@ t.SetTextFont(72)
 
 
 AllBestXSections = {}
-fin = TFile.Open("./out_2018.root")
+fin = TFile.Open("/afs/cern.ch/user/h/helfaham/CMSSW_11_0_0/src/Haamm/HaNaMiniAnalyzer/test/PUStudies/out_2018_SingleNeutrinovsZeroBias.root")
 
 
 objs = []
@@ -42,7 +42,8 @@ def PlotVariable( DirName , varName , MCName, runEra ):
     allHists[dataHist.GetMaximum()/dataHist.GetEntries()] = dataHist
     gStyle.SetOptTitle(False)
     dataHist.SetStats(False)
-    dataNorm = dataHist.DrawNormalized("E PLC PMC")
+    dataNorm = dataHist.DrawNormalized()
+    #dataNorm = dataHist.DrawNormalized("E PLC PMC")
     for xsec in [ 0.0 + (ratio*69200./1000.) for ratio in range(840,1170) ][::-1]:
         if abs( xsec - bestXSec )/bestXSec > 0.1 or abs( xsec - bestXSec )/ bestXSec < 0.099:
             if not xsec == bestXSec :
@@ -56,17 +57,18 @@ def PlotVariable( DirName , varName , MCName, runEra ):
             gROOT.ForceStyle() 
             if xsec == bestXSec:
                 hMC.SetTitle( "Best Cross Section : %.1f" % xsec )
-                hMC.SetLineColor( kRed)
-                hMC.SetLineWidth( 3 )
+                hMC.SetLineColor(2)
+                hMC.SetLineWidth(2)
             elif xsec > bestXSec :
                 hMC.SetTitle( "Cross Section : %.1f" % xsec )
-                hMC.SetLineColor( kBlue )
+                hMC.SetLineColor(6)
             elif xsec < bestXSec :
                 hMC.SetTitle( "Cross Section : %.1f" % xsec )
-                hMC.SetLineColor( kGreen)
+                hMC.SetLineColor(4)
 
+            hMC.DrawNormalized("SAME")
+            #hMC.DrawNormalized("SAME E PLC PMC")
             hMC.SetStats(False)
-            hMC.DrawNormalized("SAME E PLC PMC")
         else:
             print hName , "null"
 
@@ -103,32 +105,32 @@ def CalcChi2( DirName , varName , MCName , runEra , xsec ):
         
 
 
-variables = { "nVertices" : ( "nVertices" , 54 , 6 , 60 ) ,
-              "nGoodVertices" : ("nGoodVertices", 54, 5 , 59) ,
-              "nChargedHadrons" : ("nChargedHadrons" , 1200 , 0 , 1200 ),
-              "fixedGridRhoAll" : ("fixedGridRhoAll" , 40 , 0 , 40 ),
-              "fixedGridRhoFastjetAll" : ("fixedGridRhoFastjetAll" , 40 , 0 , 40 ),
-              "fixedGridRhoFastjetAllCalo" : ("fixedGridRhoFastjetAllCalo" , 25 , 0 , 25 ),
-              "fixedGridRhoFastjetCentral" : ("fixedGridRhoFastjetCentral" , 50 , 0 , 50 ),
-              "fixedGridRhoFastjetCentralCalo" : ("fixedGridRhoFastjetCentralCalo" , 20 , 0 , 20 ),
-              "fixedGridRhoFastjetCentralChargedPileUp" : ("fixedGridRhoFastjetCentralChargedPileUp" , 35 , 0 , 35 ),
+variables = { "nVertices" : ( "nVertices" , 74 , 6 , 80 ) ,
+              #"nGoodVertices" : ("nGoodVertices", 54, 5 , 59) ,
+              "nChargedHadrons" : ("nChargedHadrons" , 2000 , 0 , 2000 ),
+              "fixedGridRhoAll" : ("fixedGridRhoAll" , 60 , 0 , 60 ),
+              #"fixedGridRhoFastjetAll" : ("fixedGridRhoFastjetAll" , 40 , 0 , 40 ),
+              #"fixedGridRhoFastjetAllCalo" : ("fixedGridRhoFastjetAllCalo" , 25 , 0 , 25 ),
+              #"fixedGridRhoFastjetCentral" : ("fixedGridRhoFastjetCentral" , 50 , 0 , 50 ),
+              #"fixedGridRhoFastjetCentralCalo" : ("fixedGridRhoFastjetCentralCalo" , 20 , 0 , 20 ),
+              #"fixedGridRhoFastjetCentralChargedPileUp" : ("fixedGridRhoFastjetCentralChargedPileUp" , 35 , 0 , 35 ),
               
-              "fixedGridRhoFastjetCentralNeutral" : ("fixedGridRhoFastjetCentralNeutral" , 12 , 0 , 12 ),
-              "nMus" : ("nMus" , 10 , 0 , 10 ),
-              "nEles" : ("nEles" , 10 , 0 , 10 ) ,
-              "nLostTracks": ("nLostTracks" , 35 , 0 , 35 ),
-              "nPhotons" : ("nPhotons" , 600 , 0 , 600 ),
-              "nNeutralHadrons" : ("nNeutralHadrons" , 120 , 0 , 120 )
+              #"fixedGridRhoFastjetCentralNeutral" : ("fixedGridRhoFastjetCentralNeutral" , 12 , 0 , 12 ),
+              #"nMus" : ("nMus" , 10 , 0 , 10 ),
+              #"nEles" : ("nEles" , 10 , 0 , 10 ) ,
+              #"nLostTracks": ("nLostTracks" , 35 , 0 , 35 ),
+              #"nPhotons" : ("nPhotons" , 600 , 0 , 600 ),
+              #"nNeutralHadrons" : ("nNeutralHadrons" , 120 , 0 , 120 )
 }
 
-varNames = [#"nGoodVertices",
-            "fixedGridRhoFastjetCentralChargedPileUp",
+varNames = ["nVertices",
+            #"nGoodVertices",
+            #"fixedGridRhoFastjetCentralChargedPileUp",
             "nChargedHadrons",
             "fixedGridRhoAll",
-            "fixedGridRhoFastjetAll",
-            "nVertices",
-            "fixedGridRhoFastjetAllCalo",
-            "fixedGridRhoFastjetCentral",
+            #"fixedGridRhoFastjetAll",
+            #"fixedGridRhoFastjetAllCalo",
+            #"fixedGridRhoFastjetCentral",
             #"fixedGridRhoFastjetCentralCalo",
             #"fixedGridRhoFastjetCentralNeutral",
             #"nMus",
@@ -147,10 +149,9 @@ allGraphs = {}
 allMultiGraphs = {}
 canvases = {}
 
-#tunes = [  "tuneM1" , "tuneM2" , "tuneM3" , "tuneM4" ]
 tunes = [  "tuneM1" , "tuneM5" ]
 
-for runEra in ["All" , 'eraA','eraB','eraC','eraD']:
+for runEra in ["All",'eraA','eraB','eraC','eraD','eraE']:
     mg = TMultiGraph()
     mg.SetName( runEra )
     allMultiGraphs[ runEra ] = mg
@@ -286,6 +287,7 @@ for runEra in ["All" , 'eraA','eraB','eraC','eraD']:
         i+=1
 
     canvas.SaveAs( canvas.GetName() + ".png" )
+#TODO you exit here why?
 #exit()                
 
 allGraphs_2 = {}

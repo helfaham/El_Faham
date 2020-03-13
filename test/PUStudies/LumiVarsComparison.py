@@ -119,14 +119,18 @@ class LumiCorrelationStudiesPerRun :
             #self.RunMin = 323416
             #self.RunMax = 324416
             #self.Color = 7
+        #elif run == "D":
+            #self.RunMin = 324417
+            #self.RunMax = 325273
+            #self.Color = 7
         elif run == "D":
-            self.RunMin = 324417
+            self.RunMin = 320413
             self.RunMax = 325273
             self.Color = 7
-        #elif run == "E":
-            #self.RunMin = 325283
-            #self.RunMax = 325746
-            #self.Color = 8
+        elif run == "E":
+            self.RunMin = 325283
+            self.RunMax = 325746
+            self.Color = 8
         else:
             self.RunMin = self.Tree.GetMinimum("run")
             self.RunMax = self.Tree.GetMaximum("run")
@@ -145,6 +149,7 @@ class LumiCorrelationStudiesPerRun :
 
             self.AllHistos[var].SetMarkerColorAlpha(self.Color , 0.5)
             self.AllHistos[var].SetFillColor(self.Color)
+            self.AllHistos[var].SetTitle("")
 
     def RunIsHere( self, run):
         
@@ -338,7 +343,7 @@ class LumiCorrelationStudies :
             l.Write()
             self.Canvases[ var + "_l" ] = l
             c.Write()
-            c.SaveAs("./FitRes_eraD_split_by_run/%s.png" %(var))
+            c.SaveAs("./corr/%s.png" %(var))
             self.Canvases[ var ] = c
         #gROOT.SetBatch(False)
         #gStyle.SetOptStat(1)
