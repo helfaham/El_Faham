@@ -89,7 +89,7 @@ class Variable:
         fout.cd()
 
 class DatasetController :
-    def __init__(self , path = "/afs/cern.ch/work/h/helfaham/helfaham/2017_PU/samples_hadd/" , fileName = "ZeroBias%s.root"):
+    def __init__(self , path = "/eos/home-h/helfaham/PU_work/2017/samples_hadd/" , fileName = "ZeroBias%s.root"):
         self.runEras = {} #"B":{},"C":{},"D":{},"E":{},"F":{},"G":{},"H":{}}
         self.nTuples = path
         self.All = TChain("PUAnalyzer/Trees/Events")
@@ -129,7 +129,7 @@ class DatasetController :
         return getattr( self , attrname )
         
 class MCSampleContainer :
-    def __init__(self, name , nTuples = "/afs/cern.ch/work/h/helfaham/helfaham/2017_PU/samples_hadd/" , runEras = []):
+    def __init__(self, name , nTuples = "/eos/home-h/helfaham/PU_work/2017/samples_hadd/" , runEras = []):
         self.nTuples=nTuples
 
         self.SampleName = name
@@ -208,21 +208,22 @@ class EraTuneHandler :
         self.Dir = fout.mkdir( name )
         self.Dir.cd()
 
-        variables = { "nVertices" : ( "nVertices" , 54 , 6 , 60 ) ,
-                      "nGoodVertices" : ("nGoodVertices", 54, 5 , 59) ,
-                      "nEles" : ("nEles" , 10 , 0 , 10 ) ,
-                      "nMus" : ("nMus" , 10 , 0 , 10 ),
-                      "nChargedHadrons" : ("nChargedHadrons" , 1200 , 0 , 1200 ),
-                      "nLostTracks": ("nLostTracks" , 35 , 0 , 35 ),
-                      "nPhotons" : ("nPhotons" , 600 , 0 , 600 ),
-                      "nNeutralHadrons" : ("nNeutralHadrons" , 120 , 0 , 120 ),
-                      "fixedGridRhoAll" : ("fixedGridRhoAll" , 40 , 0 , 40 ),
-                      "fixedGridRhoFastjetAll" : ("fixedGridRhoFastjetAll" , 40 , 0 , 40 ),
-                      "fixedGridRhoFastjetAllCalo" : ("fixedGridRhoFastjetAllCalo" , 25 , 0 , 25 ),
-                      "fixedGridRhoFastjetCentral" : ("fixedGridRhoFastjetCentral" , 50 , 0 , 50 ),
-                      "fixedGridRhoFastjetCentralCalo" : ("fixedGridRhoFastjetCentralCalo" , 20 , 0 , 20 ),
-                      "fixedGridRhoFastjetCentralChargedPileUp" : ("fixedGridRhoFastjetCentralChargedPileUp" , 35 , 0 , 35 ),
-                      "fixedGridRhoFastjetCentralNeutral" : ("fixedGridRhoFastjetCentralNeutral" , 12 , 0 , 12 ) }
+        variables = { "nVertices" : ( "nVertices" , 74 , 6 , 80 ) ,
+                      #"nGoodVertices" : ("nGoodVertices", 54, 5 , 59) ,
+                      #"nEles" : ("nEles" , 10 , 0 , 10 ) ,
+                      #"nMus" : ("nMus" , 10 , 0 , 10 ),
+                      "nChargedHadrons" : ("nChargedHadrons" , 2000 , 0 , 2000 ),
+                      #"nLostTracks": ("nLostTracks" , 35 , 0 , 35 ),
+                      #"nPhotons" : ("nPhotons" , 600 , 0 , 600 ),
+                      #"nNeutralHadrons" : ("nNeutralHadrons" , 120 , 0 , 120 ),
+                      "fixedGridRhoAll" : ("fixedGridRhoAll" , 60 , 0 , 60 ),
+                      #"fixedGridRhoFastjetAll" : ("fixedGridRhoFastjetAll" , 40 , 0 , 40 ),
+                      #"fixedGridRhoFastjetAllCalo" : ("fixedGridRhoFastjetAllCalo" , 25 , 0 , 25 ),
+                      #"fixedGridRhoFastjetCentral" : ("fixedGridRhoFastjetCentral" , 50 , 0 , 50 ),
+                      #"fixedGridRhoFastjetCentralCalo" : ("fixedGridRhoFastjetCentralCalo" , 20 , 0 , 20 ),
+                      #"fixedGridRhoFastjetCentralChargedPileUp" : ("fixedGridRhoFastjetCentralChargedPileUp" , 35 , 0 , 35 ),
+                      #"fixedGridRhoFastjetCentralNeutral" : ("fixedGridRhoFastjetCentralNeutral" , 12 , 0 , 12 ) 
+}
         bestXsecPlots = {}
 
         for var in variables:
