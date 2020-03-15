@@ -77,7 +77,7 @@ def PlotVariable( DirName , varName , MCName, runEra ):
     print varName, MCName, maxvals, bestXSec
     option = ""
     maX = maxvals[0]
-    dataNorm.GetYaxis().SetRangeUser(0 , maX*1.2 )
+    dataNorm.GetYaxis().SetRangeUser(0 , maX*1.8)
     # for m in maxvals :
     #     #print m
     #     allHists[m].SetStats(False)
@@ -288,7 +288,7 @@ for runEra in ["All",'eraA','eraB','eraC','eraD','eraE']:
 
     canvas.SaveAs( canvas.GetName() + ".png" )
 #TODO you exit here why?
-#exit()                
+exit()                
 
 allGraphs_2 = {}
 allMultiGraphs_2 = {}

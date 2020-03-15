@@ -44,7 +44,7 @@ class VarsMaker :
 
         elif dataset == "ZeroBias" :
             self.vars = {"AVGnGoodVertices":[100,5,25],
-                         "AVGnVertices":[100,6,35],
+                         "AVGnVertices":[100,6,55],
                          #"AVGnInt",            
                          #"AVGnInt50ns",        
                          "AVGnEles":[10,0,1],
@@ -130,7 +130,7 @@ class LumiCorrelationStudiesPerRun :
         elif run == "E":
             self.RunMin = 325308
             self.RunMax = 325310
-            self.Color = 8
+            self.Color = 8 
         else:
             self.RunMin = self.Tree.GetMinimum("run")
             self.RunMax = self.Tree.GetMaximum("run")
@@ -146,8 +146,10 @@ class LumiCorrelationStudiesPerRun :
                 self.AllHistos[var] = TH2D( "h" + run +var , run+";Average bunch instantaneous luminosity (/ub/Xing);" + bins[3] , 300, 0.00001 , 0.001 , bins[0] , bins[1] , bins[2] ) # for avg lumi from pu_latest.txt
             elif argv[2] == "b" :
                 self.AllHistos[var] = TH2D( "h" + run +var , run+";Normalized Integrated luminosity (/ub);" + bins[3] , 350, 0.0 , 10 , bins[0] , bins[1] , bins[2] ) # for avg recorded lumi from brilcalc
-
-            self.AllHistos[var].SetMarkerColorAlpha(self.Color , 0.5)
+            if run == "E": 
+               self.AllHistos[var].SetMarkerColorAlpha(self.Color , 20)
+            else:
+                 self.AllHistos[var].SetMarkerColorAlpha(self.Color , 0.5)
             self.AllHistos[var].SetFillColor(self.Color)
             self.AllHistos[var].SetTitle("")
 
@@ -250,16 +252,21 @@ class LumiCorrelationStudies :
             self.AllRuns[ runEra ] = LumiCorrelationStudiesPerRun( runEra , fname , self.Vars.vars , title )
 
         self.PULumiData = None
-        with open('pileup_JSON.txt') as data_file:   #this data file should latest for eras and JSON for eraE 
-            self.PULumiData = json.load(data_file)
-
+	#with open('pileup_new.txt') as data_file:    
+            #self.PULumiData = json.load(data_file)
+        if runEra == "E":
+	   with open('pileup_JSON.txt') as data_file:    
+	       self.PULumiData = json.load(data_file)
+        else:
+	     with open('pileup_latest.txt') as data_file:    
+ 	         self.PULumiData = json.load(data_file)
         self.ntot_runs = len(self.PULumiData)
         self.ntot_lumis = 0
         for run in self.PULumiData:
             runinfo = self.PULumiData[run]
             self.ntot_lumis += len( runinfo )
 
-        self.BrilCalcLumis = LumiValsFromBrilCalc('LumiPerLumiSection.csv' , 'NBX_perFill_2018.csv')
+        self.BrilCalcLumis = LumiValsFromBrilCalc('LumiPerLumiSection.csv' , 'NBX_perFill_2018_only18.csv')
         #print self.BrilCalcLumis.Min , self.BrilCalcLumis.Max
         
         
