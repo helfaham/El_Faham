@@ -5,58 +5,18 @@ Sample.WD = os.path.dirname(os.path.abspath(__file__))
 print Sample.WD
 
 MINIAOD = []
-#2017
-SingleMuonB  = Sample( "SingleMuB"  ,  0 , False ,  "/SingleMuon/Run2017B-31Mar2018-v1/MINIAOD" )
-SingleMuonC  = Sample( "SingleMuC"  ,  0 , False ,  "/SingleMuon/Run2017C-31Mar2018-v1/MINIAOD" )
-SingleMuonD  = Sample( "SingleMuD"  ,  0 , False ,  "/SingleMuon/Run2017D-31Mar2018-v1/MINIAOD" )
-SingleMuonE  = Sample( "SingleMuE"  ,  0 , False ,  "/SingleMuon/Run2017E-31Mar2018-v1/MINIAOD" )
-SingleMuonF  = Sample( "SingleMuF"  ,  0 , False ,  "/SingleMuon/Run2017F-31Mar2018-v1/MINIAOD" )
-SingleMuonG  = Sample( "SingleMuG"  ,  0 , False ,  "/SingleMuon/Run2017G-17Nov2017-v1/MINIAOD" )
-#SingleMuonH1 = Sample( "SingleMuH1" ,  0 , False ,  "/SingleMuon/Run2017H-17Nov2017-v1/MINIAOD" ) #empty list
-SingleMuonH2 = Sample( "SingleMuH2" ,  0 , False ,  "/SingleMuon/Run2017H-17Nov2017-v2/MINIAOD" )
+#2017UL
+ZeroBiasF = Sample("ZeroBiasF" , 0 , False , "/ZeroBias/Run2017F-09Aug2019_UL2017-v1/MINIAOD")
+ZeroBiasE = Sample("ZeroBiasE" , 0 , False , "/ZeroBias/Run2017E-09Aug2019_UL2017-v1/MINIAOD")
+ZeroBiasD = Sample("ZeroBiasD" , 0 , False , "/ZeroBias/Run2017D-09Aug2019_UL2017-v1/MINIAOD")
+ZeroBiasC = Sample("ZeroBiasC" , 0 , False , "/ZeroBias/Run2017C-09Aug2019_UL2017-v1/MINIAOD")
+ZeroBiasB = Sample("ZeroBiasB" , 0 , False , "/ZeroBias/Run2017B-09Aug2019_UL2017-v1/MINIAOD")
 
-MINIAOD.extend( [ SingleMuonB , SingleMuonC , SingleMuonD , SingleMuonE , SingleMuonF , SingleMuonG ,SingleMuonH2 ] )
+MINIAOD.extend( [ ZeroBiasB, ZeroBiasC , ZeroBiasD , ZeroBiasE , ZeroBiasF ] )
 
-#2017
-ZMuMuM1 = Sample( "ZmuMuM1" , 1 , False , "/DYJetsToLL_M-50_TuneCP1_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-FlatPU0to75TuneCP1_12Apr2018_94X_mc2017_realistic_v14-v2/MINIAODSIM")
-ZMuMuM5 = Sample( "ZmuMuM5" , 1 , False , "/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8_Fall17/RunIIFall17MiniAODv2-FlatPU0to75TuneCP5_12Apr2018_94X_mc2017_realistic_v14-v2/MINIAODSIM")
-
-MINIAOD.extend( [ ZMuMuM1 , ZMuMuM5  ] ) 
-
-#2017
-MinBiasA3 = Sample("MinBiasA3"  , 0 , False , "/MinimumBias/Run2017A-PromptReco-v3/MINIAOD")
-MinBiasA2 = Sample("MinBiasA2"  , 0 , False , "/MinimumBias/Run2017A-PromptReco-v2/MINIAOD")
-MinBiasA1 = Sample("MinBiasA1"  , 0 , False , "/MinimumBias/Run2017A-PromptReco-v1/MINIAOD")
-MinBiasB2 = Sample("MinBiasB2"  , 0 , False , "/MinimumBias/Run2017B-PromptReco-v2/MINIAOD")
-MinBiasB1 = Sample("MinBiasB1"  , 0 , False , "/MinimumBias/Run2017B-PromptReco-v1/MINIAOD")
-MinBiasC3 = Sample("MinBiasC3"  , 0 , False , "/MinimumBias/Run2017C-PromptReco-v3/MINIAOD")
-MinBiasC2 = Sample("MinBiasC2"  , 0 , False , "/MinimumBias/Run2017C-PromptReco-v2/MINIAOD")
-MinBiasC1 = Sample("MinBiasC1"  , 0 , False , "/MinimumBias/Run2017C-PromptReco-v1/MINIAOD")
-MinBiasD  = Sample("MinBiasD"   , 0 , False , "/MinimumBias/Run2017D-PromptReco-v1/MINIAOD")
-MinBiasE  = Sample("MinBiasE"   , 0 , False , "/MinimumBias/Run2017E-PromptReco-v1/MINIAOD")
-MinBiasF  = Sample("MinBiasF"   , 0 , False , "/MinimumBias/Run2017F-PromptReco-v1/MINIAOD")
-MinBiasG  = Sample("MinBiasG"   , 0 , False , "/MinimumBias/Run2017G-PromptReco-v1/MINIAOD")
-MinBiasH  = Sample("MinBiasH"   , 0 , False , "/MinimumBias/Run2017H-PromptReco-v1/MINIAOD")
-
-MINIAOD.extend( [ MinBiasA3, MinBiasA2, MinBiasA1, MinBiasB2 , MinBiasB1, MinBiasC3, MinBiasC2, MinBiasC1,  MinBiasD , MinBiasE , MinBiasF , MinBiasG , MinBiasH ] )
-
-#2017
-ZeroBiasH = Sample("ZeroBiasH" , 0 , False , "/ZeroBias/Run2017H-17Nov2017-v1/MINIAOD")
-ZeroBiasG = Sample("ZeroBiasG" , 0 , False , "/ZeroBias/Run2017G-17Nov2017-v1/MINIAOD")
-ZeroBiasF = Sample("ZeroBiasF" , 0 , False , "/ZeroBias/Run2017F-31Mar2018-v1/MINIAOD")
-ZeroBiasE = Sample("ZeroBiasE" , 0 , False , "/ZeroBias/Run2017E-31Mar2018-v1/MINIAOD")
-ZeroBiasD = Sample("ZeroBiasD" , 0 , False , "/ZeroBias/Run2017D-31Mar2018-v1/MINIAOD")
-ZeroBiasC = Sample("ZeroBiasC" , 0 , False , "/ZeroBias/Run2017C-31Mar2018-v1/MINIAOD")
-ZeroBiasB = Sample("ZeroBiasB" , 0 , False , "/ZeroBias/Run2017B-31Mar2018-v1/MINIAOD")
-ZeroBiasA = Sample("ZeroBiasA" , 0 , False , "/ZeroBias/Run2017A-09Oct2017-v1/MINIAOD")
-
-MINIAOD.extend( [ ZeroBiasA, ZeroBiasB, ZeroBiasC , ZeroBiasD , ZeroBiasE , ZeroBiasF , ZeroBiasG , ZeroBiasH ] )
-
-#2017
-SingleNeutrinoTuneCP1   = Sample("SingleNeutrinoTuneCP1"   , 1 , False , "/SingleNeutrino/RunIIFall17MiniAODv2-FlatPU0to75TuneCP1_12Apr2018_94X_mc2017_realistic_v14_ext3-v1/MINIAODSIM" )
-SingleNeutrinoTuneCP5 = Sample("SingleNeutrinoTuneCP5" , 1 , False , "/SingleNeutrino/RunIIFall17MiniAODv2-FlatPU0to75TuneCP5_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM" )
-#SingleNeutrinoTuneCP5 = Sample("SingleNeutrinoTuneCP5" , 1 , False , "/SingleNeutrino/RunIIFall17MiniAODv2-FlatPU0to75TuneCP5_12Apr2018_94X_mc2017_realistic_v14_ext2-v1/MINIAODSIM" )
+SingleNeutrino   = Sample("SingleNeutrino"   , 1 , False , "/SingleNeutrino/RunIISummer19UL17MiniAOD-106X_mc2017_realistic_v6-v2/MINIAODSIM" )
+SingleNeutrino_FlatPU = Sample("SingleNeutrino_FlatPU" , 1 , False , "/SingleNeutrino/RunIISummer19UL17MiniAOD-FlatPU0to75_106X_mc2017_realistic_v6_ext2-v1/MINIAODSIM" )
 
 SingleNeutrinos = []
-MINIAOD.extend( [ SingleNeutrinoTuneCP1 , SingleNeutrinoTuneCP5 ] )
-SingleNeutrinos.extend( [ SingleNeutrinoTuneCP1 , SingleNeutrinoTuneCP5 ] )
+MINIAOD.extend( [ SingleNeutrino , SingleNeutrino_FlatPU ] )
+SingleNeutrinos.extend( [ SingleNeutrino , SingleNeutrino_FlatPU ] )
