@@ -33,7 +33,7 @@ file_sh = open("%s/Submit.sh" % (workingdir) , "w" )
 
 
 for sample in samples:
-    if not sample.Name.count("ZeroBiasB"):
+    if not sample.Name.count("ZeroBias"):
         continue
 
     os.mkdir( "%s/%s" % (workingdir , sample.Name) )
@@ -59,8 +59,7 @@ for sample in samples:
         "outdir":OutPath,
         "nFilesPerJob":nFilesPerJob
         }
-    #print >> file, "queue %d" % (len(sample.Jobs))
-    print >> file, "queue 10"
+    print >> file, "queue %d" % (len(sample.Jobs))
 
     print >> file, ""
 
