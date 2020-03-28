@@ -40,7 +40,7 @@ for sample in samples:
     copy( "SetupAndRun.sh" , "./%s/%s" % (workingdir , sample.Name) )
 
     file = open("%s/%s/Submit.cmd" % (workingdir , sample.Name) , "w" )
-    print >> file, 'requirements            = (OpSysAndVer =?= "SLCern6")'
+    #print >> file, 'requirements            = (OpSysAndVer =?= "SLCern6")'
     print >> file, "executable              = %s/%s/%s/SetupAndRun.sh" % (os.getcwd() , workingdir , sample.Name)
     print >> file, "output                  = $(ClusterId)_$(ProcId).out"
     print >> file, "error                   = $(ClusterId)_$(ProcId).err"
@@ -59,7 +59,8 @@ for sample in samples:
         "outdir":OutPath,
         "nFilesPerJob":nFilesPerJob
         }
-    print >> file, "queue %d" % (len(sample.Jobs))
+    #print >> file, "queue %d" % (len(sample.Jobs))
+    print >> file, "queue 10"
 
     print >> file, ""
 
