@@ -14,9 +14,9 @@ ZeroBiasB = Sample("ZeroBiasB" , 0 , False , "/ZeroBias/Run2017B-09Aug2019_UL201
 
 MINIAOD.extend( [ ZeroBiasB, ZeroBiasC , ZeroBiasD , ZeroBiasE , ZeroBiasF ] )
 
-SingleNeutrino   = Sample("SingleNeutrino"   , 1 , False , "/SingleNeutrino/RunIISummer19UL17MiniAOD-106X_mc2017_realistic_v6-v2/MINIAODSIM" )
-SingleNeutrino_FlatPU = Sample("SingleNeutrino_FlatPU" , 1 , False , "/SingleNeutrino/RunIISummer19UL17MiniAOD-FlatPU0to75_106X_mc2017_realistic_v6_ext2-v1/MINIAODSIM" )
+SingleNeutrino   = Sample("SingleNeutrinoType1"   , 1 , False , "/SingleNeutrino/RunIISummer19UL17MiniAOD-106X_mc2017_realistic_v6-v2/MINIAODSIM" )
+SingleNeutrino_FlatPU = Sample("SingleNeutrinoType2" , 1 , False , "/SingleNeutrino/RunIISummer19UL17MiniAOD-FlatPU0to75_106X_mc2017_realistic_v6_ext2-v1/MINIAODSIM" )
 
 SingleNeutrinos = []
-MINIAOD.extend( [ SingleNeutrino , SingleNeutrino_FlatPU ] )
-SingleNeutrinos.extend( [ SingleNeutrino , SingleNeutrino_FlatPU ] )
+MINIAOD.extend( [ SingleNeutrinoType1 , SingleNeutrinoType2 ] )
+SingleNeutrinos.extend( [ SingleNeutrinoType1 , SingleNeutrinoType2 ] )

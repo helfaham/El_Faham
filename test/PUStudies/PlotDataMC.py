@@ -10,7 +10,7 @@ t.SetTextFont(72)
 
 
 AllBestXSections = {}
-fin = TFile.Open("/afs/cern.ch/user/h/helfaham/CMSSW_9_4_7/src/Haamm/HaNaMiniAnalyzer/test/PUStudies/out_2017_SingleNeutrinovsZeroBias.root")
+fin = TFile.Open("/afs/cern.ch/user/h/helfaham/CMSSW_10_6_7/src/Haamm/HaNaMiniAnalyzer/test/PUStudies/out_2017_UL_SingleNeutrinovsZeroBias.root")
 
 
 objs = []
@@ -139,25 +139,22 @@ varNames = ["nVertices",
 ]
 
 for var in varNames :
-    for tune in [ "tuneM1" , "tuneM5" ] :
-        a = PlotVariable( "SingleNuZeroBias" , var , tune , "All" )                    
+    for Type in [ "typeM1" , "typeM2" ] :
+        a = PlotVariable( "SingleNuZeroBias" , var , Type , "All" )                    
 #exit()
         
 allGraphs = {}
 allMultiGraphs = {}
 canvases = {}
 
-tunes = [  "tuneM1","tuneM5" ]  
-for runEra in ["All" ,'eraB', 'eraC','eraD','eraE','eraF','eraG','eraH']:
+types = ["typeM1","typeM2" ]  
+for runEra in ["All" ,'eraB', 'eraC','eraD','eraF']:
     mg = TMultiGraph()
     mg.SetName( runEra )
     allMultiGraphs[ runEra ] = mg
-    marker_info = {"tuneM0":(20, 2 , 0   ) ,
-                   "tuneM1":(20, 2 , 0   ) ,
-                   "tuneM2":(20, 2 , 0) ,
-                   "tuneM3":(23, 6 , 0.2) ,
-                   "tuneM4":(21, 8 , 0.3) ,
-                   "tuneM5":(21, 8 , 0) }
+    marker_info = {"typeM1":(20, 2 , 0   ) ,
+                   "typeM2":(21, 8 , 0   ) ,
+					}
     Legend = TLegend( 0.21,0.76,0.64,0.96 )
 
     xCMS = array.array( 'd' , range(0, len(varNames) ) )
@@ -182,7 +179,7 @@ for runEra in ["All" ,'eraB', 'eraC','eraD','eraE','eraF','eraG','eraH']:
     mg.Add( gCMSLine , "l" )
 
     
-    for MCName in tunes : 
+    for MCName in types : 
         x = array.array( 'd' )
         y = array.array( 'd' )
         exl = array.array( 'd' )

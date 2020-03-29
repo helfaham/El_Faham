@@ -233,7 +233,7 @@ class LumiCorrelationStudies :
 
         self.AllRuns = {}
         self.AllRunNames = []
-        for runEra in ['A','B','C','D','E','F','G','H']:
+        for runEra in ['B','C','D','F']:
             fname = path + self.FileName%(runEra)
             if not os.path.isfile( fname ):
                 print "data file" , fname , "doesn't exist"
@@ -344,7 +344,7 @@ class LumiCorrelationStudies :
                 
         self.fout.Close()
             
-path = "/eos/home-h/helfaham/PU_work/2017/samples_hadd/"
+path = "/eos/home-h/helfaham/PU_work/UL/2017/samples_hadd/"
 lcs = LumiCorrelationStudies( path , argv[1] , argv[2])
 if argv[2] == "p1":
     lcs.Loop( 1 )

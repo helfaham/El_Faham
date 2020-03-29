@@ -89,11 +89,11 @@ class Variable:
         fout.cd()
 
 class DatasetController :
-    def __init__(self , path = "/eos/home-h/helfaham/PU_work/2017/samples_hadd/" , fileName = "ZeroBias%s.root"):
+    def __init__(self , path = "/eos/home-h/helfaham/PU_work/UL/2017/samples_hadd/" , fileName = "ZeroBias%s.root"):
         self.runEras = {} #"B":{},"C":{},"D":{},"E":{},"F":{},"G":{},"H":{}}
         self.nTuples = path
         self.All = TChain("PUAnalyzer/Trees/Events")
-        for runEra in ['C','D','E','F']: #self.runEras :
+        for runEra in ['B','C','D','F']: #self.runEras :
             fname = path + fileName%(runEra)
             if os.path.isfile( fname ):
                 self.runEras[ runEra ] = {}
@@ -129,16 +129,16 @@ class DatasetController :
         return getattr( self , attrname )
         
 class MCSampleContainer :
-    def __init__(self, name , nTuples = "/eos/home-h/helfaham/PU_work/2017/samples_hadd/" , runEras = []):
+    def __init__(self, name , nTuples = "/eos/home-h/helfaham/PU_work/UL/2017/samples_hadd/" , runEras = []):
         self.nTuples=nTuples
 
         self.SampleName = name
         self.FileName = nTuples + self.SampleName + ".root"
         self.File = TFile.Open( self.FileName )
-        if name.count("CP5"):
-           self.hnTrueIntMCName = "PUAnalyzer/nTruInteractions/nTruInteractions_" + self.SampleName + "_1"
+        if name.count("Type1"):
+           self.hnTrueIntMCName = "PUAnalyzer/nTruInteractions/nTruInteractions_" +  "SingleNeutrino"
         else:
-	     self.hnTrueIntMCName = "PUAnalyzer/nTruInteractions/nTruInteractions_" + self.SampleName
+	     self.hnTrueIntMCName = "PUAnalyzer/nTruInteractions/nTruInteractions_" + "SingleNeutrino_FlatPU"
         self.hnTrueInt = self.File.Get( self.hnTrueIntMCName )
         self.nIntNBins = self.hnTrueInt.GetNbinsX()
         self.nIntMin = self.hnTrueInt.GetBinLowEdge(1)
@@ -156,9 +156,10 @@ class MCSampleContainer :
         for runEra in self.runEras:
             for method in datapumethods:
                 fdata = None
-                datafilename = nTuples + "../datapu_hadd/data_%s_H_%s.root" % (method, runEra)
+                datafilename = "/eos/home-h/helfaham/PU_work/UL/2017/datapu_hadd/data_%s_H_%s.root" % (method, runEra)
                 print datafilename
                 if os.path.isfile( datafilename ):
+                    print("good")
                     fdata = TFile.Open( datafilename )
                 else:
                     print datafilename, "doesn't exit"
@@ -186,10 +187,10 @@ class MCSampleContainer :
         return getattr( self , attrname )
         
 
-class EraTuneHandler :
+class EraTypeHandler :
     def Make2DSummaryPlot(self , varName , ext):
         name = "hBestXSections_%s_%s" % (varName , ext)
-        setattr( self, name , TH2D( name , "Best XSections (%s,%s);Era;Tune" % (ext, varName) , len(self.data.runEras)+1 , 0 , len(self.data.runEras)+1 , 4 , 0 , 4 ) )
+        setattr( self, name , TH2D( name , "Best XSections (%s,%s);Era;Type" % (ext, varName) , len(self.data.runEras)+1 , 0 , len(self.data.runEras)+1 , 4 , 0 , 4 ) )
         h = getattr( self, name)
         h.GetXaxis().SetBinLabel( 1 , "All")
         index = 2
@@ -197,13 +198,13 @@ class EraTuneHandler :
             h.GetXaxis().SetBinLabel( index , "era%s" % (runera) )
             index += 1
         index = 1
-        for tune in self.Tunes:
-            h.GetYaxis().SetBinLabel( index , "tuneM%d"%(tune) )
+        for Type in self.Types:
+            h.GetYaxis().SetBinLabel( index , "typeM%d"%(Type) )
             index += 1
         return h
     
-    def __init__(self, name , datafiles , mcfiles , fout , tunes = [5,1] ):
-        self.Tunes = tunes 
+    def __init__(self, name , datafiles , mcfiles , fout , types = [1,2] ):
+        self.Types = types 
         self.data = DatasetController(fileName = datafiles)
         self.Dir = fout.mkdir( name )
         self.Dir.cd()
@@ -230,30 +231,30 @@ class EraTuneHandler :
             varDir = self.Dir.mkdir( var )
             chi2bestxsec = self.Make2DSummaryPlot( var , "Chi2" )
             ktestbestxsec = self.Make2DSummaryPlot( var , "KTest")
-            for tune in tunes: 
-                tuneName = "tuneM%d" % (tune)
-                setattr( self, "MC_" + tuneName , MCSampleContainer( name=mcfiles % (tune) , runEras=self.data.runEras.keys() ) )
-                mc = getattr( self, "MC_" + tuneName )
-                tunedir = varDir.mkdir(tuneName )
-                tunedir.cd()
+            for Type in types: 
+                typeName = "typeM%d" % (Type)
+                setattr( self, "MC_" + typeName , MCSampleContainer( name=mcfiles % (Type) , runEras=self.data.runEras.keys() ) )
+                mc = getattr( self, "MC_" + typeName )
+                typedir = varDir.mkdir(typeName )
+                typedir.cd()
 
                 for runEra in sorted( mc.runEras ):
                     Var = Variable("latest" , runEra , self.data , mc , var , variables[var][0] , variables[var][1] , variables[var][2]  , variables[var][3] )
-                    Var.Write( tunedir )
+                    Var.Write( typedir )
 
-                    chi2bestxsec.Fill( runEra , tuneName , Var.XSectionMinChi2[0] )
-                    ktestbestxsec.Fill( runEra , tuneName , Var.XSectionMinKTest[0] )
+                    chi2bestxsec.Fill( runEra , typeName , Var.XSectionMinChi2[0] )
+                    ktestbestxsec.Fill( runEra , typeName , Var.XSectionMinKTest[0] )
                 
             varDir.cd()
             chi2bestxsec.Write()
             ktestbestxsec.Write()
         
-fout = TFile.Open("out_2017_SingleNeutrinovsZeroBias.root" , "recreate")
+fout = TFile.Open("out_2017_UL_SingleNeutrinovsZeroBias.root" , "recreate")
 #EraTuneHandler( "DY" , "SingleMu%s.root",  "ZmuMuM%d" , fout )
 #EraTuneHandler( "NuGunZeroBias" , "ZeroBias%s.root",  "NuGunM%d" , fout )
 #EraTuneHandler( "NuGunMinBias" , "MinBias%s.root",  "NuGunM%d" , fout )
 #EraTuneHandler( "SingleNuMinBias" , "MinBias%s.root",  "SingleNeutrinoTuneCP%d" , fout , [0,2,5] )
-EraTuneHandler( "SingleNuZeroBias" , "ZeroBias%s.root",  "SingleNeutrinoTuneCP%d" , fout , [1,5] )
+EraTypeHandler( "SingleNuZeroBias" , "ZeroBias%s.root",  "SingleNeutrinoType%d" , fout , [1,2] )
 
 
 fout.Close()
