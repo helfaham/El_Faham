@@ -171,8 +171,8 @@ class MCSampleContainer :
                         print "Histo for ", runEra, " for xsec " , xsec_val , "doesn't exist in the file"
                         continue
                     hdata.Scale( 1.0 / hdata.Integral() )
-                    self.hnTrueInt.Divide(hdata)
-                    #hdata.Divide( self.hnTrueInt )
+                    #self.hnTrueInt.Divide(hdata)
+                    hdata.Divide( self.hnTrueInt )
                     gROOT.cd()
                     self.DataFiles[ (method,runEra,xsec_val) ] = PUWeightInfo( method, runEra , xsec_val , hdata )
                 fdata.Close()
