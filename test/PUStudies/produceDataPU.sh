@@ -1,6 +1,6 @@
 #!/bin/bash
 source /cvmfs/cms.cern.ch/cmsset_default.sh
-cd /afs/cern.ch/user/h/helfaham/CMSSW_9_4_7/src/Haamm/HaNaMiniAnalyzer/test/PUStudies
+cd /afs/cern.ch/user/h/helfaham/CMSSW_10_6_7/src/Haamm/HaNaMiniAnalyzer/test/PUStudies
 eval `scramv1 runtime -sh`
 
 if [ ! -z "$CONDORJOBID" ];

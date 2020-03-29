@@ -26,7 +26,9 @@ def PlotVariable( DirName , varName , MCName, runEra ):
     #print bestXSec
     
     DataHistName = "%s/%s/%s/latest/%s/%s_%s" % ( DirName , varName , MCName , runEra , runEra , varName )
+    print DataHistName
     MCHistName = "%s/%s/%s/latest/%s/%s_latest_%s" % ( DirName , varName , MCName , runEra , varName, runEra  )
+    print MCHistName
     MCHistName += "_%.1f"
 
     cOut = TCanvas("DataMC")
@@ -148,7 +150,7 @@ allMultiGraphs = {}
 canvases = {}
 
 types = ["typeM1","typeM2" ]  
-for runEra in ["All" ,'eraB', 'eraC','eraD','eraF']:
+for runEra in ["All" ,'eraB', 'eraC','eraD','eraE','eraF']:
     mg = TMultiGraph()
     mg.SetName( runEra )
     allMultiGraphs[ runEra ] = mg

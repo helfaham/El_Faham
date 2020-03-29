@@ -93,7 +93,7 @@ class DatasetController :
         self.runEras = {} #"B":{},"C":{},"D":{},"E":{},"F":{},"G":{},"H":{}}
         self.nTuples = path
         self.All = TChain("PUAnalyzer/Trees/Events")
-        for runEra in ['B','C','D','F']: #self.runEras :
+        for runEra in ['B','C','D', 'E','F']: #self.runEras :
             fname = path + fileName%(runEra)
             if os.path.isfile( fname ):
                 self.runEras[ runEra ] = {}
@@ -171,7 +171,8 @@ class MCSampleContainer :
                         print "Histo for ", runEra, " for xsec " , xsec_val , "doesn't exist in the file"
                         continue
                     hdata.Scale( 1.0 / hdata.Integral() )
-                    hdata.Divide( self.hnTrueInt )
+                    self.hnTrueInt.Divide(hdata)
+                    #hdata.Divide( self.hnTrueInt )
                     gROOT.cd()
                     self.DataFiles[ (method,runEra,xsec_val) ] = PUWeightInfo( method, runEra , xsec_val , hdata )
                 fdata.Close()
@@ -250,12 +251,11 @@ class EraTypeHandler :
             ktestbestxsec.Write()
         
 fout = TFile.Open("out_2017_UL_SingleNeutrinovsZeroBias.root" , "recreate")
-#EraTuneHandler( "DY" , "SingleMu%s.root",  "ZmuMuM%d" , fout )
-#EraTuneHandler( "NuGunZeroBias" , "ZeroBias%s.root",  "NuGunM%d" , fout )
-#EraTuneHandler( "NuGunMinBias" , "MinBias%s.root",  "NuGunM%d" , fout )
-#EraTuneHandler( "SingleNuMinBias" , "MinBias%s.root",  "SingleNeutrinoTuneCP%d" , fout , [0,2,5] )
 EraTypeHandler( "SingleNuZeroBias" , "ZeroBias%s.root",  "SingleNeutrinoType%d" , fout , [1,2] )
-
+#EraTypeHandler( "DY" , "SingleMu%s.root",  "ZmuMuM%d" , fout )
+#EraTypeHandler( "NuGunZeroBias" , "ZeroBias%s.root",  "NuGunM%d" , fout )
+#EraTypeHandler( "NuGunMinBias" , "MinBias%s.root",  "NuGunM%d" , fout )
+#EraTypeHandler( "SingleNuMinBias" , "MinBias%s.root",  "SingleNeutrinoTuneCP%d" , fout , [1,2] )
 
 fout.Close()
 
