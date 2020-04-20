@@ -32,7 +32,7 @@ file_sh = open("%s/Submit.sh" % (workingdir) , "w" )
 
 
 for sample in samples:
-    if not sample.Name.count("ZeroBias"):
+    if not sample.Name.count("SingleNeutrino"):
         continue
 
     os.mkdir( "%s/%s" % (workingdir , sample.Name) )
@@ -73,6 +73,3 @@ print "to submit the jobs, you have to run the following commands :"
 print "cd %s" % (workingdir)
 print "source Submit.sh"
 file_sh.close()
-
-
-
