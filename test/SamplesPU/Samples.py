@@ -12,7 +12,7 @@ ZeroBiasB = Sample("ZeroBiasB" , 0 , False , "/ZeroBias/Run2018B-12Nov2019_UL201
 MINIAOD.extend( [ ZeroBiasA , ZeroBiasB ] )
 
 #2018
-SingleNeutrino   = Sample("SingleNeutrino" , 1 , False , "SingleNeutrino/RunIISummer19UL18MiniAOD-FlatPU0to70_106X_upgrade2018_realistic_v11_L1v1-v1/MINIAODSIM" )
+SingleNeutrino   = Sample("SingleNeutrino" , 1 , False , "/SingleNeutrino/RunIISummer19UL18MiniAOD-FlatPU0to70_106X_upgrade2018_realistic_v11_L1v1-v1/MINIAODSIM" )
 
 SingleNeutrinos = []
 MINIAOD.extend( [ SingleNeutrino ] )
