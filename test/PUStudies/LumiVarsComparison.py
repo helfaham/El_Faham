@@ -44,12 +44,12 @@ class VarsMaker :
 #do you need to adjust the x-axis for the below var same as in plotdatamc and makefriends?
         elif dataset == "ZeroBias" :
             self.vars = {#"AVGnGoodVertices":[100,5,25],
-                         "AVGnVertices":[100,6,80],
+                         "AVGnVertices":[100,6,60],
                          #"AVGnInt",            
                          #"AVGnInt50ns",        
                          #"AVGnEles":[10,0,1],
                          #"AVGnMus":[60,0,3],
-                         "AVGnChargedHadrons":[600,100,2000], 
+                         "AVGnChargedHadrons":[600,100,1600], 
                          #"AVGnLostTracks":[60,0,3],     
                          #"AVGnPhotons":[500 , 50 , 300 ],        
                          #"AVGnNeutralHadrons":[80,30,90], 
@@ -57,7 +57,7 @@ class VarsMaker :
                          #"AVGfixedGridRhoFastjetCentralNeutral":[50 , 0 , 6],
                          #"AVGfixedGridRhoFastjetAllCalo":[70, 0 , 20],
                          #"AVGfixedGridRhoFastjetCentralCalo":[50 , 0 , 10 ],
-                         "AVGfixedGridRhoAll":[80 , 4, 60],
+                         "AVGfixedGridRhoAll":[80 , 4, 40],
                          #"AVGfixedGridRhoFastjetAll":[80 , 4, 25],
                          #"AVGfixedGridRhoFastjetCentral":[80 , 4 , 25],
                          #"AVGfixedGridRhoFastjetCentralChargedPileUp":[100, 0 , 25]
@@ -243,8 +243,8 @@ class LumiCorrelationStudies :
 
         self.AllRuns = {}
         self.AllRunNames = []
-        for runEra in ['A','B','C','D','E']:
-        #for runEra in ['E']:
+        #for runEra in ['A','B','C','D','E']:
+        for runEra in ['A','B']:
             fname = path + self.FileName%(runEra)
             if not os.path.isfile( fname ):
                 print "data file" , fname , "doesn't exist"
@@ -359,7 +359,7 @@ class LumiCorrelationStudies :
                 
         self.fout.Close()
             
-path = "/eos/home-h/helfaham/PU_work/2018/samples_hadd/"
+path = "/eos/home-h/helfaham/PU_work/UL/2018/samples_hadd/"
 lcs = LumiCorrelationStudies( path , argv[1] , argv[2]) 
 #arg1 is the sample, arg2 is the plot type(see above)
 if argv[2] == "p1":
