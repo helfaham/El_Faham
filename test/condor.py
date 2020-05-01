@@ -32,7 +32,7 @@ file_sh = open("%s/Submit.sh" % (workingdir) , "w" )
 
 
 for sample in samples:
-    if not sample.Name.count("SingleNeutrino"):
+    if not sample.Name.count("AODtest"):
         continue
 
     os.mkdir( "%s/%s" % (workingdir , sample.Name) )
@@ -52,7 +52,7 @@ for sample in samples:
         "vomsaddress":"%s/%s/.x509up_u%d" % (os.getcwd() , workingdir , os.getuid()) ,
         "scram":os.getenv("SCRAM_ARCH") ,
         "cmsver":os.getenv("CMSSW_VERSION"),
-        "gitco":"UL2018" ,
+        "gitco":"AOD18" ,
         "sample":sample.Name ,
         "out":prefix,
         "outdir":OutPath,

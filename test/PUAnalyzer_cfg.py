@@ -9,6 +9,7 @@ process.MessageLogger.cerr.FwkReport.reportEvery = 10000
 process.load('Configuration.StandardSequences.Services_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
+#process.TFileService = cms.Service("TFileService", fileName = cms.string("/eos/cms/store/mc/RunIISummer19UL18RECO/SingleNeutrino/AODSIM/FlatPU0to75_106X_upgrade2018_realistic_v11_L1v1_ext1-v1/10000/41D75AA2-947F-F44B-A365-771C138858CA.root") )
 process.TFileService = cms.Service("TFileService", fileName = cms.string("histo.root") )
 process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
 process.source = cms.Source("PoolSource",
@@ -16,7 +17,7 @@ process.source = cms.Source("PoolSource",
                             fileNames = cms.untracked.vstring()
 )
 
-
+# that is the plugin which is in the plugin dir --> check line 62 in plugins/PUStudies.cc
 process.PUAnalyzer = cms.EDAnalyzer('PUAnalyzer',
                                     LHE = cms.PSet ( useLHEW = cms.bool( False ),
                                                      Input = cms.InputTag("externalLHEProducer")
@@ -86,7 +87,6 @@ options.register('output',
                  "could be root://eoscms//eos/cms/store/user/hbakhshi/out")
 
 options.parseArguments()
-
 
 theSample = None
 import os

@@ -1,0 +1,77 @@
+subject   : /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=helfaham/CN=834699/CN=Hesham El Faham/CN=890439362
+issuer    : /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=helfaham/CN=834699/CN=Hesham El Faham
+identity  : /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=helfaham/CN=834699/CN=Hesham El Faham
+type      : RFC3820 compliant impersonation proxy
+strength  : 2048
+path      : /afs/cern.ch/user/h/helfaham/CMSSW_9_4_7/src/Haamm/HaNaMiniAnalyzer/test/test_AOD/.x509up_u119445
+timeleft  : 999:42:23
+key usage : Digital Signature, Key Encipherment
+WARNING: Developer's area is created for architecture slc6_amd64_gcc630 while your current OS is SLC7.
+Your branch is up-to-date with 'origin/AOD18'.
+SCRAM warning: You are trying to compile/build for architecture slc6_amd64_gcc630 on SLC7 OS which might not work.
+If you know this SCRAM_ARCH/OS combination works then please first run 'scram build --ignore-arch'.
+>> Local Products Rules ..... started
+>> Local Products Rules ..... done
+>> Entering Package Haamm/HaNaMiniAnalyzer
+>> Creating project symlinks
+Entering library rule at Haamm/HaNaMiniAnalyzer
+>> Compiling  /pool/condor/dir_23299/CMSSW_9_4_7/src/Haamm/HaNaMiniAnalyzer/src/JetReader.cc 
+>> Compiling  /pool/condor/dir_23299/CMSSW_9_4_7/src/Haamm/HaNaMiniAnalyzer/src/PackedCandidateReader.cc 
+>> Compiling  /pool/condor/dir_23299/CMSSW_9_4_7/src/Haamm/HaNaMiniAnalyzer/src/DiMuonReader.cc 
+>> Compiling  /pool/condor/dir_23299/CMSSW_9_4_7/src/Haamm/HaNaMiniAnalyzer/src/VertexReader.cc 
+>> Compiling  /pool/condor/dir_23299/CMSSW_9_4_7/src/Haamm/HaNaMiniAnalyzer/src/LHEEventReader.cc 
+>> Compiling  /pool/condor/dir_23299/CMSSW_9_4_7/src/Haamm/HaNaMiniAnalyzer/src/GenEventInfoProductReader.cc 
+>> Compiling  /pool/condor/dir_23299/CMSSW_9_4_7/src/Haamm/HaNaMiniAnalyzer/src/METReader.cc 
+>> Compiling  /pool/condor/dir_23299/CMSSW_9_4_7/src/Haamm/HaNaMiniAnalyzer/src/Histograms.cc 
+>> Compiling  /pool/condor/dir_23299/CMSSW_9_4_7/src/Haamm/HaNaMiniAnalyzer/src/Category.cc 
+>> Compiling  /pool/condor/dir_23299/CMSSW_9_4_7/src/Haamm/HaNaMiniAnalyzer/src/TtGenEvent.cc 
+>> Compiling  /pool/condor/dir_23299/CMSSW_9_4_7/src/Haamm/HaNaMiniAnalyzer/src/HLTReader.cc 
+>> Compiling  /pool/condor/dir_23299/CMSSW_9_4_7/src/Haamm/HaNaMiniAnalyzer/src/BTagWeight.cc 
+>> Compiling  /pool/condor/dir_23299/CMSSW_9_4_7/src/Haamm/HaNaMiniAnalyzer/src/HaNaBaseMiniAnalyzer.cc 
+>> Building shared library tmp/slc6_amd64_gcc630/src/Haamm/HaNaMiniAnalyzer/src/HaammHaNaMiniAnalyzer/libHaammHaNaMiniAnalyzer.so
+Copying tmp/slc6_amd64_gcc630/src/Haamm/HaNaMiniAnalyzer/src/HaammHaNaMiniAnalyzer/libHaammHaNaMiniAnalyzer.so to productstore area:
+Leaving library rule at Haamm/HaNaMiniAnalyzer
+Entering library rule at src/Haamm/HaNaMiniAnalyzer/plugins
+>> Compiling edm plugin /pool/condor/dir_23299/CMSSW_9_4_7/src/Haamm/HaNaMiniAnalyzer/plugins/PUStudies.cc 
+>> Building edm plugin tmp/slc6_amd64_gcc630/src/Haamm/HaNaMiniAnalyzer/plugins/HaammHaNaMiniAnalyzerAuto/libHaammHaNaMiniAnalyzerAuto.so
+Leaving library rule at src/Haamm/HaNaMiniAnalyzer/plugins
+@@@@ Running edmWriteConfigs for HaammHaNaMiniAnalyzerAuto
+config/SCRAM/GMake/Makefile.rules:2068: recipe for target 'lib/slc6_amd64_gcc630/HaammHaNaMiniAnalyzerAuto.edmplugin' failed
+gmake: *** [There are compilation/build errors. Please see the detail log above.] Error 2
+0
+cmsRun PUAnalyzer_cfg.py sample=AODtest job=0 output=out maxEvents=-1 nFilesPerJob=2
+total 72
+-rw-r--r--. 1 helfaham zh 13937 May  1 16:21 Cert_314472-325175_13TeV_PromptReco_Collisions18_JSON.txt
+-rw-r--r--. 1 helfaham zh  2487 May  1 16:21 FinalDraw.py
+-rw-r--r--. 1 helfaham zh  7220 May  1 16:21 PUAnalyzer_cfg.py
+drwxr-xr-x. 2 helfaham zh  4096 May  1 16:21 PUStudies
+-rw-r--r--. 1 helfaham zh  6245 May  1 16:21 Plotter.py
+drwxr-xr-x. 2 helfaham zh  4096 May  1 16:21 SamplesPU
+-rwxr-xr-x. 1 helfaham zh  3580 May  1 16:21 SetupAndRun.sh
+-rw-r--r--. 1 helfaham zh   565 May  1 16:21 SubmitPlotter.py
+-rwxr-xr-x. 1 helfaham zh  2627 May  1 16:21 condor.py
+-rwxr-xr-x. 1 helfaham zh  1370 May  1 16:21 hadd.py
+-rw-r--r--. 1 helfaham zh  4574 May  1 16:21 lxbatch.py
+-rw-r--r--. 1 helfaham zh   220 May  1 16:21 runPlotter.sh
+1th Try
+2th Try
+3th Try
+4th Try
+5th Try
+6th Try
+7th Try
+8th Try
+9th Try
+10th Try
+11th Try
+12th Try
+13th Try
+14th Try
+15th Try
+16th Try
+17th Try
+18th Try
+19th Try
+20th Try
+21th Try
+The file was not copied to destination after 20 tries

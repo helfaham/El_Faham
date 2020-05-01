@@ -132,7 +132,7 @@ PUAnalyzer::PUAnalyzer( const edm::ParameterSet& ps ) :
   HaNaBaseMiniAnalyzer( ps ) 
 {
   for(auto s : ps.getParameter< std::vector<string> >("Rhos") ){
-    Rhos.push_back( new DoubleReader( s , consumesCollector() ) ); 
+    Rhos.push_back( new DoubleReader( s , consumesCollector() ) ); //s is the name, consumesCollector? 
     //std::cout << *(Rhos.rbegin())->tagName << std::endl;
   }
 

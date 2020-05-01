@@ -17,3 +17,10 @@ SingleNeutrino   = Sample("SingleNeutrino" , 1 , False , "/SingleNeutrino/RunIIS
 SingleNeutrinos = []
 MINIAOD.extend( [ SingleNeutrino ] )
 SingleNeutrinos.extend( [ SingleNeutrino ] )
+
+
+#2018 AOD test
+AODtest = Sample("AODtest","1",False,"/SingleNeutrino/RunIISummer19UL18RECO-FlatPU0to70_106X_upgrade2018_realistic_v11_L1v1-v1/AODSIM ")
+AODtests=[]
+MINIAOD.extend([AODtest])
+AODtests.extend([AODtest])
