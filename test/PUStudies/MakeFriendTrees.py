@@ -187,10 +187,10 @@ class MCSampleContainer :
         return getattr( self , attrname )
         
 
-class EraTuneHandler :
+class EraTypeHandler :
     def Make2DSummaryPlot(self , varName , ext):
         name = "hBestXSections_%s_%s" % (varName , ext)
-        setattr( self, name , TH2D( name , "Best XSections (%s,%s);Era;Tune" % (ext, varName) , len(self.data.runEras)+1 , 0 , len(self.data.runEras)+1 , 4 , 0 , 4 ) )
+        setattr( self, name , TH2D( name , "Best XSections (%s,%s);Era;Type" % (ext, varName) , len(self.data.runEras)+1 , 0 , len(self.data.runEras)+1 , 4 , 0 , 4 ) )
         h = getattr( self, name)
         h.GetXaxis().SetBinLabel( 1 , "All")
         index = 2
@@ -203,8 +203,8 @@ class EraTuneHandler :
             index += 1
         return h
     
-    def __init__(self, name , datafiles , mcfiles , fout , Types = [2] ):
-        self.Types = Types 
+    def __init__(self, name , datafiles , mcfiles , fout , types = [1,2] ):
+        self.Types = types 
         self.data = DatasetController(fileName = datafiles)
         self.Dir = fout.mkdir( name )
         self.Dir.cd()
@@ -231,30 +231,30 @@ class EraTuneHandler :
             varDir = self.Dir.mkdir( var )
             chi2bestxsec = self.Make2DSummaryPlot( var , "Chi2" )
             ktestbestxsec = self.Make2DSummaryPlot( var , "KTest")
-            for Type in Types : #[1,2,3,4]:
-                TypeName = "Type%d" % (Type)
-                setattr( self, "MC_" + TypeName , MCSampleContainer( name=mcfiles % (Type) , runEras=self.data.runEras.keys() ) )
-                mc = getattr( self, "MC_" + TypeName )
-                Typedir = varDir.mkdir(TypeName )
-                Typedir.cd()
+            for Type in types : #[1,2,3,4]:
+                typeName = "Type%d" % (Type)
+                setattr( self, "MC_" + typeName , MCSampleContainer( name=mcfiles % (Type) , runEras=self.data.runEras.keys() ) )
+                mc = getattr( self, "MC_" + typeName )
+                typedir = varDir.mkdir(typeName )
+                typedir.cd()
 
                 for runEra in sorted( mc.runEras ):
                     Var = Variable("latest" , runEra , self.data , mc , var , variables[var][0] , variables[var][1] , variables[var][2]  , variables[var][3] )
                     Var.Write( Typedir )
 
-                    chi2bestxsec.Fill( runEra , TypeName , Var.XSectionMinChi2[0] )
-                    ktestbestxsec.Fill( runEra , TypeName , Var.XSectionMinKTest[0] )
+                    chi2bestxsec.Fill( runEra , typeName , Var.XSectionMinChi2[0] )
+                    ktestbestxsec.Fill( runEra , typeName , Var.XSectionMinKTest[0] )
                 
             varDir.cd()
             chi2bestxsec.Write()
             ktestbestxsec.Write()
         
 fout = TFile.Open("out_2018_SingleNeutrinovsZeroBias.root" , "recreate")
-#EraTuneHandler( "DY" , "SingleMu%s.root",  "ZmuMuM%d" , fout )
-#EraTuneHandler( "NuGunZeroBias" , "ZeroBias%s.root",  "NuGunM%d" , fout )
-#EraTuneHandler( "NuGunMinBias" , "MinBias%s.root",  "NuGunM%d" , fout )
-#EraTuneHandler( "SingleNuMinBias" , "MinBias%s.root",  "SingleNeutrinoTuneCP%d" , fout , [0,2,5] )
-EraTuneHandler( "SingleNuZeroBias" , "ZeroBias%s.root",  "SingleNeutrinoType%d" , fout,[2] )
+#EraTypeHandler( "DY" , "SingleMu%s.root",  "ZmuMuM%d" , fout )
+#EraTypeHandler( "NuGunZeroBias" , "ZeroBias%s.root",  "NuGunM%d" , fout )
+#EraTypeHandler( "NuGunMinBias" , "MinBias%s.root",  "NuGunM%d" , fout )
+#EraTypeHandler( "SingleNuMinBias" , "MinBias%s.root",  "SingleNeutrinoTuneCP%d" , fout , [0,2,5] )
+EraTypeHandler( "SingleNuZeroBias" , "ZeroBias%s.root",  "SingleNeutrinoType%d" , fout,[1,2] )
 
 fout.Close()
 

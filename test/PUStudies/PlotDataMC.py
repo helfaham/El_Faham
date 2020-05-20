@@ -141,7 +141,7 @@ varNames = ["nVertices",
 ]
 
 for var in varNames :
-    for Type in [ "Type2" ] :
+    for Type in [ "Type1, Type2" ] :
         a = PlotVariable( "SingleNuZeroBias" , var ,Type, "All" )                    
 #exit()
         
@@ -149,15 +149,15 @@ allGraphs = {}
 allMultiGraphs = {}
 canvases = {}
 
-Type = [  "Type2" ]
+types = [  "Type1, Type2" ]
 
 #for runEra in ["All",'eraA','eraB','eraC','eraD','eraE']:
 for runEra in ["All",'eraA','eraB']:
     mg = TMultiGraph()
     mg.SetName( runEra )
     allMultiGraphs[ runEra ] = mg
-    marker_info = {#"tuneM0":(20, 2 , 0   ) ,
-                   "Type2":(20, 2 , 0   ) ,
+    marker_info = {"Type1":(20, 2 , 0   ) ,
+                   "Type2":(21, 8 , 0   ) ,
                    #"tuneM2":(20, 2 , 0) ,
                    #"tuneM3":(23, 6 , 0.2) ,
                    #"tuneM4":(21, 8 , 0.3) ,
@@ -187,7 +187,7 @@ for runEra in ["All",'eraA','eraB']:
     mg.Add( gCMSLine , "l" )
 
     
-    for MCName in Type : 
+    for MCName in types : 
         x = array.array( 'd' )
         y = array.array( 'd' )
         exl = array.array( 'd' )
