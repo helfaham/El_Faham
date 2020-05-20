@@ -106,38 +106,38 @@ def CalcChi2( DirName , varName , MCName , runEra , xsec ):
 
 
 variables = { "nVertices" : ( "nVertices" , 74 , 6 , 80 ) ,
-              #"nGoodVertices" : ("nGoodVertices", 54, 5 , 59) ,
+              "nGoodVertices" : ("nGoodVertices", 54, 5 , 59) ,
               "nChargedHadrons" : ("nChargedHadrons" , 2000 , 0 , 2000 ),
               "fixedGridRhoAll" : ("fixedGridRhoAll" , 60 , 0 , 60 ),
-              #"fixedGridRhoFastjetAll" : ("fixedGridRhoFastjetAll" , 40 , 0 , 40 ),
-              #"fixedGridRhoFastjetAllCalo" : ("fixedGridRhoFastjetAllCalo" , 25 , 0 , 25 ),
-              #"fixedGridRhoFastjetCentral" : ("fixedGridRhoFastjetCentral" , 50 , 0 , 50 ),
-              #"fixedGridRhoFastjetCentralCalo" : ("fixedGridRhoFastjetCentralCalo" , 20 , 0 , 20 ),
-              #"fixedGridRhoFastjetCentralChargedPileUp" : ("fixedGridRhoFastjetCentralChargedPileUp" , 35 , 0 , 35 ),
+              "fixedGridRhoFastjetAll" : ("fixedGridRhoFastjetAll" , 40 , 0 , 40 ),
+              "fixedGridRhoFastjetAllCalo" : ("fixedGridRhoFastjetAllCalo" , 25 , 0 , 25 ),
+              "fixedGridRhoFastjetCentral" : ("fixedGridRhoFastjetCentral" , 50 , 0 , 50 ),
+              "fixedGridRhoFastjetCentralCalo" : ("fixedGridRhoFastjetCentralCalo" , 20 , 0 , 20 ),
+              "fixedGridRhoFastjetCentralChargedPileUp" : ("fixedGridRhoFastjetCentralChargedPileUp" , 35 , 0 , 35 ),
               
-              #"fixedGridRhoFastjetCentralNeutral" : ("fixedGridRhoFastjetCentralNeutral" , 12 , 0 , 12 ),
-              #"nMus" : ("nMus" , 10 , 0 , 10 ),
-              #"nEles" : ("nEles" , 10 , 0 , 10 ) ,
-              #"nLostTracks": ("nLostTracks" , 35 , 0 , 35 ),
-              #"nPhotons" : ("nPhotons" , 600 , 0 , 600 ),
-              #"nNeutralHadrons" : ("nNeutralHadrons" , 120 , 0 , 120 )
+              "fixedGridRhoFastjetCentralNeutral" : ("fixedGridRhoFastjetCentralNeutral" , 12 , 0 , 12 ),
+              "nMus" : ("nMus" , 10 , 0 , 10 ),
+              "nEles" : ("nEles" , 10 , 0 , 10 ) ,
+              "nLostTracks": ("nLostTracks" , 35 , 0 , 35 ),
+              "nPhotons" : ("nPhotons" , 600 , 0 , 600 ),
+              "nNeutralHadrons" : ("nNeutralHadrons" , 120 , 0 , 120 )
 }
 
 varNames = ["nVertices",
-            #"nGoodVertices",
-            #"fixedGridRhoFastjetCentralChargedPileUp",
+            "nGoodVertices",
+            "fixedGridRhoFastjetCentralChargedPileUp",
             "nChargedHadrons",
             "fixedGridRhoAll",
-            #"fixedGridRhoFastjetAll",
-            #"fixedGridRhoFastjetAllCalo",
-            #"fixedGridRhoFastjetCentral",
-            #"fixedGridRhoFastjetCentralCalo",
-            #"fixedGridRhoFastjetCentralNeutral",
-            #"nMus",
-            #"nEles",
-            #"nLostTracks",
-            #"nPhotons",
-            #"nNeutralHadrons"
+            "fixedGridRhoFastjetAll",
+            "fixedGridRhoFastjetAllCalo",
+            "fixedGridRhoFastjetCentral",
+            "fixedGridRhoFastjetCentralCalo",
+            "fixedGridRhoFastjetCentralNeutral",
+            "nMus",
+            "nEles",
+            "nLostTracks",
+            "nPhotons",
+            "nNeutralHadrons"
 ]
 
 for var in varNames :
