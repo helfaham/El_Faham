@@ -20,14 +20,14 @@ nBins1=100
 
 #TODO always specify the JSON file you are using here, the script automatically takes it from certification directly and I don't know why
 
-ANJSON=/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions18/13TeV/PromptReco/Cert_314472-325175_13TeV_PromptReco_Collisions18_JSON.txt
-#ANJSON=/afs/cern.ch/user/h/helfaham/CMSSW_11_0_0/src/Haamm/HaNaMiniAnalyzer/test/PUStudies/Cert_325274-325765_13TeV_PromptReco_Collisions18_JSON_eraE.txt
+#ANJSON=/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions18/13TeV/PromptReco/Cert_314472-325175_13TeV_PromptReco_Collisions18_JSON.txt
+ANJSON=$1
 appendixName=$2
 
 function produce {
-    pileupCalc.py -i $ANJSON --inputLumiJSON ./pileup_JSON.txt --calcMode true --minBiasXsec $xsec --maxPileupBin $nBins1 --numPileupBins $nBins1 --pileupHistName=h_${xsecvariation} /eos/home-h/helfaham/data_$2_${xsecvariation}_${appendixName}.root
+    pileupCalc.py -i $ANJSON --inputLumiJSON $1 --calcMode true --minBiasXsec $xsec --maxPileupBin $nBins1 --numPileupBins $nBins1 --pileupHistName=h_${xsecvariation} /eos/home-h/helfaham/data_$2_${xsecvariation}_${appendixName}.root
     
-    echo pileupCalc.py -i $ANJSON --inputLumiJSON ./pileup_JSON.txt --calcMode true --minBiasXsec $xsec --maxPileupBin $nBins1 --numPileupBins $nBins1 --pileupHistName=h_${xsecvariation} /eos/home-h/helfaham/data_$2_${xsecvariation}_${appendixName}.root
+    echo pileupCalc.py -i $ANJSON --inputLumiJSON $1 --calcMode true --minBiasXsec $xsec --maxPileupBin $nBins1 --numPileupBins $nBins1 --pileupHistName=h_${xsecvariation} /eos/home-h/helfaham/data_$2_${xsecvariation}_${appendixName}.root
 
 #echo pileupCalc.py -i $ANJSON --inputLumiJSON $1  --calcMode true --minBiasXsec $xsecDown --maxPileupBin $nBins --numPileupBins $nBins ./data_$2_${xsecvariation}_down.root
     #echo pileupCalc.py -i $ANJSON --inputLumiJSON $1  --calcMode true --minBiasXsec $xsecUp --maxPileupBin $nBins --numPileupBins $nBins ./data_$2_${xsecvariation}_up.root
