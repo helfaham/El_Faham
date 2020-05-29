@@ -141,7 +141,7 @@ varNames = ["nVertices",
 ]
 
 for var in varNames :
-    for Type in [ "Type1, Type2" ] :
+    for Type in [ "Type1", "Type2" ] :
         a = PlotVariable( "SingleNuZeroBias" , var ,Type, "All" )                    
 #exit()
         
@@ -149,7 +149,7 @@ allGraphs = {}
 allMultiGraphs = {}
 canvases = {}
 
-types = [  "Type1, Type2" ]
+types = [  "Type1", "Type2" ]
 
 #for runEra in ["All",'eraA','eraB','eraC','eraD','eraE']:
 for runEra in ["All",'eraA','eraB']:

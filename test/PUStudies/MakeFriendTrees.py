@@ -136,9 +136,7 @@ class MCSampleContainer :
         self.SampleName = name
         self.FileName = nTuples + self.SampleName + ".root"
         self.File = TFile.Open( self.FileName )
-
-        #self.hnTrueIntMCName = "PUAnalyzer/nTruInteractions/nTruInteractions_" + self.SampleName
-        self.hnTrueIntMCName = "PUAnalyzer/nTruInteractions/nTruInteractions_SingleNeutrino"
+        self.hnTrueIntMCName = "PUAnalyzer/nTruInteractions/nTruInteractions_" + self.SampleName
         self.hnTrueInt = self.File.Get( self.hnTrueIntMCName )
         print self.File, self.hnTrueInt
         self.nIntNBins = self.hnTrueInt.GetNbinsX()
@@ -240,7 +238,7 @@ class EraTypeHandler :
 
                 for runEra in sorted( mc.runEras ):
                     Var = Variable("latest" , runEra , self.data , mc , var , variables[var][0] , variables[var][1] , variables[var][2]  , variables[var][3] )
-                    Var.Write( Typedir )
+                    Var.Write( typedir )
 
                     chi2bestxsec.Fill( runEra , typeName , Var.XSectionMinChi2[0] )
                     ktestbestxsec.Fill( runEra , typeName , Var.XSectionMinKTest[0] )
