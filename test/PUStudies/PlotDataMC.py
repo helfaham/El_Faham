@@ -36,7 +36,7 @@ def PlotVariable( DirName , varName , MCName, runEra ):
     objs.append( dataHist )
     
     dataHist.SetLineColor( kBlack )
-    dataHist.SetLineWidth( 3 )
+    dataHist.SetLineWidth( 1 )
     dataHist.SetTitle("Data;%s (%s)" % (varName,MCName)  )
     #dataHist.Rebin(8)
     allHists[dataHist.GetMaximum()/dataHist.GetEntries()] = dataHist
@@ -45,7 +45,7 @@ def PlotVariable( DirName , varName , MCName, runEra ):
     dataNorm = dataHist.DrawNormalized()
     #dataNorm = dataHist.DrawNormalized("E PLC PMC")
     for xsec in [ 0.0 + (ratio*69200./1000.) for ratio in range(840,1170) ][::-1]:
-        if abs( xsec - bestXSec )/bestXSec > 0.1 or abs( xsec - bestXSec )/ bestXSec < 0.099:
+        if abs( xsec - bestXSec )/bestXSec > 0.1 or abs( xsec - bestXSec )/ bestXSec < 0.2: #What is that doing?
             if not xsec == bestXSec :
                 #print xsec, "skipped"
                 continue
@@ -58,13 +58,16 @@ def PlotVariable( DirName , varName , MCName, runEra ):
             if xsec == bestXSec:
                 hMC.SetTitle( "Best Cross Section : %.1f" % xsec )
                 hMC.SetLineColor(2)
-                hMC.SetLineWidth(2)
+                hMC.SetLineWidth(1)
             elif xsec > bestXSec :
                 hMC.SetTitle( "Cross Section : %.1f" % xsec )
                 hMC.SetLineColor(6)
+                hMC.SetLineWidth(1)
             elif xsec < bestXSec :
                 hMC.SetTitle( "Cross Section : %.1f" % xsec )
                 hMC.SetLineColor(4)
+                hMC.SetLineWidth(1)
+
 
             hMC.DrawNormalized("SAME")
             #hMC.DrawNormalized("SAME E PLC PMC")
@@ -77,14 +80,14 @@ def PlotVariable( DirName , varName , MCName, runEra ):
     print varName, MCName, maxvals, bestXSec
     option = ""
     maX = maxvals[0]
-    dataNorm.GetYaxis().SetRangeUser(0 , maX*1.8)
+    dataNorm.GetYaxis().SetRangeUser(0 , maX*1.2)
     # for m in maxvals :
     #     #print m
     #     allHists[m].SetStats(False)
     #     allHists[m].DrawNormalized(option)
     #     option = "SAME"
 
-    cOut.BuildLegend()
+    cOut.BuildLegend(0.5,0.67,0.88,0.88)
     cOut.SaveAs("FitRes/%s_%s.png" % (varName , MCName) )
     return cOut
 
@@ -105,38 +108,38 @@ def CalcChi2( DirName , varName , MCName , runEra , xsec ):
         
 
 
-variables = { "nVertices" : ( "nVertices" , 74 , 6 , 80 ) ,
-              "nGoodVertices" : ("nGoodVertices", 54, 5 , 59) ,
-              "nChargedHadrons" : ("nChargedHadrons" , 2000 , 0 , 2000 ),
-              "fixedGridRhoAll" : ("fixedGridRhoAll" , 60 , 0 , 60 ),
-              "fixedGridRhoFastjetAll" : ("fixedGridRhoFastjetAll" , 40 , 0 , 40 ),
-              "fixedGridRhoFastjetAllCalo" : ("fixedGridRhoFastjetAllCalo" , 25 , 0 , 25 ),
-              "fixedGridRhoFastjetCentral" : ("fixedGridRhoFastjetCentral" , 50 , 0 , 50 ),
-              "fixedGridRhoFastjetCentralCalo" : ("fixedGridRhoFastjetCentralCalo" , 20 , 0 , 20 ),
-              "fixedGridRhoFastjetCentralChargedPileUp" : ("fixedGridRhoFastjetCentralChargedPileUp" , 35 , 0 , 35 ),
+variables = { #"nVertices" : ( "nVertices" , 74 , 6 , 80 ) ,
+              #"nGoodVertices" : ("nGoodVertices", 54, 5 , 59) ,
+              #"nChargedHadrons" : ("nChargedHadrons" , 2000 , 0 , 2000 ),
+              #"fixedGridRhoAll" : ("fixedGridRhoAll" , 60 , 0 , 60 ),
+              #"fixedGridRhoFastjetAll" : ("fixedGridRhoFastjetAll" , 40 , 0 , 40 ),
+              #"fixedGridRhoFastjetAllCalo" : ("fixedGridRhoFastjetAllCalo" , 25 , 0 , 25 ),
+              #"fixedGridRhoFastjetCentral" : ("fixedGridRhoFastjetCentral" , 50 , 0 , 50 ),
+              #"fixedGridRhoFastjetCentralCalo" : ("fixedGridRhoFastjetCentralCalo" , 20 , 0 , 20 ),
+              #"fixedGridRhoFastjetCentralChargedPileUp" : ("fixedGridRhoFastjetCentralChargedPileUp" , 35 , 0 , 35 ),
               
-              "fixedGridRhoFastjetCentralNeutral" : ("fixedGridRhoFastjetCentralNeutral" , 12 , 0 , 12 ),
-              "nMus" : ("nMus" , 10 , 0 , 10 ),
-              "nEles" : ("nEles" , 10 , 0 , 10 ) ,
-              "nLostTracks": ("nLostTracks" , 35 , 0 , 35 ),
-              "nPhotons" : ("nPhotons" , 600 , 0 , 600 ),
-              "nNeutralHadrons" : ("nNeutralHadrons" , 120 , 0 , 120 )
+              #"fixedGridRhoFastjetCentralNeutral" : ("fixedGridRhoFastjetCentralNeutral" , 12 , 0 , 12 ),
+              #"nMus" : ("nMus" , 10 , 0 , 10 ),
+              #"nEles" : ("nEles" , 10 , 0 , 10 ) ,
+              #"nLostTracks": ("nLostTracks" , 35 , 0 , 35 ),
+              #"nPhotons" : ("nPhotons" , 600 , 0 , 600 ),
+              #"nNeutralHadrons" : ("nNeutralHadrons" , 120 , 0 , 120 )
 }
 
 varNames = ["nVertices",
-            "nGoodVertices",
-            "fixedGridRhoFastjetCentralChargedPileUp",
+            #"nGoodVertices",
+            #"fixedGridRhoFastjetCentralChargedPileUp",
             "nChargedHadrons",
             "fixedGridRhoAll",
-            "fixedGridRhoFastjetAll",
-            "fixedGridRhoFastjetAllCalo",
-            "fixedGridRhoFastjetCentral",
-            "fixedGridRhoFastjetCentralCalo",
-            "fixedGridRhoFastjetCentralNeutral",
-            "nMus",
-            "nEles",
-            "nLostTracks",
-            "nPhotons",
+            #"fixedGridRhoFastjetAll",
+            #"fixedGridRhoFastjetAllCalo",
+            #"fixedGridRhoFastjetCentral",
+            #"fixedGridRhoFastjetCentralCalo",
+            #"fixedGridRhoFastjetCentralNeutral",
+            #"nMus",
+            #"nEles",
+            #"nLostTracks",
+            #"nPhotons",
             "nNeutralHadrons"
 ]
 
@@ -163,7 +166,7 @@ for runEra in ["All",'eraA','eraB']:
                    #"tuneM4":(21, 8 , 0.3) ,
                    #"tuneM5":(21, 8 , 0) 
 		}
-    Legend = TLegend( 0.21,0.76,0.64,0.96 )
+    Legend = TLegend( 0.7,0.8,0.88,0.88 )
 
     xCMS = array.array( 'd' , range(0, len(varNames) ) )
     xCMS[0] -= 0.2
