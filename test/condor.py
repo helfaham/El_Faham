@@ -32,7 +32,7 @@ file_sh = open("%s/Submit.sh" % (workingdir) , "w" )
 
 
 for sample in samples:
-    if not sample.Name.count("MinBiasA"):
+    if not sample.Name.count("MinBias"):
         continue
 
     os.mkdir( "%s/%s" % (workingdir , sample.Name) )
