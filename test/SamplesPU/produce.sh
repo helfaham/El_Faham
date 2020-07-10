@@ -6,4 +6,7 @@ dasgoclient --limit=0 --query="file dataset=/SingleNeutrino/RunIISummer19UL18Min
 dasgoclient --limit=0 --query="file dataset=/ZeroBias/Run2018A-12Nov2019_UL2018-v2/MINIAOD  " > ZeroBiasA.list
 dasgoclient --limit=0 --query="file dataset=/ZeroBias/Run2018B-12Nov2019_UL2018-v2/MINIAOD  " > ZeroBiasB.list
 
-
+dasgoclient --limit=0 --query="file dataset=/MinimumBias/Run2018A-12Nov2019_UL2018-v1/MINIAOD  " > MinBiasA.list
+dasgoclient --limit=0 --query="file dataset=/MinimumBias/Run2018B-12Nov2019_UL2018-v1/MINIAOD  " > MinBiasB.list
+dasgoclient --limit=0 --query="file dataset=/MinimumBias/Run2018C-12Nov2019_UL2018-v1/MINIAOD  " > MinBiasC.list
+dasgoclient --limit=0 --query="file dataset=/MinimumBias/Run2018D-12Nov2019_UL2018-v1/MINIAOD  " > MinBiasD.list

@@ -207,21 +207,21 @@ class EraTypeHandler :
         self.Dir = fout.mkdir( name )
         self.Dir.cd()
 
-        variables = { "nVertices" : ( "nVertices" , 65 , 0 , 65 ) ,
-                      "nGoodVertices" : ("nGoodVertices", 54, 5 , 59) ,
-                      "nEles" : ("nEles" , 5 , 0 , 5 ) ,
-                      "nMus" : ("nMus" , 10 , 0 , 10),
-                      "nChargedHadrons" : ("nChargedHadrons" , 2000 , 0 , 2000 ),
-                      "nLostTracks": ("nLostTracks" , 55 , 0 , 55 ),
-                      "nPhotons" : ("nPhotons" , 450 , 0 , 450 ),
-                      "nNeutralHadrons" : ("nNeutralHadrons" , 90 , 40 , 130 ),
-                      "fixedGridRhoAll" : ("fixedGridRhoAll" , 50 , 0 , 50 ),
-                      "fixedGridRhoFastjetAll" : ("fixedGridRhoFastjetAll" , 45 , 0 , 45 ),
-                      "fixedGridRhoFastjetAllCalo" : ("fixedGridRhoFastjetAllCalo" , 40 , 0 , 40 ),
-                      "fixedGridRhoFastjetCentral" : ("fixedGridRhoFastjetCentral" , 50 , 0 , 50 ),
-                      "fixedGridRhoFastjetCentralCalo" : ("fixedGridRhoFastjetCentralCalo" , 25 , 0 , 25 ),
-                      "fixedGridRhoFastjetCentralChargedPileUp" : ("fixedGridRhoFastjetCentralChargedPileUp" , 35 , 0 , 35 ),
-                      "fixedGridRhoFastjetCentralNeutral" : ("fixedGridRhoFastjetCentralNeutral" , 12 , 0 , 12 ) 
+        variables = { #"nVertices" : ( "nVertices" , 65 , 0 , 65 ) ,
+                      #"nGoodVertices" : ("nGoodVertices", 54, 5 , 59) ,
+                      #"nEles" : ("nEles" , 5 , 0 , 5 ) ,
+                      #"nMus" : ("nMus" , 10 , 0 , 10),
+                      #"nChargedHadrons" : ("nChargedHadrons" , 2000 , 0 , 2000 ),
+                      #"nLostTracks": ("nLostTracks" , 55 , 0 , 55 ),
+                      #"nPhotons" : ("nPhotons" , 450 , 0 , 450 ),
+                      "nNeutralHadrons" : ("nNeutralHadrons" , 60 , 70 , 130 ),
+                      #"fixedGridRhoAll" : ("fixedGridRhoAll" , 50 , 0 , 50 ),
+                      #"fixedGridRhoFastjetAll" : ("fixedGridRhoFastjetAll" , 45 , 0 , 45 ),
+                      #"fixedGridRhoFastjetAllCalo" : ("fixedGridRhoFastjetAllCalo" , 40 , 0 , 40 ),
+                      #"fixedGridRhoFastjetCentral" : ("fixedGridRhoFastjetCentral" , 50 , 0 , 50 ),
+                      #"fixedGridRhoFastjetCentralCalo" : ("fixedGridRhoFastjetCentralCalo" , 25 , 0 , 25 ),
+                      #"fixedGridRhoFastjetCentralChargedPileUp" : ("fixedGridRhoFastjetCentralChargedPileUp" , 35 , 0 , 35 ),
+                      #"fixedGridRhoFastjetCentralNeutral" : ("fixedGridRhoFastjetCentralNeutral" , 12 , 0 , 12 ) 
 }
         bestXsecPlots = {}
 
