@@ -13,7 +13,6 @@ OutPath = "/%s/%s/" % (sys.argv[2], user )
 #OutPath = "eos/cms/store/user/%s/%s/" % (user, sys.argv[2] )
 
 from SamplesPU.Samples import MINIAOD as samples
-#from SamplesPU.Samples import SingleNeutrinos as samples
 for sample in samples:
     sample.MakeJobs( nFilesPerJob , "%s/%s" % (OutPath , prefix) )
 
@@ -33,13 +32,14 @@ file_sh = open("%s/Submit.sh" % (workingdir) , "w" )
 
 
 for sample in samples:
-    if not sample.Name.count("SingleNeutrinoTuneCP2"):
+    if not sample.Name.count("MinBias"):
         continue
 
     os.mkdir( "%s/%s" % (workingdir , sample.Name) )
     copy( "SetupAndRun.sh" , "./%s/%s" % (workingdir , sample.Name) )
 
     file = open("%s/%s/Submit.cmd" % (workingdir , sample.Name) , "w" )
+    #print >> file, 'requirements            = (OpSysAndVer =?= "SLCern6")'
     print >> file, "executable              = %s/%s/%s/SetupAndRun.sh" % (os.getcwd() , workingdir , sample.Name)
     print >> file, "output                  = $(ClusterId)_$(ProcId).out"
     print >> file, "error                   = $(ClusterId)_$(ProcId).err"
