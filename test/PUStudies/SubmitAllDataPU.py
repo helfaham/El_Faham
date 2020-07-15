@@ -33,7 +33,7 @@ for era in jsons:
 #    submit = ('bsub -q {que:s} -J "{era:s}[840-1170]" -o datapu/{era:s}_{var:s}.out ' + command).format( var="%I" , json=jsons[era] , era=era , que=queue )
 #    print submit
     
-    if not era.count("eraB"):
+    if not era.count("eraD"):
         continue
 
     os.mkdir( "%s/%s" % (workingdir , era) )
