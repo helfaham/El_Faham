@@ -4,7 +4,7 @@ import getpass
 user = getpass.getuser()
 
 #prefix   = "data"
-OutPath  = "/%s/%s/PU_work/2016" % (sys.argv[2],user) 
+OutPath  = "/%s/%s/" % (sys.argv[2],user) 
 
 import os
 from os import listdir
@@ -33,8 +33,8 @@ for era in jsons:
 #    submit = ('bsub -q {que:s} -J "{era:s}[840-1170]" -o datapu/{era:s}_{var:s}.out ' + command).format( var="%I" , json=jsons[era] , era=era , que=queue )
 #    print submit
     
-    #if not era.count("eraB"):
-     #   continue
+    if not era.count("eraF"):
+        continue
 
     os.mkdir( "%s/%s" % (workingdir , era) )
     shutil.copy( "produceDataPU.sh" , "./%s/%s" % (workingdir,era))
