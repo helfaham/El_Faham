@@ -89,12 +89,12 @@ class Variable:
         fout.cd()
 
 class DatasetController :
-    def __init__(self , path = "/eos/home-h/helfaham/PU_work/UL/2018/samples_hadd/" , fileName = "ZeroBias%s.root"):
+    def __init__(self , path = "/eos/home-h/helfaham/PU_work/UL/2018/samples_hadd/" , fileName = "MinBias%s.root"):
         self.runEras = {} #"B":{},"C":{},"D":{},"E":{},"F":{},"G":{},"H":{}}
         self.nTuples = path
         self.All = TChain("PUAnalyzer/Trees/Events")
         #for runEra in ['A','B','C','D','E']: #self.runEras :
-        for runEra in ['A','B']: #self.runEras :
+        for runEra in ['A']: #self.runEras :
             fname = path + fileName%(runEra)
             if os.path.isfile( fname ):
                 self.runEras[ runEra ] = {}
@@ -207,21 +207,21 @@ class EraTypeHandler :
         self.Dir = fout.mkdir( name )
         self.Dir.cd()
 
-        variables = { #"nVertices" : ( "nVertices" , 65 , 0 , 65 ) ,
-                      #"nGoodVertices" : ("nGoodVertices", 54, 5 , 59) ,
-                      #"nEles" : ("nEles" , 5 , 0 , 5 ) ,
-                      #"nMus" : ("nMus" , 10 , 0 , 10),
-                      #"nChargedHadrons" : ("nChargedHadrons" , 2000 , 0 , 2000 ),
-                      #"nLostTracks": ("nLostTracks" , 55 , 0 , 55 ),
-                      #"nPhotons" : ("nPhotons" , 450 , 0 , 450 ),
-                      "nNeutralHadrons" : ("nNeutralHadrons" , 60 , 70 , 130 ),
-                      #"fixedGridRhoAll" : ("fixedGridRhoAll" , 50 , 0 , 50 ),
-                      #"fixedGridRhoFastjetAll" : ("fixedGridRhoFastjetAll" , 45 , 0 , 45 ),
-                      #"fixedGridRhoFastjetAllCalo" : ("fixedGridRhoFastjetAllCalo" , 40 , 0 , 40 ),
-                      #"fixedGridRhoFastjetCentral" : ("fixedGridRhoFastjetCentral" , 50 , 0 , 50 ),
-                      #"fixedGridRhoFastjetCentralCalo" : ("fixedGridRhoFastjetCentralCalo" , 25 , 0 , 25 ),
-                      #"fixedGridRhoFastjetCentralChargedPileUp" : ("fixedGridRhoFastjetCentralChargedPileUp" , 35 , 0 , 35 ),
-                      #"fixedGridRhoFastjetCentralNeutral" : ("fixedGridRhoFastjetCentralNeutral" , 12 , 0 , 12 ) 
+        variables = { "nVertices" : ( "nVertices" , 65 , 0 , 65 ) ,
+                      "nGoodVertices" : ("nGoodVertices", 54, 5 , 59) ,
+                      "nEles" : ("nEles" , 5 , 0 , 5 ) ,
+                      "nMus" : ("nMus" , 10 , 0 , 10),
+                      "nChargedHadrons" : ("nChargedHadrons" , 2000 , 0 , 2000 ),
+                      "nLostTracks": ("nLostTracks" , 55 , 0 , 55 ),
+                      "nPhotons" : ("nPhotons" , 450 , 0 , 450 ),
+                      "nNeutralHadrons" : ("nNeutralHadrons" , 130 , 0 , 130 ),
+                      "fixedGridRhoAll" : ("fixedGridRhoAll" , 50 , 0 , 50 ),
+                      "fixedGridRhoFastjetAll" : ("fixedGridRhoFastjetAll" , 45 , 0 , 45 ),
+                      "fixedGridRhoFastjetAllCalo" : ("fixedGridRhoFastjetAllCalo" , 40 , 0 , 40 ),
+                      "fixedGridRhoFastjetCentral" : ("fixedGridRhoFastjetCentral" , 50 , 0 , 50 ),
+                      "fixedGridRhoFastjetCentralCalo" : ("fixedGridRhoFastjetCentralCalo" , 25 , 0 , 25 ),
+                      "fixedGridRhoFastjetCentralChargedPileUp" : ("fixedGridRhoFastjetCentralChargedPileUp" , 35 , 0 , 35 ),
+                      "fixedGridRhoFastjetCentralNeutral" : ("fixedGridRhoFastjetCentralNeutral" , 12 , 0 , 12 ) 
 }
         bestXsecPlots = {}
 
@@ -247,12 +247,12 @@ class EraTypeHandler :
             chi2bestxsec.Write()
             ktestbestxsec.Write()
         
-fout = TFile.Open("out_2018_SingleNeutrinovsZeroBias.root" , "recreate")
+fout = TFile.Open("out_2018_SingleNeutrinovsMinBias.root" , "recreate")
 #EraTypeHandler( "DY" , "SingleMu%s.root",  "ZmuMuM%d" , fout )
 #EraTypeHandler( "NuGunZeroBias" , "ZeroBias%s.root",  "NuGunM%d" , fout )
 #EraTypeHandler( "NuGunMinBias" , "MinBias%s.root",  "NuGunM%d" , fout )
-#EraTypeHandler( "SingleNuMinBias" , "MinBias%s.root",  "SingleNeutrinoTuneCP%d" , fout , [0,2,5] )
-EraTypeHandler( "SingleNuZeroBias" , "ZeroBias%s.root",  "SingleNeutrinoType%d" , fout,[1,2] )
+EraTypeHandler( "SingleNuMinBias" , "MinBias%s.root",  "SingleNeutrinoType%d" , fout , [1,2] )
+#EraTypeHandler( "SingleNuZeroBias" , "ZeroBias%s.root",  "SingleNeutrinoType%d" , fout,[1,2] )
 
 fout.Close()
 
