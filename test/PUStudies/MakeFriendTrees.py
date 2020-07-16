@@ -89,11 +89,11 @@ class Variable:
         fout.cd()
 
 class DatasetController :
-    def __init__(self , path = "/eos/home-h/helfaham/PU_work/2016/samples_hadd/" , fileName = "ZeroBias%s.root"):
+    def __init__(self , path = "/eos/home-h/helfaham/PU_work/UL/2016/samples_hadd/" , fileName = "ZeroBias%s.root"):
         self.runEras = {} #"B":{},"C":{},"D":{},"E":{},"F":{},"G":{},"H":{}}
         self.nTuples = path
         self.All = TChain("PUAnalyzer/Trees/Events")
-        for runEra in ['B','C','D','E','F','G','H']: #self.runEras :
+        for runEra in ['F','G','H']: #self.runEras :
             fname = path + fileName%(runEra)
             if os.path.isfile( fname ):
                 self.runEras[ runEra ] = {}
@@ -129,7 +129,7 @@ class DatasetController :
         return getattr( self , attrname )
         
 class MCSampleContainer :
-    def __init__(self, name , nTuples = "/eos/home-h/helfaham/PU_work/2016/samples_hadd/" , runEras = []):
+    def __init__(self, name , nTuples = "/eos/home-h/helfaham/PU_work/UL/2016/samples_hadd/" , runEras = []):
         self.nTuples=nTuples
 
         self.SampleName = name
@@ -155,7 +155,7 @@ class MCSampleContainer :
         for runEra in self.runEras:
             for method in datapumethods:
                 fdata = None
-                datafilename = nTuples + "../datapu_hadd/data_%s_H_%s.root" % (method, runEra)
+                datafilename = nTuples + "../datapu_hadd/data_%s_%s.root" % (method, runEra)
                 print datafilename
                 if os.path.isfile( datafilename ):
                     fdata = TFile.Open( datafilename )
@@ -214,7 +214,7 @@ class EraTuneHandler :
                       "nChargedHadrons" : ("nChargedHadrons" , 1200 , 0 , 1200 ),
                       "nLostTracks": ("nLostTracks" , 35 , 0 , 35 ),
                       "nPhotons" : ("nPhotons" , 600 , 0 , 600 ),
-                      "nNeutralHadrons" : ("nNeutralHadrons" , 120 , 0 , 120 ),
+                      "nNeutralHadrons" : ("nNeutralHadrons" , 130 , 0 , 130 ),
                       "fixedGridRhoAll" : ("fixedGridRhoAll" , 40 , 0 , 40 ),
                       "fixedGridRhoFastjetAll" : ("fixedGridRhoFastjetAll" , 40 , 0 , 40 ),
                       "fixedGridRhoFastjetAllCalo" : ("fixedGridRhoFastjetAllCalo" , 25 , 0 , 25 ),
@@ -246,13 +246,12 @@ class EraTuneHandler :
             chi2bestxsec.Write()
             ktestbestxsec.Write()
         
-#fout = TFile.Open("out_2016.root" , "recreate")
 fout = TFile.Open("out_2016_SingleNeutrinovsZeroBias.root" , "recreate")
 #EraTuneHandler( "DY" , "SingleMu%s.root",  "ZmuMuM%d" , fout )
 #EraTuneHandler( "NuGunZeroBias" , "ZeroBias%s.root",  "NuGunM%d" , fout )
 #EraTuneHandler( "NuGunMinBias" , "MinBias%s.root",  "NuGunM%d" , fout )
 #EraTuneHandler( "SingleNuMinBias" , "MinBias%s.root",  "SingleNeutrinoTuneCP%d" , fout , [0,2,5] )
-EraTuneHandler( "SingleNuZeroBias" , "ZeroBias%s.root",  "SingleNeutrinoTuneCP%d" , fout , [0,2,5] )
+EraTuneHandler( "SingleNuZeroBias" , "ZeroBias%s.root",  "SingleNeutrinoCP%d" , fout , [1] )
 
 fout.Close()
 

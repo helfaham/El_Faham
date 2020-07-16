@@ -11,8 +11,7 @@ t.SetTextFont(72)
 
 AllBestXSections = {}
 #fin = TFile.Open("out.root")
-fin = TFile.Open("/eos/home-h/helfaham/PU_work/2016/out_2016_SingleNeutrinovsZeroBias.root")
-#fin = TFile.Open("/afs/cern.ch/work/h/helfaham/helfaham/2017_PU/out_2017_SingleNeutrinovsZeroBias.root")
+fin = TFile.Open("/afs/cern.ch/user/h/helfaham/CMSSW_10_6_12/src/Haamm/HaNaMiniAnalyzer/test/PUStudies/out_2016_SingleNeutrinovsZeroBias.root")
 
 objs = []
 def PlotVariable( DirName , varName , MCName, runEra ):
@@ -37,15 +36,17 @@ def PlotVariable( DirName , varName , MCName, runEra ):
     objs.append( dataHist )
     
     dataHist.SetLineColor( kBlack )
-    dataHist.SetLineWidth( 3 )
+    dataHist.SetLineWidth( 1 )
     dataHist.SetTitle("Data;%s (%s)" % (varName,MCName)  )
     #dataHist.Rebin(8)
     allHists[dataHist.GetMaximum()/dataHist.GetEntries()] = dataHist
     gStyle.SetOptTitle(False)
     dataHist.SetStats(False)
-    dataNorm = dataHist.DrawNormalized("E PLC PMC")
+    dataNorm=dataHist.DrawNormalized()
+    #dataNorm = dataHist.DrawNormalized("E PLC PMC")
     for xsec in [ 0.0 + (ratio*69200./1000.) for ratio in range(840,1170) ][::-1]:
-        if abs( xsec - bestXSec )/bestXSec > 0.1 or abs( xsec - bestXSec )/ bestXSec < 0.099:
+        #if abs( xsec - bestXSec )/bestXSec > 0.1 or abs( xsec - bestXSec )/ bestXSec < 0.099:
+        if abs( xsec - bestXSec )/bestXSec > 0.1 or abs( xsec - bestXSec )/ bestXSec < 0.2:
             if not xsec == bestXSec :
                 #print xsec, "skipped"
                 continue
@@ -57,7 +58,7 @@ def PlotVariable( DirName , varName , MCName, runEra ):
             if xsec == bestXSec:
                 hMC.SetTitle( "Best Cross Section : %.1f" % xsec )
                 hMC.SetLineColor( kRed )
-                hMC.SetLineWidth( 3 )
+                hMC.SetLineWidth( 1 )
             elif xsec > bestXSec :
                 hMC.SetTitle( "Cross Section : %.1f" % xsec )
                 hMC.SetLineColor( kBlue )
@@ -66,7 +67,8 @@ def PlotVariable( DirName , varName , MCName, runEra ):
                 hMC.SetLineColor( kGreen )
 
             hMC.SetStats(False)
-            hMC.DrawNormalized("SAME E PLC PMC")
+            #hMC.DrawNormalized("SAME E PLC PMC")
+            hMC.DrawNormalized("SAME")
         else:
             print hName , "null"
 
@@ -82,7 +84,7 @@ def PlotVariable( DirName , varName , MCName, runEra ):
     #     allHists[m].DrawNormalized(option)
     #     option = "SAME"
 
-    cOut.BuildLegend()
+    cOut.BuildLegend(0.5,0.67,0.88,0.88)
     cOut.SaveAs("FitRes/%s_%s.png" % (varName , MCName) )
     return cOut
 
@@ -103,10 +105,10 @@ def CalcChi2( DirName , varName , MCName , runEra , xsec ):
         
 
 
-variables = { "nVertices" : ( "nVertices" , 54 , 6 , 60 ) ,
+variables = { "nVertices" : ( "nVertices" , 74 , 6 , 80 ) ,
               "nGoodVertices" : ("nGoodVertices", 54, 5 , 59) ,
-              "nChargedHadrons" : ("nChargedHadrons" , 1200 , 0 , 1200 ),
-              "fixedGridRhoAll" : ("fixedGridRhoAll" , 40 , 0 , 40 ),
+              "nChargedHadrons" : ("nChargedHadrons" , 2000 , 0 , 2000 ),
+              "fixedGridRhoAll" : ("fixedGridRhoAll" , 60 , 0 , 60 ),
               "fixedGridRhoFastjetAll" : ("fixedGridRhoFastjetAll" , 40 , 0 , 40 ),
               "fixedGridRhoFastjetAllCalo" : ("fixedGridRhoFastjetAllCalo" , 25 , 0 , 25 ),
               "fixedGridRhoFastjetCentral" : ("fixedGridRhoFastjetCentral" , 50 , 0 , 50 ),
@@ -118,10 +120,10 @@ variables = { "nVertices" : ( "nVertices" , 54 , 6 , 60 ) ,
               "nEles" : ("nEles" , 10 , 0 , 10 ) ,
               "nLostTracks": ("nLostTracks" , 35 , 0 , 35 ),
               "nPhotons" : ("nPhotons" , 600 , 0 , 600 ),
-              "nNeutralHadrons" : ("nNeutralHadrons" , 120 , 0 , 120 )
+              "nNeutralHadrons" : ("nNeutralHadrons" , 120 , 0 , 160 )
 }
 
-varNames = [#"nGoodVertices",
+varNames = ["nGoodVertices",
             "fixedGridRhoFastjetCentralChargedPileUp",
             "nChargedHadrons",
             "fixedGridRhoAll",
@@ -129,18 +131,17 @@ varNames = [#"nGoodVertices",
             "nVertices",
             "fixedGridRhoFastjetAllCalo",
             "fixedGridRhoFastjetCentral",
-            #"fixedGridRhoFastjetCentralCalo",
-            #"fixedGridRhoFastjetCentralNeutral",
-            #"nMus",
-            #"nEles",
-            #"nLostTracks",
-            #"nPhotons",
-            #"nNeutralHadrons"
+            "fixedGridRhoFastjetCentralCalo",
+            "fixedGridRhoFastjetCentralNeutral",
+            "nMus",
+            "nEles",
+            "nLostTracks",
+            "nPhotons",
+            "nNeutralHadrons"
 ]
 
 for var in varNames :
-    for tune in [ "tuneM2" , "tuneM5" ] :
-    #for tune in [ "tuneM1" ] :
+    for tune in [ "tuneM1" ] :
         a = PlotVariable( "SingleNuZeroBias" , var , tune , "All" )                    
 #exit()
         
@@ -148,20 +149,19 @@ allGraphs = {}
 allMultiGraphs = {}
 canvases = {}
 
-#tunes = [  "tuneM1" , "tuneM2" , "tuneM3" , "tuneM4" ]
-tunes = [  "tuneM2" , "tuneM5" ]
-#tunes = [  "tuneM1" ]
+tunes = [  "tuneM1" ]
 
-for runEra in ["All" , 'eraC','eraD','eraE','eraF','eraG','eraH']:
+for runEra in ["All", 'eraF','eraG','eraH']:
     mg = TMultiGraph()
     mg.SetName( runEra )
     allMultiGraphs[ runEra ] = mg
-    marker_info = {"tuneM0":(20, 2 , 0   ) ,
+    marker_info = {#"tuneM0":(20, 2 , 0   ) ,
                    "tuneM1":(20, 2 , 0   ) ,
-                   "tuneM2":(20, 2 , 0) ,
-                   "tuneM3":(23, 6 , 0.2) ,
-                   "tuneM4":(21, 8 , 0.3) ,
-                   "tuneM5":(21, 8 , 0) }
+                   #"tuneM2":(20, 2 , 0) ,
+                   #"tuneM3":(23, 6 , 0.2) ,
+                   #"tuneM4":(21, 8 , 0.3) ,
+                   #"tuneM5":(21, 8 , 0) }
+	}	
     Legend = TLegend( 0.21,0.76,0.64,0.96 )
 
     xCMS = array.array( 'd' , range(0, len(varNames) ) )
