@@ -1,4 +1,4 @@
-from ROOT import TFile, TH1, TCanvas, kRed, kBlack, kBlue, kGreen, TGraph, TGraphErrors , TGraphAsymmErrors, TMultiGraph, TAttMarker, TLatex, Double, TH1D, TLegend, TLine, gStyle, gROOT
+from ROOT import TFile, TH1, TF1, TCanvas, kRed, kBlack, kBlue, kGreen, TGraph, TGraphErrors , TGraphAsymmErrors, TMultiGraph, TAttMarker, TLatex, TStyle, Double, TH1D, TLegend, TLine, gStyle, gROOT
 import array
 import math
 
@@ -41,8 +41,12 @@ def PlotVariable( DirName , varName , MCName, runEra ):
     #dataHist.Rebin(8)
     allHists[dataHist.GetMaximum()/dataHist.GetEntries()] = dataHist
     gStyle.SetOptTitle(False)
+    #gROOT.SetStyle("Plain") #Fit
+    #dataHist.SetStats(True) #Fit
     dataHist.SetStats(False)
+    #gStyle.SetOptFit(111) #Fit
     dataNorm = dataHist.DrawNormalized()
+    #Fit = dataHist.Fit("gaus") #Fit
     #dataNorm = dataHist.DrawNormalized("E PLC PMC")
     for xsec in [ 0.0 + (ratio*69200./1000.) for ratio in range(840,1170) ][::-1]:
         if abs( xsec - bestXSec )/bestXSec > 0.1 or abs( xsec - bestXSec )/ bestXSec < 0.2: #What is that doing?
@@ -69,6 +73,7 @@ def PlotVariable( DirName , varName , MCName, runEra ):
                 hMC.SetLineWidth(1)
 
 
+            #hMC.Draw("SAME") #Fit
             hMC.DrawNormalized("SAME")
             #hMC.DrawNormalized("SAME E PLC PMC")
             hMC.SetStats(False)
@@ -87,7 +92,10 @@ def PlotVariable( DirName , varName , MCName, runEra ):
     #     allHists[m].DrawNormalized(option)
     #     option = "SAME"
 
-    cOut.BuildLegend(0.5,0.67,0.88,0.88)
+    #cOut.BuildLegend(0.1,0.5,0.3,0.7) #Fit
+    #cOut.BuildLegend(0.1,0.7,0.48,0.9) #left
+    cOut.BuildLegend(0.5,0.67,0.88,0.88) #left
+    #cOut.SaveAs("FitRes/%s_%s_fit.png" % (varName , MCName) ) #Fit
     cOut.SaveAs("FitRes/%s_%s.png" % (varName , MCName) )
     return cOut
 
@@ -127,19 +135,19 @@ variables = { #"nVertices" : ( "nVertices" , 74 , 6 , 80 ) ,
 }
 
 varNames = ["nVertices",
-            #"nGoodVertices",
-            #"fixedGridRhoFastjetCentralChargedPileUp",
+            "nGoodVertices",
+            "fixedGridRhoFastjetCentralChargedPileUp",
             "nChargedHadrons",
             "fixedGridRhoAll",
-            #"fixedGridRhoFastjetAll",
-            #"fixedGridRhoFastjetAllCalo",
-            #"fixedGridRhoFastjetCentral",
-            #"fixedGridRhoFastjetCentralCalo",
-            #"fixedGridRhoFastjetCentralNeutral",
-            #"nMus",
-            #"nEles",
-            #"nLostTracks",
-            #"nPhotons",
+            "fixedGridRhoFastjetAll",
+            "fixedGridRhoFastjetAllCalo",
+            "fixedGridRhoFastjetCentral",
+            "fixedGridRhoFastjetCentralCalo",
+            "fixedGridRhoFastjetCentralNeutral",
+            "nMus",
+            "nEles",
+            "nLostTracks",
+            "nPhotons",
             "nNeutralHadrons"
 ]
 
@@ -154,17 +162,12 @@ canvases = {}
 
 types = [  "Type1", "Type2" ]
 
-#for runEra in ["All",'eraA','eraB','eraC','eraD','eraE']:
 for runEra in ["All",'eraA','eraB']:
     mg = TMultiGraph()
     mg.SetName( runEra )
     allMultiGraphs[ runEra ] = mg
     marker_info = {"Type1":(20, 2 , 0   ) ,
                    "Type2":(21, 8 , 0   ) ,
-                   #"tuneM2":(20, 2 , 0) ,
-                   #"tuneM3":(23, 6 , 0.2) ,
-                   #"tuneM4":(21, 8 , 0.3) ,
-                   #"tuneM5":(21, 8 , 0) 
 		}
     Legend = TLegend( 0.7,0.8,0.88,0.88 )
 

@@ -94,7 +94,7 @@ class DatasetController :
         self.nTuples = path
         self.All = TChain("PUAnalyzer/Trees/Events")
         #for runEra in ['A','B','C','D','E']: #self.runEras :
-        for runEra in ['A']: #self.runEras :
+        for runEra in ['A','B']: #self.runEras :
             fname = path + fileName%(runEra)
             if os.path.isfile( fname ):
                 self.runEras[ runEra ] = {}
@@ -247,12 +247,12 @@ class EraTypeHandler :
             chi2bestxsec.Write()
             ktestbestxsec.Write()
         
-fout = TFile.Open("out_2018_SingleNeutrinovsMinBias.root" , "recreate")
+fout = TFile.Open("out_2018_SingleNeutrinovsZeroBias.root" , "recreate")
+EraTypeHandler( "SingleNuZeroBias" , "ZeroBias%s.root",  "SingleNeutrinoType%d" , fout,[1,2] )
 #EraTypeHandler( "DY" , "SingleMu%s.root",  "ZmuMuM%d" , fout )
 #EraTypeHandler( "NuGunZeroBias" , "ZeroBias%s.root",  "NuGunM%d" , fout )
 #EraTypeHandler( "NuGunMinBias" , "MinBias%s.root",  "NuGunM%d" , fout )
-EraTypeHandler( "SingleNuMinBias" , "MinBias%s.root",  "SingleNeutrinoType%d" , fout , [1,2] )
-#EraTypeHandler( "SingleNuZeroBias" , "ZeroBias%s.root",  "SingleNeutrinoType%d" , fout,[1,2] )
+#EraTypeHandler( "SingleNuMinBias" , "MinBias%s.root",  "SingleNeutrinoType%d" , fout , [1,2] )
 
 fout.Close()
 
