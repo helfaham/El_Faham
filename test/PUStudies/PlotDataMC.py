@@ -1,4 +1,4 @@
-from ROOT import TFile, TH1, TF1, TCanvas, kRed, kBlack, kBlue, kGreen, TGraph, TGraphErrors , TGraphAsymmErrors, TMultiGraph, TAttMarker, TLatex, TStyle, Double, TH1D, TLegend, TLine, gStyle, gROOT
+from ROOT import TFile, TH1, TF1, TCanvas, kRed, kBlack, kBlue, kGreen, TGraph, TGraphErrors , TGraphAsymmErrors, TMultiGraph, TAttMarker, TLatex, TStyle, Double, TH1D, TLegend, TLine, TString, gStyle, gROOT
 import array
 import math
 
@@ -94,7 +94,7 @@ def PlotVariable( DirName , varName , MCName, runEra ):
 
     #cOut.BuildLegend(0.1,0.5,0.3,0.7) #Fit
     #cOut.BuildLegend(0.1,0.7,0.48,0.9) #left
-    cOut.BuildLegend(0.5,0.67,0.88,0.88) #left
+    cOut.BuildLegend(0.5,0.67,0.88,0.88) #right
     #cOut.SaveAs("FitRes/%s_%s_fit.png" % (varName , MCName) ) #Fit
     cOut.SaveAs("FitRes/%s_%s.png" % (varName , MCName) )
     return cOut
@@ -144,9 +144,9 @@ varNames = ["nVertices",
             "fixedGridRhoFastjetCentral",
             "fixedGridRhoFastjetCentralCalo",
             "fixedGridRhoFastjetCentralNeutral",
-            "nMus",
-            "nEles",
-            "nLostTracks",
+            #"nMus",
+            ##"nEles",
+            ##"nLostTracks",
             "nPhotons",
             "nNeutralHadrons"
 ]
@@ -201,6 +201,7 @@ for runEra in ["All",'eraA','eraB']:
         eyl = array.array( 'd' )
         eyh = array.array( 'd' )
         count = marker_info[ MCName ][2]
+        new_vals = []
         for varName in varNames:
             vals = []
             for DirName in [ "SingleNuZeroBias" ] : #"DY" , "NuGunZeroBias" , "NuGunMinBias" ] :
@@ -214,9 +215,12 @@ for runEra in ["All",'eraA','eraB']:
                 if bestXSec > 0. :
                     vals.append( bestXSec )
                     #vals.append( CalcChi2( DirName , varName , MCName , runEra , bestXSec ) )
+            if bestXSec > 0.:
+	       new_vals.append(bestXSec)
+            print (" this is new vals " + str(new_vals))
             vals = [val for val in set( vals )]
             vals = sorted(vals)
-            print vals
+            print (" this is vals " + str(vals))
             if len(vals) > 3 :
                 central = 0
                 errorUp = 0
@@ -248,6 +252,8 @@ for runEra in ["All",'eraA','eraB']:
             eyl.append( errorLow )
             eyh.append( errorUp  )
             count += 1
+    	mean_vals = sum(new_vals)/len(new_vals)
+    	print ("is the arthimetic mean " + str(mean_vals)) 
         graph = TGraphAsymmErrors( len(x) , x , y , exl , exh , eyl , eyh )
         graph.SetTitle( MCName  )
         graph.SetName( runEra + "_" + MCName )
@@ -262,8 +268,8 @@ for runEra in ["All",'eraA','eraB']:
         allGraphs[(runEra,MCName)] =  graph
         mg.Add( graph , "pl" )
         Legend.AddEntry( graph , graph.GetTitle() , "lp")
-
-
+        Legend.AddEntry( graph ,'{} {}'.format("ar. mean = ", mean_vals) ,"l")
+   
     canvas = TCanvas( runEra + "_AvgDataset" , runEra + "_AvgDataset" , 0 , 0 , 1335 , 5*200 )
     canvas.Range(-2.739156,63227.16,8.503012,75975.37)
     canvas.SetLeftMargin(0.168042)
@@ -295,6 +301,7 @@ for runEra in ["All",'eraA','eraB']:
         i+=1
 
     canvas.SaveAs( canvas.GetName() + ".png" )
+
 #TODO you exit here why?
 exit()                
 
