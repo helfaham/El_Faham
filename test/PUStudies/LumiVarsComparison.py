@@ -44,7 +44,7 @@ class VarsMaker :
 
         elif dataset == "ZeroBias" :
             self.vars = {"AVGnGoodVertices":[100,5,25],
-                         "AVGnVertices":[100,6,60],
+                         "AVGnVertices":[100,6,50],
                          #"AVGnInt",            
                          #"AVGnInt50ns",        
                          #"AVGnEles":[10,0,1],
