@@ -43,7 +43,7 @@ class VarsMaker :
                 self.vars[ "AVG" + rho ] = [100,0,20 ]
 
         elif dataset == "ZeroBias" :
-            self.vars = {#"AVGnGoodVertices":[100,5,25],
+            self.vars = {"AVGnGoodVertices":[100,5,25],
                          "AVGnVertices":[100,6,60],
                          #"AVGnInt",            
                          #"AVGnInt50ns",        
@@ -51,16 +51,16 @@ class VarsMaker :
                          #"AVGnMus":[60,0,3],
                          "AVGnChargedHadrons":[600,100,1400], 
                          #"AVGnLostTracks":[60,0,3],     
-                         #"AVGnPhotons":[500 , 50 , 300 ],        
-                         #"AVGnNeutralHadrons":[80,30,90], 
+                         "AVGnPhotons":[500 , 50 , 300 ],        
+                         "AVGnNeutralHadrons":[80,30,90], 
                          #"nEventsInLumi":[1000, 0 , 1000],
-                         #"AVGfixedGridRhoFastjetCentralNeutral":[50 , 0 , 6],
-                         #"AVGfixedGridRhoFastjetAllCalo":[70, 0 , 20],
-                         #"AVGfixedGridRhoFastjetCentralCalo":[50 , 0 , 10 ],
+                         "AVGfixedGridRhoFastjetCentralNeutral":[50 , 0 , 6],
+                         "AVGfixedGridRhoFastjetAllCalo":[70, 0 , 20],
+                         "AVGfixedGridRhoFastjetCentralCalo":[50 , 0 , 10 ],
                          "AVGfixedGridRhoAll":[80 , 4, 40],
-                         #"AVGfixedGridRhoFastjetAll":[80 , 4, 25],
-                         #"AVGfixedGridRhoFastjetCentral":[80 , 4 , 25],
-                         #"AVGfixedGridRhoFastjetCentralChargedPileUp":[100, 0 , 25]
+                         "AVGfixedGridRhoFastjetAll":[80 , 4, 25],
+                         "AVGfixedGridRhoFastjetCentral":[80 , 4 , 25],
+                         "AVGfixedGridRhoFastjetCentralChargedPileUp":[100, 0 , 25]
 }
         elif dataset == "MinBias" :
             self.vars = {"AVGnGoodVertices":[100,0,0.4],

@@ -1,4 +1,4 @@
-from ROOT import TFile, TH1, TCanvas, kRed, kBlack, kBlue, kGreen, TGraph, TGraphErrors , TGraphAsymmErrors, TMultiGraph, TAttMarker, TLatex, Double, TH1D, TLegend, TLine, gStyle
+from ROOT import TFile, TH1, TCanvas, kRed, kBlack, kBlue, kGreen, TGraph, TGraphErrors , TGraphAsymmErrors, TMultiGraph, TAttMarker, TLatex, Double, TH1D, TLegend, TLine, gStyle, gROOT
 import array
 import math
 
@@ -38,16 +38,20 @@ def PlotVariable( DirName , varName , MCName, runEra ):
     objs.append( dataHist )
     
     dataHist.SetLineColor( 1 )
-    dataHist.SetLineWidth( 3 )
+    dataHist.SetLineWidth( 1 )
     dataHist.SetTitle("Data;%s (%s)" % (varName,MCName)  )
     #dataHist.Rebin(8)
     allHists[dataHist.GetMaximum()/dataHist.GetEntries()] = dataHist
     gStyle.SetOptTitle(False)
-    dataHist.SetStats(False)
+    gROOT.SetStyle("Plain") #Fit
+    dataHist.SetStats(True) #Fit
+    #dataHist.SetStats(False)
+    gStyle.SetOptFit(111) #Fit
     dataNorm = dataHist.DrawNormalized()
+    Fit = dataHist.Fit("gaus") #Fit
     #dataNorm = dataHist.DrawNormalized("E PLC PMC")
     for xsec in [ 0.0 + (ratio*69200./1000.) for ratio in range(840,1170) ][::-1]:
-        if abs( xsec - bestXSec )/bestXSec > 0.1 or abs( xsec - bestXSec )/ bestXSec < 0.099:
+        if abs( xsec - bestXSec )/bestXSec > 0.1 or abs( xsec - bestXSec )/ bestXSec < 0.2:
             if not xsec == bestXSec :
                 #print xsec, "skipped"
                 continue
@@ -59,15 +63,18 @@ def PlotVariable( DirName , varName , MCName, runEra ):
             if xsec == bestXSec:
                 hMC.SetTitle( "Best Cross Section : %.1f" % xsec )
                 hMC.SetLineColor(2)
-                hMC.SetLineWidth(2)
+                hMC.SetLineWidth(1)
             elif xsec > bestXSec :
                 hMC.SetTitle( "Cross Section : %.1f" % xsec )
                 hMC.SetLineColor(6)
+                hMC.SetLineWidth(1)
             elif xsec < bestXSec :
                 hMC.SetTitle( "Cross Section : %.1f" % xsec )
                 hMC.SetLineColor(4)
-
-            hMC.DrawNormalized("SAME")
+                hMC.SetLineWidth(1)
+	    
+            hMC.Draw("SAME") #Fit
+            #hMC.DrawNormalized("SAME")
             #hMC.DrawNormalized("SAME E PLC PMC")
             hMC.SetStats(False)
         else:
@@ -78,15 +85,18 @@ def PlotVariable( DirName , varName , MCName, runEra ):
     print (varName, MCName, maxvals, bestXSec)
     option = ""
     maX = maxvals[0]
-    dataNorm.GetYaxis().SetRangeUser(0 , maX*1.4 )
+    #dataNorm.GetYaxis().SetRangeUser(0 , maX*1.2 )
     # for m in maxvals :
     #     #print m
     #     allHists[m].SetStats(False)
     #     allHists[m].DrawNormalized(option)
     #     option = "SAME"
 
-    cOut.BuildLegend()
-    cOut.SaveAs("FitRes/%s_%s.png" % (varName , MCName) )
+    cOut.BuildLegend(0.1,0.5,0.3,0.7) #Fit
+    #cOut.BuildLegend(0.1,0.7,0.48,0.9) #left
+    #cOut.BuildLegend(0.5,0.67,0.88,0.88) #right
+    cOut.SaveAs("FitRes/%s_%s_fit.png" % (varName , MCName) ) #Fit
+    #cOut.SaveAs("FitRes/%s_%s.png" % (varName , MCName) )
     return cOut
 
 
@@ -106,10 +116,10 @@ def CalcChi2( DirName , varName , MCName , runEra , xsec ):
         
 
 
-variables = { "nVertices" : ( "nVertices" , 74 , 6 , 80 ) ,
+variables = { #"nVertices" : ( "nVertices" , 74 , 6 , 80 ) ,
               #"nGoodVertices" : ("nGoodVertices", 54, 5 , 59) ,
-              "nChargedHadrons" : ("nChargedHadrons" , 2000 , 0 , 2000 ),
-              "fixedGridRhoAll" : ("fixedGridRhoAll" , 60 , 0 , 60 ),
+              #"nChargedHadrons" : ("nChargedHadrons" , 2000 , 0 , 2000 ),
+              #"fixedGridRhoAll" : ("fixedGridRhoAll" , 60 , 0 , 60 ),
               #"fixedGridRhoFastjetAll" : ("fixedGridRhoFastjetAll" , 40 , 0 , 40 ),
               #"fixedGridRhoFastjetAllCalo" : ("fixedGridRhoFastjetAllCalo" , 25 , 0 , 25 ),
               #"fixedGridRhoFastjetCentral" : ("fixedGridRhoFastjetCentral" , 50 , 0 , 50 ),
@@ -124,26 +134,26 @@ variables = { "nVertices" : ( "nVertices" , 74 , 6 , 80 ) ,
 }
 
 varNames = ["nVertices",
-            #"nGoodVertices",
-            #"fixedGridRhoFastjetCentralChargedPileUp",
+            "nGoodVertices",
+            "fixedGridRhoFastjetCentralChargedPileUp",
             "nChargedHadrons",
             "fixedGridRhoAll",
-            #"fixedGridRhoFastjetAll",
-            #"fixedGridRhoFastjetAllCalo",
-            #"fixedGridRhoFastjetCentral",
-            #"fixedGridRhoFastjetCentralCalo",
-            #"fixedGridRhoFastjetCentralNeutral",
+            "fixedGridRhoFastjetAll",
+            "fixedGridRhoFastjetAllCalo",
+            "fixedGridRhoFastjetCentral",
+            "fixedGridRhoFastjetCentralCalo",
+            "fixedGridRhoFastjetCentralNeutral",
             #"nMus",
             #"nEles",
             #"nLostTracks",
-            #"nPhotons",
-            #"nNeutralHadrons"
+            "nPhotons",
+            "nNeutralHadrons"
 ]
 
 for var in varNames :
     for Type in [ "typeM1" , "typeM2" ] :
         a = PlotVariable( "SingleNuZeroBias" , var , Type , "All" )                    
-#exit()
+exit()
         
 allGraphs = {}
 allMultiGraphs = {}
@@ -157,7 +167,7 @@ for runEra in ["All" ,'eraB', 'eraC','eraD','eraE','eraF']:
     marker_info = {"typeM1":(20, 2 , 0   ) ,
                    "typeM2":(21, 8 , 0   ) ,
 					}
-    Legend = TLegend( 0.21,0.76,0.64,0.96 )
+    Legend = TLegend( 0.7,0.8,0.88,0.88 )
 
     xCMS = array.array( 'd' , range(0, len(varNames) ) )
     xCMS[0] -= 0.2
@@ -189,6 +199,7 @@ for runEra in ["All" ,'eraB', 'eraC','eraD','eraE','eraF']:
         eyl = array.array( 'd' )
         eyh = array.array( 'd' )
         count = marker_info[ MCName ][2]
+ 	new_vals=[]
         for varName in varNames:
             vals = []
             for DirName in [ "SingleNuZeroBias" ] : #"DY" , "NuGunZeroBias" , "NuGunMinBias" ] :
@@ -202,9 +213,12 @@ for runEra in ["All" ,'eraB', 'eraC','eraD','eraE','eraF']:
                 if bestXSec > 0. :
                     vals.append( bestXSec )
                     #vals.append( CalcChi2( DirName , varName , MCName , runEra , bestXSec ) )
+	    if bestXSec > 0.:
+	       new_vals.append(bestXSec)
+            print (" this is the new vals " + str(new_vals))
             vals = [val for val in set( vals )]
             vals = sorted(vals)
-            print (vals)
+            print (" this is vals " + str(vals))
             if len(vals) > 3 :
                 central = 0
                 errorUp = 0
@@ -236,6 +250,9 @@ for runEra in ["All" ,'eraB', 'eraC','eraD','eraE','eraF']:
             eyl.append( errorLow )
             eyh.append( errorUp  )
             count += 1
+	mean_vals = sum(new_vals)/len(new_vals)
+	mean_vals_r = round(mean_vals)
+	print ("is the arthimetic mean " + str(mean_vals))
         graph = TGraphAsymmErrors( len(x) , x , y , exl , exh , eyl , eyh )
         graph.SetTitle( MCName  )
         graph.SetName( runEra + "_" + MCName )
@@ -250,7 +267,7 @@ for runEra in ["All" ,'eraB', 'eraC','eraD','eraE','eraF']:
         allGraphs[(runEra,MCName)] =  graph
         mg.Add( graph , "pl" )
         Legend.AddEntry( graph , graph.GetTitle() , "lp")
-
+        Legend.AddEntry( graph ,'{} {}'.format("ar. mean = ", mean_vals_r) ,"l")
 
     canvas = TCanvas( runEra + "_AvgDataset" , runEra + "_AvgDataset" , 0 , 0 , 1335 , 5*200 )
     canvas.Range(-2.739156,63227.16,8.503012,75975.37)
