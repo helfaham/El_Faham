@@ -253,6 +253,7 @@ for runEra in ["All",'eraA','eraB']:
             eyh.append( errorUp  )
             count += 1
     	mean_vals = sum(new_vals)/len(new_vals)
+        mean_vals_r = round(mean_vals)
     	print ("is the arthimetic mean " + str(mean_vals)) 
         graph = TGraphAsymmErrors( len(x) , x , y , exl , exh , eyl , eyh )
         graph.SetTitle( MCName  )
@@ -268,7 +269,7 @@ for runEra in ["All",'eraA','eraB']:
         allGraphs[(runEra,MCName)] =  graph
         mg.Add( graph , "pl" )
         Legend.AddEntry( graph , graph.GetTitle() , "lp")
-        Legend.AddEntry( graph ,'{} {}'.format("ar. mean = ", mean_vals) ,"l")
+        Legend.AddEntry( graph ,'{} {}'.format("ar. mean = ", mean_vals_r) ,"l")
    
     canvas = TCanvas( runEra + "_AvgDataset" , runEra + "_AvgDataset" , 0 , 0 , 1335 , 5*200 )
     canvas.Range(-2.739156,63227.16,8.503012,75975.37)
