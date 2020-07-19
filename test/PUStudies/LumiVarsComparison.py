@@ -44,12 +44,12 @@ class VarsMaker :
 #do you need to adjust the x-axis for the below var same as in plotdatamc and makefriends?
         elif dataset == "ZeroBias" :
             self.vars = {"AVGnGoodVertices":[100,5,25],
-                         "AVGnVertices":[100,6,60],
+                         "AVGnVertices":[100,6,50],
                          #"AVGnInt",            
                          #"AVGnInt50ns",        
                          #"AVGnEles":[10,0,1],
                          #"AVGnMus":[60,0,3],
-                         "AVGnChargedHadrons":[600,100,1600], 
+                         "AVGnChargedHadrons":[600,100,1400], 
                          #"AVGnLostTracks":[60,0,3],     
                          "AVGnPhotons":[500 , 50 , 300 ],        
                          "AVGnNeutralHadrons":[80,30,90], 
@@ -73,7 +73,7 @@ class VarsMaker :
                          #"AVGnLostTracks":[20,0.,.5],     
                          "AVGnPhotons":[ 100 , 0 , 100 ],
                          "AVGnNeutralHadrons":[60,0,30], 
-                         #"nEventsInLumi":[10, 0 , 10] }
+                         "nEventsInLumi":[10, 0 , 10] }
             for rho in ["fixedGridRhoAll",
                         "fixedGridRhoFastjetAll",
                         "fixedGridRhoFastjetAllCalo",
