@@ -1,4 +1,4 @@
-from ROOT import TFile, TH1, TCanvas, kRed, kBlack, kBlue, kGreen, TGraph, TGraphErrors , TGraphAsymmErrors, TMultiGraph, TAttMarker, TLatex, Double, TH1D, TLegend, TLine, gStyle
+from ROOT import TFile, TH1, TCanvas, kRed, kBlack, kBlue, kGreen, TGraph, TGraphErrors , TGraphAsymmErrors, TMultiGraph, TAttMarker, TLatex, Double, TH1D, TLegend, TLine, gStyle, gROOT
 import array
 import math
 
@@ -41,8 +41,12 @@ def PlotVariable( DirName , varName , MCName, runEra ):
     #dataHist.Rebin(8)
     allHists[dataHist.GetMaximum()/dataHist.GetEntries()] = dataHist
     gStyle.SetOptTitle(False)
-    dataHist.SetStats(False)
+    gROOT.SetStyle("Plain") #Fit
+    dataHist.SetStats(True) #Fit
+    #dataHist.SetStats(False)
+    gStyle.SetOptFit(111) #Fit
     dataNorm=dataHist.DrawNormalized()
+    Fit = dataHist.Fit("gaus") #Fit
     #dataNorm = dataHist.DrawNormalized("E PLC PMC")
     for xsec in [ 0.0 + (ratio*69200./1000.) for ratio in range(840,1170) ][::-1]:
         #if abs( xsec - bestXSec )/bestXSec > 0.1 or abs( xsec - bestXSec )/ bestXSec < 0.099:
@@ -62,13 +66,16 @@ def PlotVariable( DirName , varName , MCName, runEra ):
             elif xsec > bestXSec :
                 hMC.SetTitle( "Cross Section : %.1f" % xsec )
                 hMC.SetLineColor( kBlue )
+		hMC.SetLineWidth(1)
             elif xsec < bestXSec :
                 hMC.SetTitle( "Cross Section : %.1f" % xsec )
                 hMC.SetLineColor( kGreen )
+		hMC.SetLineWidth(1)
 
-            hMC.SetStats(False)
+            hMC.Draw("SAME") #Fit
+            #hMC.DrawNormalized("SAME")
             #hMC.DrawNormalized("SAME E PLC PMC")
-            hMC.DrawNormalized("SAME")
+            hMC.SetStats(False)
         else:
             print hName , "null"
 
@@ -77,15 +84,18 @@ def PlotVariable( DirName , varName , MCName, runEra ):
     print varName, MCName, maxvals, bestXSec
     option = ""
     maX = maxvals[0]
-    dataNorm.GetYaxis().SetRangeUser(0 , maX*1.2 )
+    #dataNorm.GetYaxis().SetRangeUser(0 , maX*1.2 )
     # for m in maxvals :
     #     #print m
     #     allHists[m].SetStats(False)
     #     allHists[m].DrawNormalized(option)
     #     option = "SAME"
 
-    cOut.BuildLegend(0.5,0.67,0.88,0.88)
-    cOut.SaveAs("FitRes/%s_%s.png" % (varName , MCName) )
+    cOut.BuildLegend(0.1,0.5,0.3,0.7) #Fit
+    #cOut.BuildLegend(0.1,0.7,0.48,0.9) #left
+    #cOut.BuildLegend(0.5,0.67,0.88,0.88) #right
+    cOut.SaveAs("FitRes/%s_%s_fit.png" % (varName , MCName) ) #Fit
+    #cOut.SaveAs("FitRes/%s_%s.png" % (varName , MCName) )
     return cOut
 
 
@@ -105,22 +115,22 @@ def CalcChi2( DirName , varName , MCName , runEra , xsec ):
         
 
 
-variables = { "nVertices" : ( "nVertices" , 74 , 6 , 80 ) ,
-              "nGoodVertices" : ("nGoodVertices", 54, 5 , 59) ,
-              "nChargedHadrons" : ("nChargedHadrons" , 2000 , 0 , 2000 ),
-              "fixedGridRhoAll" : ("fixedGridRhoAll" , 60 , 0 , 60 ),
-              "fixedGridRhoFastjetAll" : ("fixedGridRhoFastjetAll" , 40 , 0 , 40 ),
-              "fixedGridRhoFastjetAllCalo" : ("fixedGridRhoFastjetAllCalo" , 25 , 0 , 25 ),
-              "fixedGridRhoFastjetCentral" : ("fixedGridRhoFastjetCentral" , 50 , 0 , 50 ),
-              "fixedGridRhoFastjetCentralCalo" : ("fixedGridRhoFastjetCentralCalo" , 20 , 0 , 20 ),
-              "fixedGridRhoFastjetCentralChargedPileUp" : ("fixedGridRhoFastjetCentralChargedPileUp" , 35 , 0 , 35 ),
+variables = { #"nVertices" : ( "nVertices" , 74 , 6 , 80 ) ,
+              #"nGoodVertices" : ("nGoodVertices", 54, 5 , 59) ,
+              #"nChargedHadrons" : ("nChargedHadrons" , 2000 , 0 , 2000 ),
+              #"fixedGridRhoAll" : ("fixedGridRhoAll" , 60 , 0 , 60 ),
+              #"fixedGridRhoFastjetAll" : ("fixedGridRhoFastjetAll" , 40 , 0 , 40 ),
+              #"fixedGridRhoFastjetAllCalo" : ("fixedGridRhoFastjetAllCalo" , 25 , 0 , 25 ),
+              #"fixedGridRhoFastjetCentral" : ("fixedGridRhoFastjetCentral" , 50 , 0 , 50 ),
+              #"fixedGridRhoFastjetCentralCalo" : ("fixedGridRhoFastjetCentralCalo" , 20 , 0 , 20 ),
+              #"fixedGridRhoFastjetCentralChargedPileUp" : ("fixedGridRhoFastjetCentralChargedPileUp" , 35 , 0 , 35 ),
               
-              "fixedGridRhoFastjetCentralNeutral" : ("fixedGridRhoFastjetCentralNeutral" , 12 , 0 , 12 ),
-              "nMus" : ("nMus" , 10 , 0 , 10 ),
-              "nEles" : ("nEles" , 10 , 0 , 10 ) ,
-              "nLostTracks": ("nLostTracks" , 35 , 0 , 35 ),
-              "nPhotons" : ("nPhotons" , 600 , 0 , 600 ),
-              "nNeutralHadrons" : ("nNeutralHadrons" , 120 , 0 , 160 )
+              #"fixedGridRhoFastjetCentralNeutral" : ("fixedGridRhoFastjetCentralNeutral" , 12 , 0 , 12 ),
+              #"nMus" : ("nMus" , 10 , 0 , 10 ),
+              #"nEles" : ("nEles" , 10 , 0 , 10 ) ,
+              #"nLostTracks": ("nLostTracks" , 35 , 0 , 35 ),
+              #"nPhotons" : ("nPhotons" , 600 , 0 , 600 ),
+              #"nNeutralHadrons" : ("nNeutralHadrons" , 120 , 0 , 160 )
 }
 
 varNames = ["nGoodVertices",
@@ -133,9 +143,9 @@ varNames = ["nGoodVertices",
             "fixedGridRhoFastjetCentral",
             "fixedGridRhoFastjetCentralCalo",
             "fixedGridRhoFastjetCentralNeutral",
-            "nMus",
-            "nEles",
-            "nLostTracks",
+            #"nMus",
+            #"nEles",
+            #"nLostTracks",
             "nPhotons",
             "nNeutralHadrons"
 ]
@@ -143,7 +153,7 @@ varNames = ["nGoodVertices",
 for var in varNames :
     for tune in [ "tuneM1" ] :
         a = PlotVariable( "SingleNuZeroBias" , var , tune , "All" )                    
-#exit()
+exit()
         
 allGraphs = {}
 allMultiGraphs = {}
@@ -155,14 +165,10 @@ for runEra in ["All", 'eraF','eraG','eraH']:
     mg = TMultiGraph()
     mg.SetName( runEra )
     allMultiGraphs[ runEra ] = mg
-    marker_info = {#"tuneM0":(20, 2 , 0   ) ,
+    marker_info = {
                    "tuneM1":(20, 2 , 0   ) ,
-                   #"tuneM2":(20, 2 , 0) ,
-                   #"tuneM3":(23, 6 , 0.2) ,
-                   #"tuneM4":(21, 8 , 0.3) ,
-                   #"tuneM5":(21, 8 , 0) }
-	}	
-    Legend = TLegend( 0.21,0.76,0.64,0.96 )
+			}
+    Legend = TLegend( 0.7,0.8,0.88,0.88 )
 
     xCMS = array.array( 'd' , range(0, len(varNames) ) )
     xCMS[0] -= 0.2
@@ -194,6 +200,7 @@ for runEra in ["All", 'eraF','eraG','eraH']:
         eyl = array.array( 'd' )
         eyh = array.array( 'd' )
         count = marker_info[ MCName ][2]
+        new_vals = []
         for varName in varNames:
             vals = []
             for DirName in [ "SingleNuZeroBias" ] : #"DY" , "NuGunZeroBias" , "NuGunMinBias" ] :
@@ -207,9 +214,12 @@ for runEra in ["All", 'eraF','eraG','eraH']:
                 if bestXSec > 0. :
                     vals.append( bestXSec )
                     #vals.append( CalcChi2( DirName , varName , MCName , runEra , bestXSec ) )
+            if bestXSec > 0.:
+               new_vals.append(bestXSec)
+            print (" this is new vals " + str(new_vals))
             vals = [val for val in set( vals )]
             vals = sorted(vals)
-            print vals
+            print (" this is vals" + str(vals))
             if len(vals) > 3 :
                 central = 0
                 errorUp = 0
@@ -241,6 +251,9 @@ for runEra in ["All", 'eraF','eraG','eraH']:
             eyl.append( errorLow )
             eyh.append( errorUp  )
             count += 1
+        mean_vals = sum(new_vals)/len(new_vals)
+        mean_vals_r = round(mean_vals)
+        print ("is the arthimetic mean " + str(mean_vals))
         graph = TGraphAsymmErrors( len(x) , x , y , exl , exh , eyl , eyh )
         graph.SetTitle( MCName  )
         graph.SetName( runEra + "_" + MCName )
@@ -255,7 +268,7 @@ for runEra in ["All", 'eraF','eraG','eraH']:
         allGraphs[(runEra,MCName)] =  graph
         mg.Add( graph , "pl" )
         Legend.AddEntry( graph , graph.GetTitle() , "lp")
-
+	Legend.AddEntry( graph ,'{} {}'.format("ar. mean = ", mean_vals_r) ,"l")
 
     canvas = TCanvas( runEra + "_AvgDataset" , runEra + "_AvgDataset" , 0 , 0 , 1335 , 5*200 )
     canvas.Range(-2.739156,63227.16,8.503012,75975.37)
