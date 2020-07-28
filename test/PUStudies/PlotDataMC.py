@@ -41,12 +41,12 @@ def PlotVariable( DirName , varName , MCName, runEra ):
     #dataHist.Rebin(8)
     allHists[dataHist.GetMaximum()/dataHist.GetEntries()] = dataHist
     gStyle.SetOptTitle(False)
-    gROOT.SetStyle("Plain") #Fit
-    dataHist.SetStats(True) #Fit
-    #dataHist.SetStats(False)
-    gStyle.SetOptFit(111) #Fit
+    #gROOT.SetStyle("Plain") #Fit
+    #dataHist.SetStats(True) #Fit
+    dataHist.SetStats(False)
+    #gStyle.SetOptFit(111) #Fit
     dataNorm=dataHist.DrawNormalized()
-    Fit = dataHist.Fit("gaus") #Fit
+    #Fit = dataHist.Fit("gaus") #Fit
     #dataNorm = dataHist.DrawNormalized("E PLC PMC")
     for xsec in [ 0.0 + (ratio*69200./1000.) for ratio in range(840,1170) ][::-1]:
         #if abs( xsec - bestXSec )/bestXSec > 0.1 or abs( xsec - bestXSec )/ bestXSec < 0.099:
@@ -72,8 +72,8 @@ def PlotVariable( DirName , varName , MCName, runEra ):
                 hMC.SetLineColor( kGreen )
 		hMC.SetLineWidth(1)
 
-            hMC.Draw("SAME") #Fit
-            #hMC.DrawNormalized("SAME")
+            #hMC.Draw("SAME") #Fit
+            hMC.DrawNormalized("SAME")
             #hMC.DrawNormalized("SAME E PLC PMC")
             hMC.SetStats(False)
         else:
@@ -84,18 +84,18 @@ def PlotVariable( DirName , varName , MCName, runEra ):
     print varName, MCName, maxvals, bestXSec
     option = ""
     maX = maxvals[0]
-    #dataNorm.GetYaxis().SetRangeUser(0 , maX*1.2 )
+    dataNorm.GetYaxis().SetRangeUser(0 , maX*1.2 )
     # for m in maxvals :
     #     #print m
     #     allHists[m].SetStats(False)
     #     allHists[m].DrawNormalized(option)
     #     option = "SAME"
 
-    cOut.BuildLegend(0.1,0.5,0.3,0.7) #Fit
+    #cOut.BuildLegend(0.1,0.5,0.3,0.7) #Fit
     #cOut.BuildLegend(0.1,0.7,0.48,0.9) #left
-    #cOut.BuildLegend(0.5,0.67,0.88,0.88) #right
-    cOut.SaveAs("FitRes/%s_%s_fit.png" % (varName , MCName) ) #Fit
-    #cOut.SaveAs("FitRes/%s_%s.png" % (varName , MCName) )
+    cOut.BuildLegend(0.5,0.67,0.88,0.88) #right
+    #cOut.SaveAs("FitRes/%s_%s_fit.png" % (varName , MCName) ) #Fit
+    cOut.SaveAs("FitRes/%s_%s.png" % (varName , MCName) )
     return cOut
 
 
@@ -145,7 +145,7 @@ varNames = ["nGoodVertices",
             "fixedGridRhoFastjetCentralNeutral",
             #"nMus",
             #"nEles",
-            #"nLostTracks",
+            "nLostTracks",
             "nPhotons",
             "nNeutralHadrons"
 ]
@@ -153,7 +153,7 @@ varNames = ["nGoodVertices",
 for var in varNames :
     for tune in [ "tuneM1" ] :
         a = PlotVariable( "SingleNuZeroBias" , var , tune , "All" )                    
-exit()
+#exit()
         
 allGraphs = {}
 allMultiGraphs = {}
@@ -168,7 +168,9 @@ for runEra in ["All", 'eraF','eraG','eraH']:
     marker_info = {
                    "tuneM1":(20, 2 , 0   ) ,
 			}
-    Legend = TLegend( 0.7,0.8,0.88,0.88 )
+
+    Legend = TLegend(0.2,0.8,0.9,0.9) #fit
+    #Legend = TLegend( 0.7,0.8,0.88,0.88 )
 
     xCMS = array.array( 'd' , range(0, len(varNames) ) )
     xCMS[0] -= 0.2
@@ -255,7 +257,18 @@ for runEra in ["All", 'eraF','eraG','eraH']:
         mean_vals_r = round(mean_vals)
         print ("is the arthimetic mean " + str(mean_vals))
         graph = TGraphAsymmErrors( len(x) , x , y , exl , exh , eyl , eyh )
+        # Fit
+	gROOT.SetStyle("Plain") 
+	gStyle.SetOptFit(111) 
         graph.SetTitle( MCName  )
+        graphFit = graph.Fit("gaus", "P")
+        myfunc = graph.GetFunction("gaus")
+        graphFitMean = myfunc.GetParameter(1)
+        #print ("this is the fit mean " + str(graphFitMean))
+        valueFit = graph.Eval(graphFitMean)
+        valueFit_r = round(valueFit)
+        #print valueFit
+        # end Fit
         graph.SetName( runEra + "_" + MCName )
         graph.SetLineColor(  marker_info[ MCName ][1] )
         graph.SetLineStyle(  3 )
@@ -269,6 +282,7 @@ for runEra in ["All", 'eraF','eraG','eraH']:
         mg.Add( graph , "pl" )
         Legend.AddEntry( graph , graph.GetTitle() , "lp")
 	Legend.AddEntry( graph ,'{} {}'.format("ar. mean = ", mean_vals_r) ,"l")
+	Legend.AddEntry( graph ,'{} {}'.format("fit mean = ", valueFit_r) ,"l")
 
     canvas = TCanvas( runEra + "_AvgDataset" , runEra + "_AvgDataset" , 0 , 0 , 1335 , 5*200 )
     canvas.Range(-2.739156,63227.16,8.503012,75975.37)
