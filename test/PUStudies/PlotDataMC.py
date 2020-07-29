@@ -169,8 +169,9 @@ for runEra in ["All",'eraA','eraB']:
     marker_info = {"Type1":(20, 2 , 0   ) ,
                    "Type2":(21, 8 , 0   ) ,
 		}
-    Legend = TLegend( 0.7,0.8,0.88,0.88 )
-
+    #Legend = TLegend( 0.7,0.8,0.88,0.88 )
+    Legend = TLegend(0.2,0.8,0.9,0.9) #fit
+    
     xCMS = array.array( 'd' , range(0, len(varNames) ) )
     xCMS[0] -= 0.2
     xCMS[-1] += 0.2
@@ -256,6 +257,18 @@ for runEra in ["All",'eraA','eraB']:
         mean_vals_r = round(mean_vals)
     	print ("is the arthimetic mean " + str(mean_vals)) 
         graph = TGraphAsymmErrors( len(x) , x , y , exl , exh , eyl , eyh )
+        # Fit
+        gROOT.SetStyle("Plain")
+        gStyle.SetOptFit(111)
+        graph.SetTitle( MCName  )
+        graphFit = graph.Fit("gaus", "P")
+        myfunc = graph.GetFunction("gaus")
+        graphFitMean = myfunc.GetParameter(1)
+        #print ("this is the fit mean " + str(graphFitMean))
+        valueFit = graph.Eval(graphFitMean)
+        valueFit_r = round(valueFit)
+        #print valueFit
+        # end Fit
         graph.SetTitle( MCName  )
         graph.SetName( runEra + "_" + MCName )
         graph.SetLineColor(  marker_info[ MCName ][1] )
@@ -270,6 +283,7 @@ for runEra in ["All",'eraA','eraB']:
         mg.Add( graph , "pl" )
         Legend.AddEntry( graph , graph.GetTitle() , "lp")
         Legend.AddEntry( graph ,'{} {}'.format("ar. mean = ", mean_vals_r) ,"l")
+        Legend.AddEntry( graph ,'{} {}'.format("fit mean = ", valueFit_r) ,"l")
    
     canvas = TCanvas( runEra + "_AvgDataset" , runEra + "_AvgDataset" , 0 , 0 , 1335 , 5*200 )
     canvas.Range(-2.739156,63227.16,8.503012,75975.37)
