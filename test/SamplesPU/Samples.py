@@ -23,3 +23,8 @@ ZeroBiasG = Sample("ZeroBiasG" , 0 , False , "/ZeroBias/Run2016G-21Feb2020_UL201
 ZeroBiasF = Sample("ZeroBiasF" , 0 , False , "/ZeroBias/Run2016F-21Feb2020_UL2016-v1/MINIAOD")
 
 MINIAOD.extend( [ ZeroBiasH , ZeroBiasG , ZeroBiasF ] )
+
+bug = Sample("bug" , 0 , False , "/RelValQCD_FlatPt_15_3000HS_13/CMSSW_10_6_14-PU25ns_106X_mc2017_realistic_v7_HS-v1/MINIAODSIM")
+bugfix = Sample("bugfix" , 0 , False , "/RelValQCD_FlatPt_15_3000HS_13/CMSSW_10_6_14_Pyt8240BugFix-PU25ns_106X_mc2017_realistic_v7_HS-v1/MINIAODSIM")
+
+MINIAOD.extend( [ bug, bugfix ] )
