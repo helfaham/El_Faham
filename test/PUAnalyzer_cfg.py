@@ -35,7 +35,7 @@ process.PUAnalyzer = cms.EDAnalyzer('PUAnalyzer',
                                                        MuonEtaCut = cms.double( 2.4 ),
                                                        DiMuLowMassCut = cms.double( 20. ),
                                                        DiMuCharge = cms.int32( -1 ),
-                                                       MuonID = cms.int32( 1 ), #0:no id, 1:Loose , 2:Medium , 3:tight , 4 : soft
+                                                       MuonID = cms.int32( 2 ), #0:no id, 1:Loose , 2:Medium , 3:tight , 4 : soft
                                                        DiMuZMassWindow = cms.double( 1000 ),
                                                        isHamb = cms.bool( False )
                                                        ),
@@ -114,7 +114,8 @@ else:
 
 process.PUAnalyzer.sample = theSample.Name
 process.PUAnalyzer.LHE.useLHEW = theSample.LHEWeight
-process.PUAnalyzer.isData = theSample.IsData
+#process.PUAnalyzer.isData = theSample.IsData
+process.PUAnalyzer.isData = True 
 
 if not ( options.job < theSample.MakeJobs( options.nFilesPerJob , options.output ) ):
     raise NameError("Job %d is not in the list of the jobs of sample %s with %d files per run" % (options.job , options.sample , options.nFilesPerJob ) )
