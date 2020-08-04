@@ -149,7 +149,7 @@ void PUAnalyzer::beginJob()
   //fs->cd();
   TFileDirectory treeDir = fs->mkdir( "Trees" );
   //treeDir.cd();
-
+  cout <<"H: in beginjob(): dir made"<<endl;
   // TFile* f = TFile::Open("tree.root" , "RECREATE");
   // f->cd();
   // gDirectory->Print();
@@ -167,11 +167,12 @@ void PUAnalyzer::beginJob()
   theLumiTree->Branch( "AVGnPhotons" , &AVGnPhotons );
   theLumiTree->Branch( "AVGnNeutralHadrons" , &AVGnNeutralHadrons );
   theLumiTree->Branch( "nEventsInLumi" , &nEventsInLumi );
-
+  cout <<"H: in beginjob(): lumitree filled"<<endl;
 
   theTree = treeDir.make<TTree>("Events" , "Events");
   //fs->make<TTree>("SelectedEventNumbers" , "SelectedEventNumbers");
 
+  cout <<"H: in beginjob(): events directory made"<<endl;
   theTree->Branch("run" , &runNumber );
   theTree->Branch("lumi" , &lumiNumber );
 
@@ -187,6 +188,7 @@ void PUAnalyzer::beginJob()
   theTree->Branch("nPhotons" , &(packedReader->nPhotons) );
   theTree->Branch("nNeutralHadrons" , &(packedReader->nNeutralHadrons) );
 
+  cout <<"H: in beginjob(): events branches filled"<<endl;
   for(auto rho : Rhos ){
     theTree->Branch(rho->tagName.c_str() , &(rho->Value) );
     theLumiTree->Branch( ("AVG"+rho->tagName).c_str() , &(rho->AVG) );
@@ -195,6 +197,7 @@ void PUAnalyzer::beginJob()
 
 
   if( ZSelection ){
+  cout <<"H: in beginjob(): Zselection is on"<<endl;
     theTree->Branch("passDiMuTight", &passDiMuTight );
     theTree->Branch("passDiMuMedium", &passDiMuMedium );
     theTree->Branch("InvMass" , &InvMass);
@@ -208,6 +211,7 @@ void PUAnalyzer::beginJob()
     theTree->Branch("mu2eta" , &mu2eta);
   }
   theTree->Branch("W" , &W);
+  cout <<"H: in beginjob(): end"<<endl;
 }
 
 //
