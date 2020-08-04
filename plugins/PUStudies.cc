@@ -144,7 +144,7 @@ void PUAnalyzer::beginJob()
   hnTruInt = new Histograms( SampleName , "nTruInteractions" , 100 , 0 , 100);
   hCutFlowTable = new Histograms( SampleName , "CutFlowTable" , 10 , 0.5 , 10.5);
 
-
+  cout <<"H: in beginjob(): histos created"<<endl;
   edm::Service<TFileService> fs;
   //fs->cd();
   TFileDirectory treeDir = fs->mkdir( "Trees" );
@@ -217,15 +217,19 @@ void PUAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup
   stepEventSelection = 0;
 
   if( !IsData )
+  cout <<"H: in analyze(): !is data"<<endl;
     W *= geninfoReader->Read( iEvent );
   hCutFlowTable->Fill( ++stepEventSelection , W );
+  //cout <<"H: in analyze(): cutflowtable supposedly filled"<<endl;
 
   if(hltReader->Read( iEvent ) < 0 ){
+  cout <<"H: in analyze(): hltReader reading ievent < 0"<<endl;
     return;
   }
   hCutFlowTable->Fill( ++stepEventSelection , W );
 
   if( vertexReader->Read( iEvent ) < 0 )
+  cout <<"H: in analyze(): vertexReader reading ievent < 0"<<endl;
     return;
   hCutFlowTable->Fill( ++stepEventSelection , W );
 
@@ -246,7 +250,8 @@ void PUAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup
   }
 
   if( ZSelection ){
-    //cout << vertexReader->PV()->ndof() << endl;
+    cout <<"H: in analyze(): is ZSelection and ndof of vertex is printed below"<<endl;
+    cout << vertexReader->PV()->ndof() << endl;
     switch( diMuReader->Read( iEvent , vertexReader->PV() ) ){
     case DiMuonReader::Pass :
     case DiMuonReader::UnderTheZPeak:   
