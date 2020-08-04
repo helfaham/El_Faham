@@ -296,6 +296,8 @@ void PUAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup
     mu1positive = diMuReader->DiMuon.mu1().charge() > 0;
     mu2positive = diMuReader->DiMuon.mu2().charge() > 0;
   }else{
+
+    cout <<"H: in analyze(): is not ZSelection"<<endl;
     AVGnGoodVertices += vertexReader->nGoodVtx;
     AVGnVertices += vertexReader->vtxMult;
     AVGnInt += vertexReader->npv ;
