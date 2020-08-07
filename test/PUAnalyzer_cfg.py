@@ -4,7 +4,6 @@ process = cms.Process("HaNa")
 
 process.load("FWCore.MessageService.MessageLogger_cfi")
 process.MessageLogger.cerr.FwkReport.reportEvery = 1
-
 process.load('Configuration.StandardSequences.Services_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
@@ -16,6 +15,8 @@ process.source = cms.Source("PoolSource",
                             fileNames = cms.untracked.vstring()
 )
 
+#dump = cms.module("EventContentAnalyzer")
+process.Tracer = cms.Service("Tracer")
 
 process.PUAnalyzer = cms.EDAnalyzer('PUAnalyzer',
                                     LHE = cms.PSet ( useLHEW = cms.bool( False ),
@@ -115,7 +116,6 @@ else:
 process.PUAnalyzer.sample = theSample.Name
 process.PUAnalyzer.LHE.useLHEW = theSample.LHEWeight
 process.PUAnalyzer.isData = theSample.IsData
-#process.PUAnalyzer.isData = False 
 
 if not ( options.job < theSample.MakeJobs( options.nFilesPerJob , options.output ) ):
     raise NameError("Job %d is not in the list of the jobs of sample %s with %d files per run" % (options.job , options.sample , options.nFilesPerJob ) )
