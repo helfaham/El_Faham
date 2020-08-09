@@ -3,7 +3,7 @@ import FWCore.ParameterSet.Config as cms
 process = cms.Process("HaNa")
 
 process.load("FWCore.MessageService.MessageLogger_cfi")
-process.MessageLogger.cerr.FwkReport.reportEvery = 1
+process.MessageLogger.cerr.FwkReport.reportEvery = 1000
 process.load('Configuration.StandardSequences.Services_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
@@ -16,7 +16,7 @@ process.source = cms.Source("PoolSource",
 )
 
 #dump = cms.module("EventContentAnalyzer")
-process.Tracer = cms.Service("Tracer")
+#process.Tracer = cms.Service("Tracer")
 
 process.PUAnalyzer = cms.EDAnalyzer('PUAnalyzer',
                                     LHE = cms.PSet ( useLHEW = cms.bool( False ),
