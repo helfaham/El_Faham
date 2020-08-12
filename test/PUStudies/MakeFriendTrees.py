@@ -209,10 +209,10 @@ class EraTuneHandler :
 
         variables = { "nVertices" : ( "nVertices" , 65 , 0 , 65 ) ,
                       "nGoodVertices" : ("nGoodVertices", 54, 5 , 59) ,
-                      #"nEles" : ("nEles" , 5 , 0 , 5 ) ,
-                      #"nMus" : ("nMus" , 10 , 0 , 10 ),
+                      "nEles" : ("nEles" , 5 , 0 , 5 ) ,
+                      "nMus" : ("nMus" , 10 , 0 , 10 ),
                       "nChargedHadrons" : ("nChargedHadrons" , 2000 , 0 , 2000 ),
-                      #"nLostTracks": ("nLostTracks" , 55 , 0 , 55 ),
+                      "nLostTracks": ("nLostTracks" , 55 , 0 , 55 ),
                       "nPhotons" : ("nPhotons" , 450 , 0 , 450 ),
                       "nNeutralHadrons" : ("nNeutralHadrons" , 160 , 0 , 160 ),
                       "fixedGridRhoAll" : ("fixedGridRhoAll" , 50 , 0 , 50 ),

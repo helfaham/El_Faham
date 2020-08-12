@@ -1,4 +1,4 @@
-from ROOT import TFile, TH1, TCanvas, kRed, kBlack, kBlue, kGreen, TGraph, TGraphErrors , TGraphAsymmErrors, TMultiGraph, TAttMarker, TLatex, Double, TH1D, TLegend, TLine, gStyle, gROOT
+from ROOT import TFile, TH1, TH1F, TCanvas, kRed, kBlack, kBlue, kGreen, TGraph, TGraphErrors , TGraphAsymmErrors, TMultiGraph, TAttMarker, TLatex, Double, TH1D, TLegend, TLine, gStyle, gROOT
 import array
 import math
 
@@ -13,6 +13,7 @@ AllBestXSections = {}
 #fin = TFile.Open("out.root")
 fin = TFile.Open("/afs/cern.ch/user/h/helfaham/CMSSW_10_6_12/src/Haamm/HaNaMiniAnalyzer/test/PUStudies/out_2016_SingleNeutrinovsZeroBias.root")
 
+list_bestXSec=[]
 objs = []
 def PlotVariable( DirName , varName , MCName, runEra ):
     allHists = {}
@@ -24,6 +25,7 @@ def PlotVariable( DirName , varName , MCName, runEra ):
     data_bin = twoDHist.GetXaxis().FindBin( runEra )
     bestXSec = twoDHist.GetBinContent( data_bin , mc_bin )
     #print bestXSec
+    list_bestXSec.append(bestXSec)
     
     DataHistName = "%s/%s/%s/latest/%s/%s_%s" % ( DirName , varName , MCName , runEra , runEra , varName )
     MCHistName = "%s/%s/%s/latest/%s/%s_latest_%s" % ( DirName , varName , MCName , runEra , varName, runEra  )
@@ -143,16 +145,43 @@ varNames = ["nGoodVertices",
             "fixedGridRhoFastjetCentral",
             "fixedGridRhoFastjetCentralCalo",
             "fixedGridRhoFastjetCentralNeutral",
-            #"nMus",
-            #"nEles",
+            "nMus",
+            "nEles",
             "nLostTracks",
             "nPhotons",
             "nNeutralHadrons"
 ]
 
+
 for var in varNames :
     for tune in [ "tuneM1" ] :
         a = PlotVariable( "SingleNuZeroBias" , var , tune , "All" )                    
+
+print "final list" + str(list_bestXSec)
+cOut1 = TCanvas("Fit")
+#gROOT.SetStyle("Plain") #Fit
+gStyle.SetOptFit(111) #Fit
+gStyle.SetOptTitle(0);
+hist_fit = TH1F("hist_fit","hist_fit",50,40000,100000)
+hist_fit.SetStats(True) #Fit
+Legend_fit = TLegend(0.25,0.79,0.45,0.95) #fit
+ar_mean= sum(list_bestXSec)/len(list_bestXSec)
+ar_mean_round=round(ar_mean)
+for i in range(len(list_bestXSec)):
+     hist_fit.Fill(list_bestXSec[i])
+cOut1.cd()
+Fit = hist_fit.Fit("gaus") #Fit
+Legend_fit.AddEntry(hist_fit ,'{} {}'.format("ar. mean = ", ar_mean_round) ,"l")
+hist_fit.Draw()
+hist_fit.GetXaxis().SetTitle("BestFit Xsec[mb]")
+hist_fit.GetYaxis().SetTitle("Frequency")
+hist_fit.SetTitle("UL2016")
+Legend_fit.SetFillStyle(0)
+Legend_fit.SetLineColor( 0 )
+Legend_fit.Draw()
+cOut1.SaveAs("./gaussianfit_UL_2016.png")
+
+
 #exit()
         
 allGraphs = {}
@@ -169,7 +198,7 @@ for runEra in ["All", 'eraF','eraG','eraH']:
                    "tuneM1":(20, 2 , 0   ) ,
 			}
 
-    Legend = TLegend(0.2,0.8,0.9,0.9) #fit
+    Legend = TLegend(0.25,0.79,0.45,0.95) #fit
     #Legend = TLegend( 0.7,0.8,0.88,0.88 )
 
     xCMS = array.array( 'd' , range(0, len(varNames) ) )
@@ -246,27 +275,27 @@ for runEra in ["All", 'eraF','eraG','eraH']:
                 central = vals[0]
                 errorLow = 0
                 errorUp = 0
-            x.append( count )
-            y.append( central )
-            exl.append( 0 )
-            exh.append( 0 )
-            eyl.append( errorLow )
-            eyh.append( errorUp  )
+            x.append( count ) #original
+            y.append( central ) #original
+            exl.append( 0 ) #original
+            exh.append( 0 ) #original
+            eyl.append( errorLow ) #original
+            eyh.append( errorUp  ) #original
             count += 1
         mean_vals = sum(new_vals)/len(new_vals)
         mean_vals_r = round(mean_vals)
         print ("is the arthimetic mean " + str(mean_vals))
         graph = TGraphAsymmErrors( len(x) , x , y , exl , exh , eyl , eyh )
         # Fit
-	gROOT.SetStyle("Plain") 
-	gStyle.SetOptFit(111) 
+	#gROOT.SetStyle("Plain") 
+	#gStyle.SetOptFit(111) 
         graph.SetTitle( MCName  )
-        graphFit = graph.Fit("gaus", "P")
-        myfunc = graph.GetFunction("gaus")
-        graphFitMean = myfunc.GetParameter(1)
+        #graphFit = graph.Fit("gaus", "P")
+        #myfunc = graph.GetFunction("gaus")
+        #graphFitMean = myfunc.GetParameter(1)
         #print ("this is the fit mean " + str(graphFitMean))
-        valueFit = graph.Eval(graphFitMean)
-        valueFit_r = round(valueFit)
+        #valueFit = graph.Eval(graphFitMean)
+        #valueFit_r = round(valueFit)
         #print valueFit
         # end Fit
         graph.SetName( runEra + "_" + MCName )
@@ -281,8 +310,8 @@ for runEra in ["All", 'eraF','eraG','eraH']:
         allGraphs[(runEra,MCName)] =  graph
         mg.Add( graph , "pl" )
         Legend.AddEntry( graph , graph.GetTitle() , "lp")
-	Legend.AddEntry( graph ,'{} {}'.format("ar. mean = ", mean_vals_r) ,"l")
-	Legend.AddEntry( graph ,'{} {}'.format("fit mean = ", valueFit_r) ,"l")
+	#Legend.AddEntry( graph ,'{} {}'.format("ar. mean = ", mean_vals_r) ,"l")
+	#Legend.AddEntry( graph ,'{} {}'.format("fit mean = ", valueFit_r) ,"l")
 
     canvas = TCanvas( runEra + "_AvgDataset" , runEra + "_AvgDataset" , 0 , 0 , 1335 , 5*200 )
     canvas.Range(-2.739156,63227.16,8.503012,75975.37)
@@ -328,6 +357,7 @@ for runEra in ["All" ] : #, 'eraB','eraC','eraD','eraE','eraF','eraG','eraH']:
                    "NuGunMinBias":(22, 4 , 0.1) ,
                    "NuGunZeroBias":(23, 6 , 0.2),
                    "SingleNuZeroBias" : (20,2,0) }
+
     Legend = TLegend( 0.8 , 0.7 , 1 , 1 )
     for DirName in [ "SingleNuZeroBias" ] : #["DY" , "NuGunZeroBias" , "NuGunMinBias" ] :
         x = array.array( 'd' )
@@ -430,8 +460,8 @@ for MCName in tunes : # [ "tuneM1" , "tuneM2" , "tuneM3" , "tuneM4" ]:
                    "eraF":(25, 7 , 0.5) ,
                    "eraC":(23, 46 , 0.6) ,
                    "eraB":(22, 4 , 0.7)  }
-
-    Legend = TLegend( 0.8 , 0.7 , 1 , 1 )
+    #Legend = TLegend( 0.7,0.8,0.88,0.88 )
+    Legend = TLegend( 0.2 , 0.8 , 0.9 , 0.9 )
     for runEra in ["All",'eraG','eraH','eraD','eraE','eraF' , 'eraC','eraB']:
         x = array.array( 'd' )
         y = array.array( 'd' )

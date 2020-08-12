@@ -188,7 +188,7 @@ void PUAnalyzer::beginJob()
   theTree->Branch("nPhotons" , &(packedReader->nPhotons) );
   theTree->Branch("nNeutralHadrons" , &(packedReader->nNeutralHadrons) );
 
-  cout <<"H: in beginjob(): events branches filled"<<endl;
+  //cout <<"H: in beginjob(): events branches filled"<<endl;
   for(auto rho : Rhos ){
     theTree->Branch(rho->tagName.c_str() , &(rho->Value) );
     theLumiTree->Branch( ("AVG"+rho->tagName).c_str() , &(rho->AVG) );
@@ -197,7 +197,7 @@ void PUAnalyzer::beginJob()
 
 
   if( ZSelection ){
-  cout <<"H: in beginjob(): Zselection is on"<<endl;
+  //cout <<"H: in beginjob(): Zselection is on"<<endl;
     theTree->Branch("passDiMuTight", &passDiMuTight );
     theTree->Branch("passDiMuMedium", &passDiMuMedium );
     theTree->Branch("InvMass" , &InvMass);
