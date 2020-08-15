@@ -1,4 +1,4 @@
-from ROOT import TFile, TH1, TCanvas, kRed, kBlack, kBlue, kGreen, TGraph, TGraphErrors , TGraphAsymmErrors, TMultiGraph, TAttMarker, TLatex, Double, TH1D, TLegend, TLine, gStyle, gROOT
+from ROOT import TFile, TH1, TH1F, TCanvas, kRed, kBlack, kBlue, kGreen, TGraph, TGraphErrors , TGraphAsymmErrors, TMultiGraph, TAttMarker, TLatex, Double, TH1D, TLegend, TLine, gStyle, gROOT
 import array
 import math
 
@@ -12,7 +12,7 @@ t.SetTextFont(72)
 AllBestXSections = {}
 fin = TFile.Open("/afs/cern.ch/user/h/helfaham/CMSSW_10_6_7/src/Haamm/HaNaMiniAnalyzer/test/PUStudies/out_2017_UL_SingleNeutrinovsZeroBias.root")
 
-
+list_bestXSec=[]
 objs = []
 def PlotVariable( DirName , varName , MCName, runEra ):
     allHists = {}
@@ -24,6 +24,7 @@ def PlotVariable( DirName , varName , MCName, runEra ):
     data_bin = twoDHist.GetXaxis().FindBin( runEra )
     bestXSec = twoDHist.GetBinContent( data_bin , mc_bin )
     #print bestXSec
+    list_bestXSec.append(bestXSec)
     
     DataHistName = "%s/%s/%s/latest/%s/%s_%s" % ( DirName , varName , MCName , runEra , runEra , varName )
     print DataHistName
@@ -143,18 +144,44 @@ varNames = ["nVertices",
             "fixedGridRhoFastjetCentral",
             "fixedGridRhoFastjetCentralCalo",
             "fixedGridRhoFastjetCentralNeutral",
-            #"nMus",
-            #"nEles",
-            #"nLostTracks",
+            "nMus",
+            "nEles",
+            "nLostTracks",
             "nPhotons",
             "nNeutralHadrons"
 ]
 
 for var in varNames :
+    #for Type in [ "typeM2" ] :
     for Type in [ "typeM1" , "typeM2" ] :
-        a = PlotVariable( "SingleNuZeroBias" , var , Type , "All" )                    
+        a = PlotVariable( "SingleNuZeroBias" , var , Type , "All" )  
+ 
+#for Type in [ "typeM1" , "typeM2" ] :
+#print "final list" + str(list_bestXSec)
+#cOut1 = TCanvas("Fit")
+#gROOT.SetStyle("Plain") #Fit
+#gStyle.SetOptFit(111) #Fit
+#gStyle.SetOptTitle(0);
+#hist_fit = TH1F("hist_fit","hist_fit",50,40000,100000)
+#hist_fit.SetStats(True) #Fit
+#Legend_fit = TLegend(0.25,0.79,0.45,0.95) #fit
+#ar_mean= sum(list_bestXSec)/len(list_bestXSec)
+#ar_mean_round=round(ar_mean)
+#for i in range(len(list_bestXSec)):
+    #hist_fit.Fill(list_bestXSec[i])
+#cOut1.cd()
+#Fit = hist_fit.Fit("gaus") #Fit
+#Legend_fit.AddEntry(hist_fit ,'{} {}'.format("ar. mean = ", ar_mean_round) ,"l")
+#hist_fit.Draw()
+#hist_fit.GetXaxis().SetTitle("BestFit Xsec[mb]_typeM2")
+#hist_fit.GetYaxis().SetTitle("Frequency")
+#hist_fit.SetTitle("UL2017")
+#Legend_fit.SetFillStyle(0)
+#Legend_fit.SetLineColor( 0 )
+#Legend_fit.Draw()
+#cOut1.SaveAs("./gaussianfit_UL_2017_typeM2.png")
+			 
 #exit()
-        
 allGraphs = {}
 allMultiGraphs = {}
 canvases = {}
@@ -252,20 +279,20 @@ for runEra in ["All" ,'eraB', 'eraC','eraD','eraE','eraF']:
             eyl.append( errorLow )
             eyh.append( errorUp  )
             count += 1
-	mean_vals = sum(new_vals)/len(new_vals)
-	mean_vals_r = round(mean_vals)
-	print ("is the arthimetic mean " + str(mean_vals))
+	#mean_vals = sum(new_vals)/len(new_vals)
+	#mean_vals_r = round(mean_vals)
+	#print ("is the arthimetic mean " + str(mean_vals))
         graph = TGraphAsymmErrors( len(x) , x , y , exl , exh , eyl , eyh )
         # Fit
-        gROOT.SetStyle("Plain")
-        gStyle.SetOptFit(111)
-        graph.SetTitle( MCName  )
-        graphFit = graph.Fit("gaus", "P")
-        myfunc = graph.GetFunction("gaus")
-        graphFitMean = myfunc.GetParameter(1)
+        #gROOT.SetStyle("Plain")
+        #gStyle.SetOptFit(111)
+        #graph.SetTitle( MCName  )
+        #graphFit = graph.Fit("gaus", "P")
+        #myfunc = graph.GetFunction("gaus")
+        #graphFitMean = myfunc.GetParameter(1)
         #print ("this is the fit mean " + str(graphFitMean))
-        valueFit = graph.Eval(graphFitMean)
-        valueFit_r = round(valueFit)
+        #valueFit = graph.Eval(graphFitMean)
+        #valueFit_r = round(valueFit)
         #print valueFit
         # end Fit
         graph.SetTitle( MCName  )
@@ -281,8 +308,8 @@ for runEra in ["All" ,'eraB', 'eraC','eraD','eraE','eraF']:
         allGraphs[(runEra,MCName)] =  graph
         mg.Add( graph , "pl" )
         Legend.AddEntry( graph , graph.GetTitle() , "lp")
-        Legend.AddEntry( graph ,'{} {}'.format("ar. mean = ", mean_vals_r) ,"l")
-        Legend.AddEntry( graph ,'{} {}'.format("fit mean = ", valueFit_r) ,"l")
+        #Legend.AddEntry( graph ,'{} {}'.format("ar. mean = ", mean_vals_r) ,"l")
+        #Legend.AddEntry( graph ,'{} {}'.format("fit mean = ", valueFit_r) ,"l")
 
     canvas = TCanvas( runEra + "_AvgDataset" , runEra + "_AvgDataset" , 0 , 0 , 1335 , 5*200 )
     canvas.Range(-2.739156,63227.16,8.503012,75975.37)
