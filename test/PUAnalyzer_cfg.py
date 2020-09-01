@@ -36,7 +36,7 @@ process.PUAnalyzer = cms.EDAnalyzer('PUAnalyzer',
                                                        MuonEtaCut = cms.double( 2.4 ),
                                                        DiMuLowMassCut = cms.double( 20. ),
                                                        DiMuCharge = cms.int32( -1 ),
-                                                       MuonID = cms.int32( 1 ), #0:no id, 1:Loose , 2:Medium , 3:tight , 4 : soft
+                                                       MuonID = cms.int32( 2 ), #0:no id, 1:Loose , 2:Medium , 3:tight , 4 : soft
                                                        DiMuZMassWindow = cms.double( 1000 ),
                                                        isHamb = cms.bool( False )
                                                        ),
