@@ -29,5 +29,5 @@ bugfix = Sample("bugfix" , 1 , False , "/RelValQCD_FlatPt_15_3000HS_13/CMSSW_10_
 
 ZMM_bug = Sample("ZMM_bug" , 1 , False , "/RelValZMM_13/CMSSW_10_6_14-PU25ns_106X_mc2017_realistic_v7_HS-v1/MINIAODSIM")
 ZMM_bugfix = Sample("ZMM_bugfix" , 1 , False , "/RelValZMM_13/CMSSW_10_6_14_Pyt8240BugFix-PU25ns_106X_mc2017_realistic_v7_HS-v1/MINIAODSIM")
-
-MINIAOD.extend( [ ZMM_bug, ZMM_bugfix, bug, bugfix ] )
+ZMM_bugfix_highstat = Sample("ZMM_bugfix_highstat" , 1 , False , "/RelValZMM_13/CMSSW_10_6_14_Pyt8240BugFix-PU25ns_106X_mc2017_realistic_v7_HS_rsb-v1/MINIAODSIM")
+MINIAOD.extend( [ ZMM_bug, ZMM_bugfix, ZMM_bugfix_highstat, bug, bugfix ] )

@@ -17,21 +17,21 @@ DiMuonReader::DiMuonReader( edm::ParameterSet const& iConfig, edm::ConsumesColle
   isHamb(iConfig.getParameter<bool>( "isHamb" ))
 {
   if( !IsData ){
-    cout <<"H: is not data" <<endl;
+    //cout <<"H: is not data" <<endl;
     TFile* f1 = TFile::Open( TString(SetupDir + "/MuonIDSF.root") );
     gROOT->cd();
     hMuSFID = NULL;
     if(MuonID == 1 ){ // Loose ID
-      cout <<"H: loose" <<endl;
+      //cout <<"H: loose" <<endl;
       hMuSFID = (TH2*)( f1->Get("MC_NUM_LooseID_DEN_genTracks_PAR_pt_spliteta_bin1/pt_abseta_ratio")->Clone("MuSFID") );}
     else if(MuonID == 2 ){ // Medium ID
-      cout <<"H: medium" <<endl;
+      //cout <<"H: medium" <<endl;
       hMuSFID = (TH2*)( f1->Get("MC_NUM_MediumID_DEN_genTracks_PAR_pt_spliteta_bin1/pt_abseta_ratio")->Clone("MuSFID") );}
     else if(MuonID == 3 ){ // Tight ID
-      cout <<"H: tight" <<endl;
+      //cout <<"H: tight" <<endl;
       hMuSFID = (TH2*)( f1->Get("MC_NUM_TightIDandIPCut_DEN_genTracks_PAR_pt_spliteta_bin1/pt_abseta_ratio")->Clone("MuSFID") );}
     else if(MuonID == 4 ){ // Soft ID
-      cout <<"H: soft" <<endl;
+      //cout <<"H: soft" <<endl;
       hMuSFID = (TH2*)( f1->Get("MC_NUM_SoftID_DEN_genTracks_PAR_pt_spliteta_bin1/pt_abseta_ratio")->Clone("MuSFID") );}
     else{
       cout << "No scale factor is availabel for Muon ID " << MuonID << endl;}
@@ -40,10 +40,10 @@ DiMuonReader::DiMuonReader( edm::ParameterSet const& iConfig, edm::ConsumesColle
     f1 = TFile::Open( TString(SetupDir + "/MuonIsoSF.root") );
     gROOT->cd();
     if( MuonIsoCut == 0.15 ){
-     cout <<"H: iso is 0.15" <<endl;
+     //cout <<"H: iso is 0.15" <<endl;
       hMuSFIso = (TH2*)( f1->Get("MC_NUM_TightRelIso_DEN_TightID_PAR_pt_spliteta_bin1/pt_abseta_ratio")->Clone("MuSFIso") );}
     else if( MuonIsoCut == 0.25 ){
-     cout <<"H: iso is 0.25" <<endl;
+     //cout <<"H: iso is 0.25" <<endl;
       hMuSFIso = (TH2*)( f1->Get("MC_NUM_LooseRelIso_DEN_TightID_PAR_pt_spliteta_bin1/pt_abseta_ratio")->Clone("MuSFIso") );}
     else{
       cout << "No scale factor is availabel for Muon Iso " << MuonIsoCut << endl;}
@@ -58,6 +58,8 @@ DiMuonReader::SelectionStatus DiMuonReader::Read( const edm::Event& iEvent, cons
     
   W = 1.0;
   goodMus.clear();
+  //cout <<"H: handle size below"<<endl;
+  cout << handle->size() << endl;
   for (const pat::Muon &mu : *handle) {
     if (mu.pt() < MuonSubLeadingPtCut || fabs(mu.eta()) > MuonEtaCut )
       continue;
@@ -65,19 +67,19 @@ DiMuonReader::SelectionStatus DiMuonReader::Read( const edm::Event& iEvent, cons
       continue;
 
     if( MuonID == 1 ){
-      cout <<"H: muon id is 1" <<endl;
+      //cout <<"H: muon id is 1" <<endl;
       if (!muon::isLooseMuon( mu ) ) continue;
     }
     else if(MuonID == 2){
-      cout <<"H: muon id is 2" <<endl;
+      //cout <<"H: muon id is 2" <<endl;
       if (!muon::isMediumMuon( mu ) ) continue;
     }
     else if(MuonID == 3){
-      cout <<"H: muon id is 3" <<endl;
+      //cout <<"H: muon id is 3" <<endl;
       if (!muon::isTightMuon(mu ,*PV) ) continue;
     }
     else if(MuonID == 4){
-      cout <<"H: muon id is 4" <<endl;
+      //cout <<"H: muon id is 4" <<endl;
       if (!muon::isSoftMuon( mu ,*PV) ) continue;
     }
     reco::MuonPFIsolation iso = mu.pfIsolationR04();

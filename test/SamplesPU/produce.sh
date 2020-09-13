@@ -14,4 +14,5 @@ dasgoclient --limit=0 --query="file dataset=/RelValQCD_FlatPt_15_3000HS_13/CMSSW
 dasgoclient --limit=0 --query="file dataset=/RelValQCD_FlatPt_15_3000HS_13/CMSSW_10_6_14_Pyt8240BugFix-PU25ns_106X_mc2017_realistic_v7_HS-v1/MINIAODSIM" > bugfix.list
 
 dasgoclient --limit=0 --query="file dataset=/RelValZMM_13/CMSSW_10_6_14_Pyt8240BugFix-PU25ns_106X_mc2017_realistic_v7_HS-v1/MINIAODSIM" > ZMM_bugfix.list
+dasgoclient --limit=0 --query="file dataset=/RelValZMM_13/CMSSW_10_6_14_Pyt8240BugFix-PU25ns_106X_mc2017_realistic_v7_HS_rsb-v1/MINIAODSIM" > ZMM_bugfix_highstat.list
 dasgoclient --limit=0 --query="file dataset=/RelValZMM_13/CMSSW_10_6_14-PU25ns_106X_mc2017_realistic_v7_HS-v1/MINIAODSIM" > ZMM_bug.list
