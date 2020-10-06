@@ -144,4 +144,3 @@ else :
     # if options.sync == 0 :
     #     for v in range(0 , 10 ):
     #         process.PUAnalyzer.HLT.HLT_To_Or.append( 'HLT_Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL_DZ_v%d' % (v) )
-
