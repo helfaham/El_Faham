@@ -139,7 +139,7 @@ if theSample.IsData :
 else :
 #    process.GlobalTag.globaltag = '94X_mc2017_realistic_v14'
     from PhysicsTools.PatAlgos.producersLayer1.jetUpdater_cff import *
-    #process.PUAnalyzer.ZSelection = ("ZmuMu" in theSample.Name)
+    process.PUAnalyzer.ZSelection = ("ZmuMu" in theSample.Name)
     process.p = cms.Path(process.PUAnalyzer)
     # if options.sync == 0 :
     #     for v in range(0 , 10 ):
