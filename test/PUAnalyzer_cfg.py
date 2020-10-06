@@ -131,8 +131,8 @@ if theSample.IsData :
     process.source.lumisToProcess = LumiList.LumiList(filename = (process.PUAnalyzer.SetupDir.value() + '/JSON.txt')).getVLuminosityBlockRange()
     #process.GlobalTag.globaltag = '76X_dataRun2_v15'
     
-    #process.PUAnalyzer.ZSelection = ("SingleMu" in theSample.Name)
-    process.PUAnalyzer.ZSelection = True
+    process.PUAnalyzer.ZSelection = ("SingleMu" in theSample.Name)
+    #process.PUAnalyzer.ZSelection = True #TODO try this when data files are flat
 
     process.p = cms.Path( process.PUAnalyzer )
     # for v in range(0 , 10 ):
@@ -141,8 +141,8 @@ if theSample.IsData :
 else :
     #process.GlobalTag.globaltag = '76X_dataRun2_16Dec2015_v0'
     from PhysicsTools.PatAlgos.producersLayer1.jetUpdater_cff import *
-    #process.PUAnalyzer.ZSelection = ("ZmuMu" in theSample.Name)
-    process.PUAnalyzer.ZSelection = True 
+    process.PUAnalyzer.ZSelection = ("ZmuMu" in theSample.Name)
+    #process.PUAnalyzer.ZSelection = True #TODO try this when data files are flat
     process.p = cms.Path(process.PUAnalyzer)
     # if options.sync == 0 :
     #     for v in range(0 , 10 ):
