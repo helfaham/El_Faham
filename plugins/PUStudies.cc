@@ -144,13 +144,12 @@ void PUAnalyzer::beginJob()
   hnTruInt = new Histograms( SampleName , "nTruInteractions" , 100 , 0 , 100);
   hCutFlowTable = new Histograms( SampleName , "CutFlowTable" , 10 , 0.5 , 10.5);
 
-cout<<"beginjob1"<<endl;
+
   edm::Service<TFileService> fs;
   //fs->cd();
   TFileDirectory treeDir = fs->mkdir( "Trees" );
   //treeDir.cd();
 
-cout<<"beginjob2"<<endl;
   // TFile* f = TFile::Open("tree.root" , "RECREATE");
   // f->cd();
   // gDirectory->Print();
@@ -170,11 +169,9 @@ cout<<"beginjob2"<<endl;
   theLumiTree->Branch( "nEventsInLumi" , &nEventsInLumi );
 
 
-cout<<"beginjob3"<<endl;
   theTree = treeDir.make<TTree>("Events" , "Events");
   //fs->make<TTree>("SelectedEventNumbers" , "SelectedEventNumbers");
 
-cout<<"beginjob4"<<endl;
   theTree->Branch("run" , &runNumber );
   theTree->Branch("lumi" , &lumiNumber );
 
@@ -190,7 +187,6 @@ cout<<"beginjob4"<<endl;
   theTree->Branch("nPhotons" , &(packedReader->nPhotons) );
   theTree->Branch("nNeutralHadrons" , &(packedReader->nNeutralHadrons) );
 
-cout<<"beginjob5"<<endl;
   for(auto rho : Rhos ){
     theTree->Branch(rho->tagName.c_str() , &(rho->Value) );
     theLumiTree->Branch( ("AVG"+rho->tagName).c_str() , &(rho->AVG) );
@@ -198,10 +194,7 @@ cout<<"beginjob5"<<endl;
   }
 
 
-cout<<"beginjob6"<<endl;
   if( ZSelection ){
-
-cout<<"beginjob7"<<endl;
     theTree->Branch("passDiMuTight", &passDiMuTight );
     theTree->Branch("passDiMuMedium", &passDiMuMedium );
     theTree->Branch("InvMass" , &InvMass);
@@ -215,8 +208,6 @@ cout<<"beginjob7"<<endl;
     theTree->Branch("mu2eta" , &mu2eta);
   }
   theTree->Branch("W" , &W);
-
-cout<<"beginjob8"<<endl;
 }
 
 //
@@ -225,31 +216,21 @@ void PUAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup
   W = 1.0;
   stepEventSelection = 0;
 
-cout<<"analyze1"<<endl;
   if( !IsData )
-cout<<"analyze2"<<endl;
     W *= geninfoReader->Read( iEvent );
   hCutFlowTable->Fill( ++stepEventSelection , W );
 
-cout<<"analyze3"<<endl;
   if(hltReader->Read( iEvent ) < 0 ){
-cout<<"analyze4"<<endl;
     return;
   }
   hCutFlowTable->Fill( ++stepEventSelection , W );
 
-cout<<"analyze5"<<endl;
   if( vertexReader->Read( iEvent ) < 0 )
-cout<<"analyze6"<<endl;
     return;
   hCutFlowTable->Fill( ++stepEventSelection , W );
 
-cout<<"analyze7"<<endl;
   if(!IsData)
-cout<<"analyze8"<<endl;
     hnTruInt->Fill( vertexReader->npv  , 1.0 );
-
-cout<<"analyze9"<<endl;
 
   runNumber = iEvent.eventAuxiliary().run();
   lumiNumber = iEvent.eventAuxiliary().luminosityBlock();
@@ -259,27 +240,23 @@ cout<<"analyze9"<<endl;
   lostReader->Read( iEvent );
   nLostTracks = lostReader->size();
 
-cout<<"analyze10"<<endl;
 
   for(auto _Rho_ : Rhos ){
     _Rho_->Read(iEvent);
   }
 
   if( ZSelection ){
-cout<<"analyze11"<<endl;
     //cout << vertexReader->PV()->ndof() << endl;
     switch( diMuReader->Read( iEvent , vertexReader->PV() ) ){
     case DiMuonReader::Pass :
     case DiMuonReader::UnderTheZPeak:   
       W *= (diMuReader->W) ;
       hCutFlowTable->Fill( ++stepEventSelection , W );
-cout<<"analyze12"<<endl;
       break;
     case DiMuonReader::LowMassPair:
     case DiMuonReader::NoPairWithChargeReq:
     case DiMuonReader::LessThan2Muons :
       return ;
-cout<<"analyze13"<<endl;
     }
 
     AVGnGoodVertices += vertexReader->nGoodVtx;
@@ -314,7 +291,6 @@ cout<<"analyze13"<<endl;
     mu1positive = diMuReader->DiMuon.mu1().charge() > 0;
     mu2positive = diMuReader->DiMuon.mu2().charge() > 0;
   }else{
-cout<<"analyze14"<<endl;
     AVGnGoodVertices += vertexReader->nGoodVtx;
     AVGnVertices += vertexReader->vtxMult;
     AVGnInt += vertexReader->npv ;
@@ -327,9 +303,7 @@ cout<<"analyze14"<<endl;
     AVGnNeutralHadrons += packedReader->nNeutralHadrons;
   }
 
-cout<<"analyze15"<<endl;
   nEventsInLumi++;
   theTree->Fill();
-cout<<"analyze16"<<endl;
 }
 
