@@ -6,12 +6,12 @@ print Sample.WD
 
 MINIAOD = []
 
-SingleNeutrinoCP1 = Sample("SingleNeutrinoCP1" , 1 , False , "/SingleNeutrino/RunIISummer19UL16MiniAOD-FlatPU0to75TuneCP1_106X_mcRun2_asymptotic_v13-v2/MINIAODSIM")
-SingleNeutrinoCP5 = Sample("SingleNeutrinoCP5" , 1 , False , " /SingleNeutrino/RunIISummer19UL16MiniAOD-FlatPU0to75_106X_mcRun2_asymptotic_v13_ext1-v2/MINIAODSIM")
+SingleNeutrino_CP1 = Sample("SingleNeutrino_CP1" , 1 , False , "/SingleNeutrino/RunIISummer19UL16MiniAOD-FlatPU0to75TuneCP1_106X_mcRun2_asymptotic_v13-v2/MINIAODSIM")
+SingleNeutrino_CP5 = Sample("SingleNeutrino_CP5" , 1 , False , " /SingleNeutrino/RunIISummer19UL16MiniAOD-FlatPU0to75_106X_mcRun2_asymptotic_v13_ext1-v2/MINIAODSIM")
 
 SingleNeutrinos = []
-SingleNeutrinos.extend( [ SingleNeutrinoCP1, SingleNeutrinoCP5 ] )
-MINIAOD.extend( [ SingleNeutrinoCP1, SingleNeutrinoCP5 ] )
+SingleNeutrinos.extend( [ SingleNeutrino_CP1, SingleNeutrino_CP5 ] )
+MINIAOD.extend( [ SingleNeutrino_CP1, SingleNeutrino_CP5 ] )
 
 MinBiasH = Sample("MinBiasH" , 0 , False , "/MinimumBias/Run2016H-21Feb2020_UL2016-v1/MINIAOD")
 MinBiasG = Sample("MinBiasG" , 0 , False , "/MinimumBias/Run2016G-21Feb2020_UL2016-v1/MINIAOD")
