@@ -135,8 +135,10 @@ class MCSampleContainer :
         self.SampleName = name
         self.FileName = nTuples + self.SampleName + ".root"
         self.File = TFile.Open( self.FileName )
-
-        self.hnTrueIntMCName = "PUAnalyzer/nTruInteractions/nTruInteractions_" + self.SampleName
+        if name.count("CP1"):
+        	self.hnTrueIntMCName = "PUAnalyzer/nTruInteractions/nTruInteractions_" + "SingleNeutrinoCP1"
+	elif name.count("CP5"):
+        	self.hnTrueIntMCName = "PUAnalyzer/nTruInteractions/nTruInteractions_" + "SingleNeutrinoCP5"
         self.hnTrueInt = self.File.Get( self.hnTrueIntMCName )
         self.nIntNBins = self.hnTrueInt.GetNbinsX()
         self.nIntMin = self.hnTrueInt.GetBinLowEdge(1)
@@ -196,12 +198,12 @@ class EraTuneHandler :
             h.GetXaxis().SetBinLabel( index , "era%s" % (runera) )
             index += 1
         index = 1
-        for tune in self.Tunes : #[1,2,3,4]:
-            h.GetYaxis().SetBinLabel( index , "tuneM%d"%(tune) )
+        for tune in self.Tunes : #[1,2,3,4,5]:
+            h.GetYaxis().SetBinLabel( index , "TuneCP%d"%(tune) )
             index += 1
         return h
     
-    def __init__(self, name , datafiles , mcfiles , fout , tunes = [1,2,3,4] ):
+    def __init__(self, name , datafiles , mcfiles , fout , tunes = [1,2,3,4,5] ):
         self.Tunes = tunes 
         self.data = DatasetController(fileName = datafiles)
         self.Dir = fout.mkdir( name )
@@ -229,7 +231,7 @@ class EraTuneHandler :
             chi2bestxsec = self.Make2DSummaryPlot( var , "Chi2" )
             ktestbestxsec = self.Make2DSummaryPlot( var , "KTest")
             for tune in tunes : #[1,2,3,4]:
-                tuneName = "tuneM%d" % (tune)
+                tuneName = "TuneCP%d" % (tune)
                 setattr( self, "MC_" + tuneName , MCSampleContainer( name=mcfiles % (tune) , runEras=self.data.runEras.keys() ) )
                 mc = getattr( self, "MC_" + tuneName )
                 tunedir = varDir.mkdir(tuneName )
@@ -251,7 +253,7 @@ fout = TFile.Open("out_2016_SingleNeutrinovsZeroBias.root" , "recreate")
 #EraTuneHandler( "NuGunZeroBias" , "ZeroBias%s.root",  "NuGunM%d" , fout )
 #EraTuneHandler( "NuGunMinBias" , "MinBias%s.root",  "NuGunM%d" , fout )
 #EraTuneHandler( "SingleNuMinBias" , "MinBias%s.root",  "SingleNeutrinoTuneCP%d" , fout , [0,2,5] )
-EraTuneHandler( "SingleNuZeroBias" , "ZeroBias%s.root",  "SingleNeutrinoCP%d" , fout , [1] )
+EraTuneHandler( "SingleNuZeroBias" , "ZeroBias%s.root",  "SingleNeutrino_CP%d" , fout , [1,5] )
 
 fout.Close()
 
