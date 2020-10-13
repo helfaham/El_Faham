@@ -43,12 +43,12 @@ def PlotVariable( DirName , varName , MCName, runEra ):
     #dataHist.Rebin(8)
     allHists[dataHist.GetMaximum()/dataHist.GetEntries()] = dataHist
     gStyle.SetOptTitle(False)
-    #gROOT.SetStyle("Plain") #Fit
-    #dataHist.SetStats(True) #Fit
+    #gROOT.SetStyle("Plain") #Bad fit
+    #dataHist.SetStats(True) #Bad fit
     dataHist.SetStats(False)
-    #gStyle.SetOptFit(111) #Fit
+    #gStyle.SetOptFit(111) #Bad fit
     dataNorm=dataHist.DrawNormalized()
-    #Fit = dataHist.Fit("gaus") #Fit
+    #Fit = dataHist.Fit("gaus") #Bad fit
     #dataNorm = dataHist.DrawNormalized("E PLC PMC")
     for xsec in [ 0.0 + (ratio*69200./1000.) for ratio in range(840,1170) ][::-1]:
         #if abs( xsec - bestXSec )/bestXSec > 0.1 or abs( xsec - bestXSec )/ bestXSec < 0.099:
@@ -74,7 +74,7 @@ def PlotVariable( DirName , varName , MCName, runEra ):
                 hMC.SetLineColor( kGreen )
 		hMC.SetLineWidth(1)
 
-            #hMC.Draw("SAME") #Fit
+            #hMC.Draw("SAME") #Bad fit
             hMC.DrawNormalized("SAME")
             #hMC.DrawNormalized("SAME E PLC PMC")
             hMC.SetStats(False)
@@ -96,12 +96,12 @@ def PlotVariable( DirName , varName , MCName, runEra ):
     #cOut.BuildLegend(0.1,0.5,0.3,0.7) #Fit
     #cOut.BuildLegend(0.1,0.7,0.48,0.9) #left
     cOut.BuildLegend(0.5,0.67,0.88,0.88) #right
-    #cOut.SaveAs("FitRes/%s_%s_fit.png" % (varName , MCName) ) #Fit
+    #cOut.SaveAs("FitRes/%s_%s_fit.png" % (varName , MCName) ) #Bad fit
     cOut.SaveAs("FitRes/%s_%s.png" % (varName , MCName) )
     return cOut
 
 
-#a = PlotVariable( "SingleNuZeroBias" , "nVertices" , "tuneM2" , "All" )                    
+#a = PlotVariable( "SingleNuZeroBias" , "nVertices" , "tuneM2" , "All" )  #TODO what is this line?                  
 #exit()
     
 
@@ -154,7 +154,8 @@ varNames = ["nGoodVertices",
 
 
 for var in varNames :
-    for tune in [ "tuneM1" ] :
+    #for tune in [ "TuneCP1" ] :
+    for tune in [ "TuneCP5" ] :
         a = PlotVariable( "SingleNuZeroBias" , var , tune , "All" )                    
 
 print "final list" + str(list_bestXSec)
@@ -173,7 +174,7 @@ cOut1.cd()
 Fit = hist_fit.Fit("gaus") #Fit
 Legend_fit.AddEntry(hist_fit ,'{} {}'.format("ar. mean = ", ar_mean_round) ,"l")
 hist_fit.Draw()
-hist_fit.GetXaxis().SetTitle("BestFit Xsec[mb]")
+hist_fit.GetXaxis().SetTitle("BestFit Xsec[mb]_TuneCP5")
 hist_fit.GetYaxis().SetTitle("Frequency")
 hist_fit.SetTitle("UL2016")
 Legend_fit.SetFillStyle(0)
@@ -188,17 +189,18 @@ allGraphs = {}
 allMultiGraphs = {}
 canvases = {}
 
-tunes = [  "tuneM1" ]
+tunes = [  "TuneCP1", "TuneCP5" ]
 
 for runEra in ["All", 'eraF','eraG','eraH']:
     mg = TMultiGraph()
     mg.SetName( runEra )
     allMultiGraphs[ runEra ] = mg
     marker_info = {
-                   "tuneM1":(20, 2 , 0   ) ,
+                   "TuneCP1":(20, 2 , 0   ) ,
+                   "TuneCP5":(21, 8 , 0   ) ,
 			}
 
-    Legend = TLegend(0.25,0.79,0.45,0.95) #fit
+    Legend = TLegend(0.25,0.79,0.45,0.95) #fit #TODO is it good in general or only for the fit?
     #Legend = TLegend( 0.7,0.8,0.88,0.88 )
 
     xCMS = array.array( 'd' , range(0, len(varNames) ) )
@@ -286,7 +288,7 @@ for runEra in ["All", 'eraF','eraG','eraH']:
         mean_vals_r = round(mean_vals)
         print ("is the arthimetic mean " + str(mean_vals))
         graph = TGraphAsymmErrors( len(x) , x , y , exl , exh , eyl , eyh )
-        # Fit
+        # Bad fit start
 	#gROOT.SetStyle("Plain") 
 	#gStyle.SetOptFit(111) 
         graph.SetTitle( MCName  )
@@ -297,7 +299,7 @@ for runEra in ["All", 'eraF','eraG','eraH']:
         #valueFit = graph.Eval(graphFitMean)
         #valueFit_r = round(valueFit)
         #print valueFit
-        # end Fit
+        # Bad fit end 
         graph.SetName( runEra + "_" + MCName )
         graph.SetLineColor(  marker_info[ MCName ][1] )
         graph.SetLineStyle(  3 )
@@ -310,8 +312,8 @@ for runEra in ["All", 'eraF','eraG','eraH']:
         allGraphs[(runEra,MCName)] =  graph
         mg.Add( graph , "pl" )
         Legend.AddEntry( graph , graph.GetTitle() , "lp")
-	#Legend.AddEntry( graph ,'{} {}'.format("ar. mean = ", mean_vals_r) ,"l")
-	#Legend.AddEntry( graph ,'{} {}'.format("fit mean = ", valueFit_r) ,"l")
+	#Legend.AddEntry( graph ,'{} {}'.format("ar. mean = ", mean_vals_r) ,"l") #Bad fit
+	#Legend.AddEntry( graph ,'{} {}'.format("fit mean = ", valueFit_r) ,"l") #Bad fit
 
     canvas = TCanvas( runEra + "_AvgDataset" , runEra + "_AvgDataset" , 0 , 0 , 1335 , 5*200 )
     canvas.Range(-2.739156,63227.16,8.503012,75975.37)
