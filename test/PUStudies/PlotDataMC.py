@@ -42,15 +42,15 @@ def PlotVariable( DirName , varName , MCName, runEra ):
     #dataHist.Rebin(8)
     allHists[dataHist.GetMaximum()/dataHist.GetEntries()] = dataHist
     gStyle.SetOptTitle(False)
-    #gROOT.SetStyle("Plain") #Fit
-    #dataHist.SetStats(True) #Fit
+    #gROOT.SetStyle("Plain") #Bad fit
+    #dataHist.SetStats(True) #Bad fit
     dataHist.SetStats(False)
-    #gStyle.SetOptFit(111) #Fit
+    #gStyle.SetOptFit(111) #Bad fit
     dataNorm = dataHist.DrawNormalized()
-    #Fit = dataHist.Fit("gaus") #Fit
+    #Fit = dataHist.Fit("gaus") #Bad fit
     #dataNorm = dataHist.DrawNormalized("E PLC PMC")
     for xsec in [ 0.0 + (ratio*69200./1000.) for ratio in range(840,1170) ][::-1]:
-        if abs( xsec - bestXSec )/bestXSec > 0.1 or abs( xsec - bestXSec )/ bestXSec < 0.2: #What is that doing?
+        if abs( xsec - bestXSec )/bestXSec > 0.1 or abs( xsec - bestXSec )/ bestXSec < 0.2: 
             if not xsec == bestXSec :
                 #print xsec, "skipped"
                 continue
@@ -74,7 +74,7 @@ def PlotVariable( DirName , varName , MCName, runEra ):
                 hMC.SetLineWidth(1)
 
 
-            #hMC.Draw("SAME") #Fit
+            #hMC.Draw("SAME") #Bad fit
             hMC.DrawNormalized("SAME")
             #hMC.DrawNormalized("SAME E PLC PMC")
             hMC.SetStats(False)
@@ -96,7 +96,7 @@ def PlotVariable( DirName , varName , MCName, runEra ):
     #cOut.BuildLegend(0.1,0.5,0.3,0.7) #Fit
     #cOut.BuildLegend(0.1,0.7,0.48,0.9) #left
     cOut.BuildLegend(0.5,0.67,0.88,0.88) #right
-    #cOut.SaveAs("FitRes/%s_%s_fit.png" % (varName , MCName) ) #Fit
+    #cOut.SaveAs("FitRes/%s_%s_fit.png" % (varName , MCName) ) #Bad fit
     cOut.SaveAs("FitRes/%s_%s.png" % (varName , MCName) )
     return cOut
 
@@ -153,10 +153,9 @@ varNames = ["nVertices",
 
 ]
 for var in varNames :
-    for Type in [ "Type1" ] :
-    #for Type in [ "Type1", "Type2" ] :
-        a = PlotVariable( "SingleNuZeroBias" , var ,Type, "All" )                    
-#for Type in [ "Type2"  ] :
+    #for tune in [ "TuneCP1" ] :
+    for tune in [ "TuneCP5" ] :
+        a = PlotVariable( "SingleNuZeroBias" , var ,tune, "All" )                    
 print "final list" + str(list_bestXSec)
 cOut1 = TCanvas("Fit")
 #gROOT.SetStyle("Plain") #Fit
@@ -173,30 +172,30 @@ cOut1.cd()
 Fit = hist_fit.Fit("gaus") #Fit
 Legend_fit.AddEntry(hist_fit ,'{} {}'.format("ar. mean = ", ar_mean_round) ,"l")
 hist_fit.Draw()
-hist_fit.GetXaxis().SetTitle("BestFit Xsec[mb]_Type1")
+hist_fit.GetXaxis().SetTitle("BestFit Xsec[mb]_TuneCP5")
 hist_fit.GetYaxis().SetTitle("Frequency")
 hist_fit.SetTitle("UL2018")
 Legend_fit.SetFillStyle(0)
 Legend_fit.SetLineColor( 0 )
 Legend_fit.Draw()
-cOut1.SaveAs("./gaussianfit_UL_2018_Type1.png")
-exit()
+cOut1.SaveAs("./gaussianfit_UL_2018.png")
+#exit()
         
 allGraphs = {}
 allMultiGraphs = {}
 canvases = {}
 
-types = [  "Type1", "Type2" ]
+tunes = [  "TuneCP1", "TuneCP5" ]
 
 for runEra in ["All",'eraA','eraB']:
     mg = TMultiGraph()
     mg.SetName( runEra )
     allMultiGraphs[ runEra ] = mg
-    marker_info = {"Type1":(20, 2 , 0   ) ,
-                   "Type2":(21, 8 , 0   ) ,
+    marker_info = {"TuneCP1":(20, 2 , 0   ) ,
+                   "TuneCP5":(21, 8 , 0   ) ,
 		}
     #Legend = TLegend( 0.7,0.8,0.88,0.88 )
-    Legend = TLegend(0.2,0.8,0.9,0.9) #fit
+    Legend = TLegend(0.25,0.79,0.45,0.95) #fit
     
     xCMS = array.array( 'd' , range(0, len(varNames) ) )
     xCMS[0] -= 0.2
@@ -220,7 +219,7 @@ for runEra in ["All",'eraA','eraB']:
     mg.Add( gCMSLine , "l" )
 
     
-    for MCName in types : 
+    for MCName in tunes : 
         x = array.array( 'd' )
         y = array.array( 'd' )
         exl = array.array( 'd' )
