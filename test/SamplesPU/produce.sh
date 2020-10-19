@@ -1,6 +1,11 @@
 #/afs/cern.ch/user/h/helfaham/CMSSW_10_6_12/src/Haamm/HaNaMiniAnalyzer/test/SamplesPU
 #dasgoclient --limit=0 --query="file dataset=/SingleNeutrino/RunIISummer19UL16MiniAOD-FlatPU0to75TuneCP1_106X_mcRun2_asymptotic_v13-v2/MINIAODSIM" > SingleNeutrinoCP1.list
-dasgoclient --limit=0 --query="file dataset=/SingleNeutrino/RunIISummer19UL16MiniAOD-FlatPU0to75_106X_mcRun2_asymptotic_v13_ext1-v2/MINIAODSIM" > SingleNeutrinoCP5.list
+#dasgoclient --limit=0 --query="file dataset=/SingleNeutrino/RunIISummer19UL16MiniAOD-FlatPU0to75_106X_mcRun2_asymptotic_v13_ext1-v2/MINIAODSIM" > SingleNeutrinoCP5.list
+
+
+dasgoclient --limit=0 --query="file dataset=/SingleNeutrino/RunIISummer19UL16MiniAODAPV-FlatPU0to75TuneCP1_106X_mcRun2_asymptotic_preVFP_v8_ext1-v3/MINIAODSIM" > SingleNeutrino_CP1_APV.list
+dasgoclient --limit=0 --query="file dataset=/SingleNeutrino/RunIISummer19UL16MiniAODAPV-FlatPU0to75_106X_mcRun2_asymptotic_preVFP_v8_ext2-v2/MINIAODSIM" > SingleNeutrino_CP5_APV.list
+
 
 #dasgoclient --limit=0 --query="file dataset=/ZeroBias/Run2016H-21Feb2020_UL2016-v1/MINIAOD" > ZeroBiasH.list
 #dasgoclient --limit=0 --query="file dataset=/ZeroBias/Run2016G-21Feb2020_UL2016-v1/MINIAOD" > ZeroBiasG.list
@@ -13,6 +18,6 @@ dasgoclient --limit=0 --query="file dataset=/SingleNeutrino/RunIISummer19UL16Min
 #dasgoclient --limit=0 --query="file dataset=/RelValQCD_FlatPt_15_3000HS_13/CMSSW_10_6_14-PU25ns_106X_mc2017_realistic_v7_HS-v1/MINIAODSIM" > bug.list
 #dasgoclient --limit=0 --query="file dataset=/RelValQCD_FlatPt_15_3000HS_13/CMSSW_10_6_14_Pyt8240BugFix-PU25ns_106X_mc2017_realistic_v7_HS-v1/MINIAODSIM" > bugfix.list
 
-dasgoclient --limit=0 --query="file dataset=/RelValZMM_13/CMSSW_10_6_14_Pyt8240BugFix-PU25ns_106X_mc2017_realistic_v7_HS-v1/MINIAODSIM" > ZMM_bugfix.list
-dasgoclient --limit=0 --query="file dataset=/RelValZMM_13/CMSSW_10_6_14_Pyt8240BugFix-PU25ns_106X_mc2017_realistic_v7_HS_rsb-v1/MINIAODSIM" > ZMM_bugfix_highstat.list
-dasgoclient --limit=0 --query="file dataset=/RelValZMM_13/CMSSW_10_6_14-PU25ns_106X_mc2017_realistic_v7_HS-v1/MINIAODSIM" > ZMM_bug.list
+#dasgoclient --limit=0 --query="file dataset=/RelValZMM_13/CMSSW_10_6_14_Pyt8240BugFix-PU25ns_106X_mc2017_realistic_v7_HS-v1/MINIAODSIM" > ZMM_bugfix.list
+#dasgoclient --limit=0 --query="file dataset=/RelValZMM_13/CMSSW_10_6_14_Pyt8240BugFix-PU25ns_106X_mc2017_realistic_v7_HS_rsb-v1/MINIAODSIM" > ZMM_bugfix_highstat.list
+#dasgoclient --limit=0 --query="file dataset=/RelValZMM_13/CMSSW_10_6_14-PU25ns_106X_mc2017_realistic_v7_HS-v1/MINIAODSIM" > ZMM_bug.list

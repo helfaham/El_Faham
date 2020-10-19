@@ -9,9 +9,12 @@ MINIAOD = []
 SingleNeutrino_CP1 = Sample("SingleNeutrino_CP1" , 1 , False , "/SingleNeutrino/RunIISummer19UL16MiniAOD-FlatPU0to75TuneCP1_106X_mcRun2_asymptotic_v13-v2/MINIAODSIM")
 SingleNeutrino_CP5 = Sample("SingleNeutrino_CP5" , 1 , False , " /SingleNeutrino/RunIISummer19UL16MiniAOD-FlatPU0to75_106X_mcRun2_asymptotic_v13_ext1-v2/MINIAODSIM")
 
+SingleNeutrino_CP1_APV = Sample("SingleNeutrino_CP1_APV" , 1 , False , "/SingleNeutrino/RunIISummer19UL16MiniAODAPV-FlatPU0to75TuneCP1_106X_mcRun2_asymptotic_preVFP_v8_ext1-v3/MINIAODSIM")
+SingleNeutrino_CP5_APV = Sample("SingleNeutrino_CP5_APV" , 1 , False , "/SingleNeutrino/RunIISummer19UL16MiniAODAPV-FlatPU0to75_106X_mcRun2_asymptotic_preVFP_v8_ext2-v2/MINIAODSIM")
+
 SingleNeutrinos = []
-SingleNeutrinos.extend( [ SingleNeutrino_CP1, SingleNeutrino_CP5 ] )
-MINIAOD.extend( [ SingleNeutrino_CP1, SingleNeutrino_CP5 ] )
+SingleNeutrinos.extend( [ SingleNeutrino_CP1, SingleNeutrino_CP5, SingleNeutrino_CP1_APV, SingleNeutrino_CP5_APV ] )
+MINIAOD.extend( [ SingleNeutrino_CP1, SingleNeutrino_CP5, SingleNeutrino_CP1_APV, SingleNeutrino_CP5_APV ] )
 
 MinBiasH = Sample("MinBiasH" , 0 , False , "/MinimumBias/Run2016H-21Feb2020_UL2016-v1/MINIAOD")
 MinBiasG = Sample("MinBiasG" , 0 , False , "/MinimumBias/Run2016G-21Feb2020_UL2016-v1/MINIAOD")
