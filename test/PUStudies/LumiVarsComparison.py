@@ -107,8 +107,12 @@ class LumiCorrelationStudiesPerRun :
             self.RunMin = 276831
             self.RunMax = 277420
             self.Color = 7
-        if run == "F":
-            self.RunMin = 277772
+        #elif run == "F": #APV
+            #self.RunMin = 277772
+            #self.RunMax = 278770
+            #self.Color = 8
+        elif run == "F": #Nominal
+            self.RunMin = 278771
             self.RunMax = 278808
             self.Color = 8
         elif run == "G":
@@ -229,6 +233,7 @@ class LumiCorrelationStudies :
         self.AllRuns = {}
         self.AllRunNames = []
         for runEra in ['F','G','H']:
+        #for runEra in ['F']:
             fname = path + self.FileName%(runEra)
             if not os.path.isfile( fname ):
                 print "data file" , fname , "doesn't exist"
@@ -333,6 +338,7 @@ class LumiCorrelationStudies :
             c.Write()
             c.SetTitle("")
             c.SaveAs("./corr/%s.png"%(var))
+            #c.SaveAs("./corr/%s_APV.png"%(var))
             self.Canvases[ var ] = c
         #gROOT.SetBatch(False)
         #gStyle.SetOptStat(1)
