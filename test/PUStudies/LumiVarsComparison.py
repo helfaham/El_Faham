@@ -233,7 +233,7 @@ class LumiCorrelationStudies :
         self.AllRuns = {}
         self.AllRunNames = []
         for runEra in ['F','G','H']:
-        #for runEra in ['F']:
+        #for runEra in ['B','C','D','E','F']: #APV
             fname = path + self.FileName%(runEra)
             if not os.path.isfile( fname ):
                 print "data file" , fname , "doesn't exist"
