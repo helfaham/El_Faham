@@ -42,7 +42,7 @@ class VarsMaker :
                         "fixedGridRhoFastjetCentralChargedPileUp"] :
                 self.vars[ "AVG" + rho ] = [100,0,20 ]
 
-        elif dataset == "ZeroBias" :
+        elif dataset == "ZeroBias" or "APV_ZeroBias":
             self.vars = {"AVGnGoodVertices":[100,5,25],
                          "AVGnVertices":[100,6,35],
                          #"AVGnInt",            
@@ -92,11 +92,11 @@ class LumiCorrelationStudiesPerRun :
         self.Tree.BuildIndex( "run" , "lumi" )
 
         if run == "B":
-            self.RunMin =  272007
+            self.RunMin =  273150
             self.RunMax =  275376
             self.Color = 2
         elif run == "C":
-            self.RunMin = 275657
+            self.RunMin = 275656
             self.RunMax = 276283
             self.Color = 4
         elif run == "D":
@@ -108,11 +108,11 @@ class LumiCorrelationStudiesPerRun :
             self.RunMax = 277420
             self.Color = 7
         #elif run == "F": #APV
-            #self.RunMin = 277772
+            #self.RunMin = 277932
             #self.RunMax = 278770
             #self.Color = 8
         elif run == "F": #Nominal
-            self.RunMin = 278771
+            self.RunMin = 278769
             self.RunMax = 278808
             self.Color = 8
         elif run == "G":
@@ -120,7 +120,7 @@ class LumiCorrelationStudiesPerRun :
             self.RunMax = 280385
             self.Color = 9
         elif run == "H":
-            self.RunMin = 280919
+            self.RunMin = 281613
             self.RunMax = 284044
             self.Color = 49
         else:
@@ -337,7 +337,7 @@ class LumiCorrelationStudies :
             self.Canvases[ var + "_l" ] = l
             c.Write()
             c.SetTitle("")
-            c.SaveAs("./corr/%s.png"%(var))
+            c.SaveAs("./corr/%s_Nominal.png"%(var))
             #c.SaveAs("./corr/%s_APV.png"%(var))
             self.Canvases[ var ] = c
         #gROOT.SetBatch(False)
