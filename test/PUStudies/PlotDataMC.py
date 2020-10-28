@@ -11,6 +11,7 @@ t.SetTextFont(72)
 
 AllBestXSections = {}
 #fin = TFile.Open("out.root")
+#fin = TFile.Open("/afs/cern.ch/user/h/helfaham/CMSSW_10_6_12/src/Haamm/HaNaMiniAnalyzer/test/PUStudies/out_2016_SingleNeutrinovsZeroBias_APV.root")
 fin = TFile.Open("/afs/cern.ch/user/h/helfaham/CMSSW_10_6_12/src/Haamm/HaNaMiniAnalyzer/test/PUStudies/out_2016_SingleNeutrinovsZeroBias.root")
 
 list_bestXSec=[]
@@ -39,6 +40,7 @@ def PlotVariable( DirName , varName , MCName, runEra ):
     
     dataHist.SetLineColor( kBlack )
     dataHist.SetLineWidth( 1 )
+    #dataHist.SetTitle("Data (APV);%s (%s)" % (varName,MCName)  )
     dataHist.SetTitle("Data;%s (%s)" % (varName,MCName)  )
     #dataHist.Rebin(8)
     allHists[dataHist.GetMaximum()/dataHist.GetEntries()] = dataHist
@@ -62,14 +64,17 @@ def PlotVariable( DirName , varName , MCName, runEra ):
             #hMC.Rebin(8)
             allHists[hMC.GetMaximum()/hMC.GetEntries()] = hMC
             if xsec == bestXSec:
+                #hMC.SetTitle( "Best Cross Section (APV) : %.1f" % xsec )
                 hMC.SetTitle( "Best Cross Section : %.1f" % xsec )
                 hMC.SetLineColor( kRed )
                 hMC.SetLineWidth( 1 )
             elif xsec > bestXSec :
+                #hMC.SetTitle( "Cross Section (APV) : %.1f" % xsec )
                 hMC.SetTitle( "Cross Section : %.1f" % xsec )
                 hMC.SetLineColor( kBlue )
 		hMC.SetLineWidth(1)
             elif xsec < bestXSec :
+                #hMC.SetTitle( "Cross Section (APV) : %.1f" % xsec )
                 hMC.SetTitle( "Cross Section : %.1f" % xsec )
                 hMC.SetLineColor( kGreen )
 		hMC.SetLineWidth(1)
@@ -97,6 +102,7 @@ def PlotVariable( DirName , varName , MCName, runEra ):
     #cOut.BuildLegend(0.1,0.7,0.48,0.9) #left
     cOut.BuildLegend(0.5,0.67,0.88,0.88) #right
     #cOut.SaveAs("FitRes/%s_%s_fit.png" % (varName , MCName) ) #Bad fit
+    #cOut.SaveAs("FitRes/%s_%s_APV.png" % (varName , MCName) )
     cOut.SaveAs("FitRes/%s_%s.png" % (varName , MCName) )
     return cOut
 
@@ -174,14 +180,15 @@ cOut1.cd()
 Fit = hist_fit.Fit("gaus") #Fit
 Legend_fit.AddEntry(hist_fit ,'{} {}'.format("ar. mean = ", ar_mean_round) ,"l")
 hist_fit.Draw()
+#hist_fit.GetXaxis().SetTitle("BestFit Xsec[mb]_TuneCP5_APV")
 hist_fit.GetXaxis().SetTitle("BestFit Xsec[mb]_TuneCP5")
 hist_fit.GetYaxis().SetTitle("Frequency")
 hist_fit.SetTitle("UL2016")
 Legend_fit.SetFillStyle(0)
 Legend_fit.SetLineColor( 0 )
 Legend_fit.Draw()
-cOut1.SaveAs("./gaussianfit_UL_2016.png")
-
+#cOut1.SaveAs("./gaussianfit_UL_2016_CP5_APV.png")
+cOut1.SaveAs("./gaussianfit_UL_2016_CP5.png")
 
 #exit()
         
@@ -192,6 +199,7 @@ canvases = {}
 tunes = [  "TuneCP1", "TuneCP5" ]
 
 for runEra in ["All", 'eraF','eraG','eraH']:
+#for runEra in ["All", 'eraB','eraC','eraD','eraE','eraF']:
     mg = TMultiGraph()
     mg.SetName( runEra )
     allMultiGraphs[ runEra ] = mg
@@ -330,6 +338,7 @@ for runEra in ["All", 'eraF','eraG','eraH']:
     #canvases["text" + runEra] = t.DrawTextNDC( 0.2, 0.8 , runEra )
     canvases["Leg" + runEra] = Legend
     canvases[runEra] = canvas
+    #mg.GetHistogram().GetYaxis().SetTitle( "Best Fit XSection (APV)" )
     mg.GetHistogram().GetYaxis().SetTitle( "Best Fit XSection" )
     mg.GetHistogram().GetYaxis().SetTitleOffset(2)
 
@@ -345,6 +354,7 @@ for runEra in ["All", 'eraF','eraG','eraH']:
         xax.SetBinLabel(i, lbl)
         i+=1
 
+    #canvas.SaveAs( canvas.GetName() + "_APV.png" )
     canvas.SaveAs( canvas.GetName() + ".png" )
 exit()                
 
