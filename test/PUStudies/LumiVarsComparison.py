@@ -97,23 +97,23 @@ class LumiCorrelationStudiesPerRun :
             self.RunMax = 299329
             self.Color = 2
         if run == "B":
-            self.RunMin = 297020 
+            self.RunMin = 297047 
             self.RunMax = 299329
             self.Color = 2
         if run == "C":
-            self.RunMin = 299337
-            self.RunMax = 302044
+            self.RunMin = 299368
+            self.RunMax = 302029
             self.Color = 4
         elif run == "D":
-            self.RunMin = 302046
-            self.RunMax = 303434
+            self.RunMin = 302030
+            self.RunMax = 302663
             self.Color = 5
         elif run == "E":
-            self.RunMin = 303435
-            self.RunMax = 304826
+            self.RunMin = 303818
+            self.RunMax = 304797
             self.Color = 7
         elif run == "F":
-            self.RunMin = 304914
+            self.RunMin = 305040
             self.RunMax = 306462
             self.Color = 8
         elif run == "G":
