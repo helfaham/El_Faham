@@ -12,7 +12,14 @@ t.SetTextFont(72)
 AllBestXSections = {}
 fin = TFile.Open("/afs/cern.ch/user/h/helfaham/CMSSW_10_6_4_patch1/src/Haamm/HaNaMiniAnalyzer/test/PUStudies/out_2018_SingleNeutrinovsZeroBias.root")
 
-list_bestXSec=[]
+TuneCP1_All=[]
+TuneCP1_eraA=[]
+TuneCP1_eraB=[]
+
+TuneCP5_All=[]
+TuneCP5_eraA=[]
+TuneCP5_eraB=[]
+
 objs = []
 def PlotVariable( DirName , varName , MCName, runEra ):
     allHists = {}
@@ -24,7 +31,20 @@ def PlotVariable( DirName , varName , MCName, runEra ):
     data_bin = twoDHist.GetXaxis().FindBin( runEra )
     bestXSec = twoDHist.GetBinContent( data_bin , mc_bin )
     #print bestXSec
-    list_bestXSec.append(bestXSec)
+    if MCName   == "TuneCP1":
+        if runEra       == "eraA":
+            TuneCP1_eraA.append(bestXSec)
+        elif runEra     == "eraB":
+            TuneCP1_eraB.append(bestXSec)
+        elif runEra     == "All":
+            TuneCP1_All.append(bestXSec)
+    elif MCName   == "TuneCP5":
+        if runEra       == "eraA":
+            TuneCP5_eraA.append(bestXSec)
+        elif runEra     == "eraB":
+            TuneCP5_eraB.append(bestXSec)
+        elif runEra     == "All":
+            TuneCP5_All.append(bestXSec)
     
     DataHistName = "%s/%s/%s/latest/%s/%s_%s" % ( DirName , varName , MCName , runEra , runEra , varName )
     MCHistName = "%s/%s/%s/latest/%s/%s_latest_%s" % ( DirName , varName , MCName , runEra , varName, runEra  )
@@ -42,12 +62,8 @@ def PlotVariable( DirName , varName , MCName, runEra ):
     #dataHist.Rebin(8)
     allHists[dataHist.GetMaximum()/dataHist.GetEntries()] = dataHist
     gStyle.SetOptTitle(False)
-    #gROOT.SetStyle("Plain") #Bad fit
-    #dataHist.SetStats(True) #Bad fit
     dataHist.SetStats(False)
-    #gStyle.SetOptFit(111) #Bad fit
     dataNorm = dataHist.DrawNormalized()
-    #Fit = dataHist.Fit("gaus") #Bad fit
     #dataNorm = dataHist.DrawNormalized("E PLC PMC")
     for xsec in [ 0.0 + (ratio*69200./1000.) for ratio in range(840,1170) ][::-1]:
         if abs( xsec - bestXSec )/bestXSec > 0.1 or abs( xsec - bestXSec )/ bestXSec < 0.2: 
@@ -61,20 +77,19 @@ def PlotVariable( DirName , varName , MCName, runEra ):
             allHists[hMC.GetMaximum()/hMC.GetEntries()] = hMC
             gROOT.ForceStyle() 
             if xsec == bestXSec:
-                hMC.SetTitle( "Best Cross Section : %.1f" % xsec )
+                hMC.SetTitle( "Best Cross Section (%s): %.1f" %(runEra, xsec) )
                 hMC.SetLineColor(2)
                 hMC.SetLineWidth(1)
             elif xsec > bestXSec :
-                hMC.SetTitle( "Cross Section : %.1f" % xsec )
+                hMC.SetTitle( "Cross Section (%s) : %.1f" %(runEra, xsec) )
                 hMC.SetLineColor(6)
                 hMC.SetLineWidth(1)
             elif xsec < bestXSec :
-                hMC.SetTitle( "Cross Section : %.1f" % xsec )
+                hMC.SetTitle( "Cross Section (%s) : %.1f" %(runEra, xsec) )
                 hMC.SetLineColor(4)
                 hMC.SetLineWidth(1)
 
 
-            #hMC.Draw("SAME") #Bad fit
             hMC.DrawNormalized("SAME")
             #hMC.DrawNormalized("SAME E PLC PMC")
             hMC.SetStats(False)
@@ -93,17 +108,69 @@ def PlotVariable( DirName , varName , MCName, runEra ):
     #     allHists[m].DrawNormalized(option)
     #     option = "SAME"
 
-    #cOut.BuildLegend(0.1,0.5,0.3,0.7) #Fit
     #cOut.BuildLegend(0.1,0.7,0.48,0.9) #left
     cOut.BuildLegend(0.5,0.67,0.88,0.88) #right
-    #cOut.SaveAs("FitRes/%s_%s_fit.png" % (varName , MCName) ) #Bad fit
-    cOut.SaveAs("FitRes/%s_%s.png" % (varName , MCName) )
+    cOut.SaveAs("FitRes/new_test_plots/%s/%s_%s_%s.png" % (runEra, varName , MCName, runEra) )
     return cOut
 
 
 #a = PlotVariable( "SingleNuZeroBias" , "nVertices" , "tuneM2" , "All" )                    
 #exit()
-    
+def GaussFit(list_bestXSec):
+
+    print "final list" + str(list_bestXSec)
+    cOut1 = TCanvas("Fit")
+    gStyle.SetOptFit(111) #Fit
+    gStyle.SetOptTitle(0);
+    hist_fit = TH1F("hist_fit","hist_fit",50,40000,100000)
+    hist_fit.SetStats(True) #Fit
+    Legend_fit = TLegend(0.25,0.79,0.45,0.95) #fit
+    ar_mean= sum(list_bestXSec)/len(list_bestXSec)
+    ar_mean_round=round(ar_mean)
+    for i in range(len(list_bestXSec)):
+        hist_fit.Fill(list_bestXSec[i])
+    cOut1.cd()
+    Fit = hist_fit.Fit("gaus") #Fit
+    Legend_fit.AddEntry(hist_fit ,'{} {}'.format("ar. mean = ", ar_mean_round) ,"l")
+    hist_fit.Draw()
+
+    if list_bestXSec == TuneCP1_All:
+        hist_fit.GetXaxis().SetTitle("BestFit Xsec[mb]_TuneCP1_All")
+    elif list_bestXSec  == TuneCP1_eraA:
+        hist_fit.GetXaxis().SetTitle("BestFit Xsec[mb]_TuneCP1_eraA")
+    elif list_bestXSec  == TuneCP1_eraB:
+        hist_fit.GetXaxis().SetTitle("BestFit Xsec[mb]_TuneCP1_eraB")
+
+    elif list_bestXSec  == TuneCP5_All:
+        hist_fit.GetXaxis().SetTitle("BestFit Xsec[mb]_TuneCP5_All")
+    elif list_bestXSec  == TuneCP5_eraA:
+        hist_fit.GetXaxis().SetTitle("BestFit Xsec[mb]_TuneCP5_eraA")
+    elif list_bestXSec  == TuneCP5_eraB:
+        hist_fit.GetXaxis().SetTitle("BestFit Xsec[mb]_TuneCP5_eraB")
+
+    hist_fit.GetYaxis().SetTitle("Frequency")
+    hist_fit.SetTitle("UL2018")
+    Legend_fit.SetFillStyle(0)
+    Legend_fit.SetLineColor( 0 )
+    Legend_fit.Draw()
+
+    if list_bestXSec == TuneCP1_All:
+        cOut1.SaveAs("./gaussfits/gaussianfit_UL_2018_CP1_All_test.png")
+    elif list_bestXSec == TuneCP5_All:
+        cOut1.SaveAs("./gaussfits/gaussianfit_UL_2018_CP5_All_test.png")
+
+    elif list_bestXSec == TuneCP1_eraA:
+        cOut1.SaveAs("./gaussfits/gaussianfit_UL_2018_CP1_eraA_test.png")
+    elif list_bestXSec == TuneCP1_eraB:
+        cOut1.SaveAs("./gaussfits/gaussianfit_UL_2018_CP1_eraB_test.png")
+
+    elif list_bestXSec == TuneCP5_eraA:
+        cOut1.SaveAs("./gaussfits/gaussianfit_UL_2018_CP5_eraA_test.png")
+    elif list_bestXSec == TuneCP5_eraB:
+        cOut1.SaveAs("./gaussfits/gaussianfit_UL_2018_CP5_eraB_test.png")
+
+    return cOut1
+
 
 def CalcChi2( DirName , varName , MCName , runEra , xsec ):
     DataHistName = "%s/%s/%s/latest/%s/%s_%s" % ( DirName , varName , MCName , runEra , runEra , varName )
@@ -153,32 +220,12 @@ varNames = ["nVertices",
 
 ]
 for var in varNames :
-    #for tune in [ "TuneCP1" ] :
-    for tune in [ "TuneCP5" ] :
-        a = PlotVariable( "SingleNuZeroBias" , var ,tune, "All" )                    
-print "final list" + str(list_bestXSec)
-cOut1 = TCanvas("Fit")
-#gROOT.SetStyle("Plain") #Fit
-gStyle.SetOptFit(111) #Fit
-gStyle.SetOptTitle(0);
-hist_fit = TH1F("hist_fit","hist_fit",50,40000,100000)
-hist_fit.SetStats(True) #Fit
-Legend_fit = TLegend(0.25,0.79,0.45,0.95) #fit
-ar_mean= sum(list_bestXSec)/len(list_bestXSec)
-ar_mean_round=round(ar_mean)
-for i in range(len(list_bestXSec)):
-    hist_fit.Fill(list_bestXSec[i])
-cOut1.cd()
-Fit = hist_fit.Fit("gaus") #Fit
-Legend_fit.AddEntry(hist_fit ,'{} {}'.format("ar. mean = ", ar_mean_round) ,"l")
-hist_fit.Draw()
-hist_fit.GetXaxis().SetTitle("BestFit Xsec[mb]_TuneCP5")
-hist_fit.GetYaxis().SetTitle("Frequency")
-hist_fit.SetTitle("UL2018")
-Legend_fit.SetFillStyle(0)
-Legend_fit.SetLineColor( 0 )
-Legend_fit.Draw()
-cOut1.SaveAs("./gaussianfit_UL_2018.png")
+    for tune in [ "TuneCP1", "TuneCP5" ] :
+	for runEra in ["All", 'eraA', 'eraB' ]:
+        	a = PlotVariable( "SingleNuZeroBias" , var ,tune, runEra )                    
+for list_bestXSec in [TuneCP1_All, TuneCP1_eraA, TuneCP1_eraB, TuneCP5_All, TuneCP5_eraA, TuneCP5_eraB]:
+        b = GaussFit(list_bestXSec)
+
 #exit()
         
 allGraphs = {}
