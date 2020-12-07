@@ -335,7 +335,7 @@ class LumiCorrelationStudies :
             self.AllRuns[run].Write( self.fout )
 
         gROOT.SetBatch(True)
-        gStyle.SetOptStat(1)
+        gStyle.SetOptStat(0)
         self.Canvases = {}
         self.fout.mkdir("Canvases").cd()
         for var in self.Vars.vars :
