@@ -8,16 +8,19 @@ MINIAOD = []
 
 SingleNeutrino_CP1 		= Sample("SingleNeutrino_CP1" 		, 1 , False , "/SingleNeutrino/RunIISummer19UL16MiniAOD-FlatPU0to75TuneCP1_106X_mcRun2_asymptotic_v13-v2/MINIAODSIM")
 SingleNeutrino_CP5 		= Sample("SingleNeutrino_CP5" 		, 1 , False , " /SingleNeutrino/RunIISummer19UL16MiniAOD-FlatPU0to75_106X_mcRun2_asymptotic_v13_ext1-v2/MINIAODSIM")
+
+SingleNeutrino_CP1_postbug 	= Sample("SingleNeutrino_CP1_postbug" 	, 1 , False , "/Neutrino_E-10_gun/RunIISummer20UL16MiniAOD-FlatPU0to75TuneCP1_106X_mcRun2_asymptotic_v13-v2/MINIAODSIM")
 SingleNeutrino_CP5_postbug 	= Sample("SingleNeutrino_CP5_postbug" 	, 1 , False , "/Neutrino_E-10_gun/RunIISummer20UL16MiniAOD-FlatPU0to75_106X_mcRun2_asymptotic_v13_ext1-v2/MINIAODSIM")
 
 SingleNeutrino_CP1_APV 		= Sample("SingleNeutrino_CP1_APV" 		, 1 , False , "/SingleNeutrino/RunIISummer19UL16MiniAODAPV-FlatPU0to75TuneCP1_106X_mcRun2_asymptotic_preVFP_v8_ext1-v3/MINIAODSIM")
 SingleNeutrino_CP5_APV 		= Sample("SingleNeutrino_CP5_APV" 		, 1 , False , "/SingleNeutrino/RunIISummer19UL16MiniAODAPV-FlatPU0to75_106X_mcRun2_asymptotic_preVFP_v8_ext2-v2/MINIAODSIM")
+
+SingleNeutrino_CP1_postbug_APV 	= Sample("SingleNeutrino_CP1_postbug_APV" 	, 1 , False , "/Neutrino_E-10_gun/RunIISummer20UL16MiniAODAPV-FlatPU0to75TuneCP1_106X_mcRun2_asymptotic_preVFP_v8_ext1-v2/MINIAODSIM")
 SingleNeutrino_CP5_postbug_APV 	= Sample("SingleNeutrino_CP5_postbug_APV" 	, 1 , False , "/Neutrino_E-10_gun/RunIISummer20UL16MiniAODAPV-FlatPU0to75_106X_mcRun2_asymptotic_preVFP_v8_ext2-v2/MINIAODSIM")
 
-
 SingleNeutrinos = []
-SingleNeutrinos.extend( [ SingleNeutrino_CP1, SingleNeutrino_CP5, SingleNeutrino_CP1_APV, SingleNeutrino_CP5_APV, SingleNeutrino_CP5_postbug, SingleNeutrino_CP5_postbug_APV ] )
-MINIAOD.extend( [ SingleNeutrino_CP1, SingleNeutrino_CP5, SingleNeutrino_CP1_APV, SingleNeutrino_CP5_APV, SingleNeutrino_CP5_postbug, SingleNeutrino_CP5_postbug_APV ] )
+SingleNeutrinos.extend( [ SingleNeutrino_CP1, SingleNeutrino_CP5, SingleNeutrino_CP1_APV, SingleNeutrino_CP5_APV, SingleNeutrino_CP5_postbug, SingleNeutrino_CP5_postbug_APV, SingleNeutrino_CP1_postbug, SingleNeutrino_CP1_postbug_APV ] )
+MINIAOD.extend( [ SingleNeutrino_CP1, SingleNeutrino_CP5, SingleNeutrino_CP1_APV, SingleNeutrino_CP5_APV, SingleNeutrino_CP5_postbug, SingleNeutrino_CP5_postbug_APV, SingleNeutrino_CP1_postbug, SingleNeutrino_CP1_postbug_APV ] )
 
 ZeroBiasB_APV_ver1 	= Sample("ZeroBiasB_APV_ver1" 	, 0 , False , "/ZeroBias/Run2016B-21Feb2020_ver1_UL2016_HIPM-v1/MINIAOD")
 ZeroBiasB_APV_ver2 	= Sample("ZeroBiasB_APV_ver2" 	, 0 , False , "/ZeroBias/Run2016B-21Feb2020_ver2_UL2016_HIPM-v1/MINIAOD")

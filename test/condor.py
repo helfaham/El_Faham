@@ -32,7 +32,7 @@ file_sh = open("%s/Submit.sh" % (workingdir) , "w" )
 
 
 for sample in samples:
-    if not sample.Name.count("APV"):
+    if not sample.Name.count("postbug"):
         continue
 
     os.mkdir( "%s/%s" % (workingdir , sample.Name) )

@@ -89,16 +89,16 @@ class Variable:
         fout.cd()
 
 class DatasetController :
-    #def __init__(self , path = "/eos/home-h/helfaham/PU_work/UL/2016/samples_hadd/" , fileName = "APV_ZeroBias%s.root"):
-    def __init__(self , path = "/eos/home-h/helfaham/PU_work/UL/2016/samples_hadd/" , fileName = "ZeroBias%s.root"):
+    def __init__(self , path = "/eos/home-h/helfaham/PU_work/UL/2016/samples_hadd/" , fileName = "APV_ZeroBias%s.root"):
+    #def __init__(self , path = "/eos/home-h/helfaham/PU_work/UL/2016/samples_hadd/" , fileName = "ZeroBias%s.root"):
         #self.runEras = {"F":{278770:278808},"G":{278820:280385},"H":{280919:284044}} #just for runs book-keeping
         self.runEras = {}
         #self.minRun=minRun #TODO declare the min and max runs here and define selection cuts
         #self.maxRun=maxRun 
         self.nTuples = path
         self.All = TChain("PUAnalyzer/Trees/Events")
-        for runEra in ['F','G','H']: #self.runEras :
-        #for runEra in ['B','C','D','E','F']: #self.runEras :
+        #for runEra in ['F','G','H']: #self.runEras :
+        for runEra in ['B','C','D','E','F']: #self.runEras : #APV
             fname = path + fileName%(runEra)
             if os.path.isfile( fname ):
                 self.runEras[ runEra ] = {}
@@ -147,14 +147,14 @@ class MCSampleContainer :
         self.SampleName = name
         self.FileName = nTuples + self.SampleName + ".root"
         self.File = TFile.Open( self.FileName )
-        if name.count("CP1"):
-        	self.hnTrueIntMCName = "PUAnalyzer/nTruInteractions/nTruInteractions_" + "SingleNeutrinoCP1"
-	elif name.count("CP5"):
-        	self.hnTrueIntMCName = "PUAnalyzer/nTruInteractions/nTruInteractions_" + "SingleNeutrinoCP5"
-        #if name.count("CP1_APV"):
-        	#self.hnTrueIntMCName = "PUAnalyzer/nTruInteractions/nTruInteractions_" + "SingleNeutrino_CP1_APV"
-	#elif name.count("CP5_APV"):
-        	#self.hnTrueIntMCName = "PUAnalyzer/nTruInteractions/nTruInteractions_" + "SingleNeutrino_CP5_APV"
+        #if name.count("CP1"):
+        	#self.hnTrueIntMCName = "PUAnalyzer/nTruInteractions/nTruInteractions_" + "SingleNeutrinoCP1"
+	#elif name.count("CP5"):
+        	#self.hnTrueIntMCName = "PUAnalyzer/nTruInteractions/nTruInteractions_" + "SingleNeutrino_CP5_postbug"
+        if name.count("CP1_APV"):
+        	self.hnTrueIntMCName = "PUAnalyzer/nTruInteractions/nTruInteractions_" + "SingleNeutrino_CP1_APV"
+	elif name.count("CP5_APV"):
+        	self.hnTrueIntMCName = "PUAnalyzer/nTruInteractions/nTruInteractions_" + "SingleNeutrino_CP5_postbug_APV"
         self.hnTrueInt = self.File.Get( self.hnTrueIntMCName )
         self.nIntNBins = self.hnTrueInt.GetNbinsX()
         self.nIntMin = self.hnTrueInt.GetBinLowEdge(1)
@@ -264,14 +264,14 @@ class EraTuneHandler :
             chi2bestxsec.Write()
             ktestbestxsec.Write()
         
-#fout = TFile.Open("out_2016_SingleNeutrinovsZeroBias_APV.root" , "recreate")
-fout = TFile.Open("out_2016_SingleNeutrinovsZeroBias.root" , "recreate")
+fout = TFile.Open("out_2016_SingleNeutrinovsZeroBias_APV.root" , "recreate")
+#fout = TFile.Open("out_2016_SingleNeutrinovsZeroBias.root" , "recreate")
 #EraTuneHandler( "DY" , "SingleMu%s.root",  "ZmuMuM%d" , fout )
 #EraTuneHandler( "NuGunZeroBias" , "ZeroBias%s.root",  "NuGunM%d" , fout )
 #EraTuneHandler( "NuGunMinBias" , "MinBias%s.root",  "NuGunM%d" , fout )
 #EraTuneHandler( "SingleNuMinBias" , "MinBias%s.root",  "SingleNeutrinoTuneCP%d" , fout , [0,2,5] )
-EraTuneHandler( "SingleNuZeroBias" , "ZeroBias%s.root",  "SingleNeutrino_CP%d" , fout , [1,5] )
-#EraTuneHandler( "SingleNuZeroBias" , "APV_ZeroBias%s.root",  "SingleNeutrino_CP%d_APV" , fout , [1,5] )
+#EraTuneHandler( "SingleNuZeroBias" , "ZeroBias%s.root",  "SingleNeutrino_CP%d" , fout , [1,5] )
+EraTuneHandler( "SingleNuZeroBias" , "APV_ZeroBias%s.root",  "SingleNeutrino_CP%d_APV" , fout , [1,5] )
 
 fout.Close()
 
