@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-nFilesPerJob=2
+nFilesPerJob=1
 import sys
 import getpass
 user = getpass.getuser()
