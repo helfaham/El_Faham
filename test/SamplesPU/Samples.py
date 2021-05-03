@@ -12,7 +12,9 @@ ZeroBiasD = Sample("ZeroBiasD" , 0 , False , "/ZeroBias/Run2017D-09Aug2019_UL201
 ZeroBiasC = Sample("ZeroBiasC" , 0 , False , "/ZeroBias/Run2017C-09Aug2019_UL2017-v1/MINIAOD")
 ZeroBiasB = Sample("ZeroBiasB" , 0 , False , "/ZeroBias/Run2017B-09Aug2019_UL2017-v1/MINIAOD")
 
-MINIAOD.extend( [ ZeroBiasB, ZeroBiasC , ZeroBiasD , ZeroBiasE , ZeroBiasF ] )
+ZeroBias_low=Sample("ZeroBias_low" , 0 , False ,"/ZeroBias/Run2017H-09Aug2019_UL2017_LowPU-v1/MINIAOD")
+
+MINIAOD.extend( [ ZeroBiasB, ZeroBiasC , ZeroBiasD , ZeroBiasE , ZeroBiasF, ZeroBias_low ] )
 
 MinBiasB = Sample("MinBiasB" , 0 , False , "/MinimumBias/Run2017B-09Aug2019_UL2017-v1/MINIAOD")
 MinBiasC = Sample("MinBiasC" , 0 , False , "/MinimumBias/Run2017C-09Aug2019_UL2017-v1/MINIAOD")

@@ -14,5 +14,8 @@ echo did you run ---voms-proxy-init -voms cms -rfc---?
 
 ##das_client --limit=0 --query="file dataset=/SingleNeutrino/RunIISummer19UL17MiniAOD-106X_mc2017_realistic_v6-v2/MINIAODSIM" > SingleNeutrino.list
 
-das_client --limit=0 --query="file dataset=/SingleNeutrino/RunIISummer19UL17MiniAOD-FlatPU0to75_106X_mc2017_realistic_v6_ext2-v1/MINIAODSIM" > SingleNeutrino_CP5.list #this is cp5
-das_client --limit=0 --query="file dataset=/SingleNeutrino/RunIISummer19UL17MiniAOD-FlatPU0to75TuneCP1_106X_mc2017_realistic_v6_ext1-v2/MINIAODSIM" > SingleNeutrino_CP1.list #this is cp1
+dasgoclient --limit=0 --query="file dataset= /ZeroBias/Run2017H-09Aug2019_UL2017_LowPU-v1/MINIAOD" > ZeroBias_low.list
+
+
+#das_client --limit=0 --query="file dataset=/SingleNeutrino/RunIISummer19UL17MiniAOD-FlatPU0to75_106X_mc2017_realistic_v6_ext2-v1/MINIAODSIM" > SingleNeutrino_CP5.list #this is cp5
+#das_client --limit=0 --query="file dataset=/SingleNeutrino/RunIISummer19UL17MiniAOD-FlatPU0to75TuneCP1_106X_mc2017_realistic_v6_ext1-v2/MINIAODSIM" > SingleNeutrino_CP1.list #this is cp1
