@@ -9,8 +9,8 @@ if not len(sys.argv) == 3 :
     exit()
 
 prefix = "out"
-OutPath = "/%s/%s/" % (sys.argv[2], user )
-#OutPath = "eos/cms/store/user/%s/%s/" % (user, sys.argv[2] )
+#OutPath = "/%s/%s/" % (sys.argv[2], user )
+OutPath = "/eos/cms/store/user/%s/%s/" % (user, sys.argv[2] )
 
 from SamplesPU.Samples import MINIAOD as samples
 for sample in samples:
@@ -32,8 +32,8 @@ file_sh = open("%s/Submit.sh" % (workingdir) , "w" )
 
 
 for sample in samples:
-    if not sample.Name.count("CP"):
-        continue
+    #if not sample.Name.count("CP"):
+    #    continue
 
     os.mkdir( "%s/%s" % (workingdir , sample.Name) )
     copy( "SetupAndRun.sh" , "./%s/%s" % (workingdir , sample.Name) )
