@@ -14,6 +14,7 @@ VertexReader::VertexReader( edm::ParameterSet const& iPS, edm::ConsumesCollector
 
 bool VertexReader::CheckVertex(VertexCollection::value_type vtx){ 
   if( !IsData ) return true;
+  //cout << vtx.position().z() << " " << vtx.ndof() << "  " << vtx.position() << endl;
   return (fabs(vtx.position().z()) < 24.0 &&
 	  vtx.ndof() > 4.0 &&
 	  vtx.position().rho() < 2.0 ); 
@@ -28,6 +29,7 @@ double VertexReader::Read( const edm::Event& iEvent ){
     vtxMult = handle->size();
     nGoodVtx = 0;
     auto vtx = handle->front();
+    //cout << handle->size() << endl;
     if(!CheckVertex(vtx) )
       return -1.0;
     else{
