@@ -73,6 +73,7 @@ public:
   //TREE VALS
   unsigned int runNumber, lumiNumber;
   // unsigned long long EventN;
+    int bxNumber, orbitNumber;
   // char nVertices, nGoodVertices , nInt , nInt50ns ;
   int nLostTracks; // ,nEles , nMus , nChargedHadrons ,  nPhotons, nNeutralHadrons ;
   float InvMass , reliso1 , reliso2;
@@ -175,6 +176,8 @@ void PUAnalyzer::beginJob()
   //cout <<"H: in beginjob(): events directory made"<<endl;
   theTree->Branch("run" , &runNumber );
   theTree->Branch("lumi" , &lumiNumber );
+  theTree->Branch("bx" , &bxNumber );
+  theTree->Branch("orbit" , &orbitNumber );
 
   // gDirectory->Print();
   theTree->Branch("nGoodVertices" , &(vertexReader->nGoodVtx) );
@@ -242,6 +245,9 @@ void PUAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup
 
   runNumber = iEvent.eventAuxiliary().run();
   lumiNumber = iEvent.eventAuxiliary().luminosityBlock();
+
+  bxNumber = iEvent.eventAuxiliary().bunchCrossing();
+  orbitNumber = iEvent.eventAuxiliary().orbitNumber();
  
   packedReader->Read( iEvent );
 
