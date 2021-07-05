@@ -72,7 +72,6 @@ public:
   TTree* theLumiTree;
   //TREE VALS
   unsigned int runNumber, lumiNumber;
-  int bxNumber, orbitNumber;
   // unsigned long long EventN;
   int bxNumber, orbitNumber;
   // char nVertices, nGoodVertices , nInt , nInt50ns ;
@@ -228,12 +227,13 @@ void PUAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup
     return;
   }
   hCutFlowTable->Fill( ++stepEventSelection , W );
-
-  auto vOutput = vertexReader->Read( iEvent );
+  if( vertexReader->Read( iEvent ) < 0 )
+    return;
+  //auto vOutput = vertexReader->Read( iEvent );
   //cout << vOutput << endl;
 
-  if( vOutput < 0 )
-    return;
+  //if( vOutput < 0 )
+    //return;
   hCutFlowTable->Fill( ++stepEventSelection , W );
 
   if(!IsData)
@@ -241,6 +241,7 @@ void PUAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup
 
   runNumber = iEvent.eventAuxiliary().run();
   lumiNumber = iEvent.eventAuxiliary().luminosityBlock();
+
   bxNumber = iEvent.eventAuxiliary().bunchCrossing();
   orbitNumber = iEvent.eventAuxiliary().orbitNumber();
 
